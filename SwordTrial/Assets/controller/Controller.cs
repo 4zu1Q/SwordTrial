@@ -26,7 +26,7 @@ public class Controller : MonoBehaviour
     {
         m_charaCon = GetComponent<CharacterController>();    //キャラクターのコントローラーのコンポーネントを参照する
         m_animeCon = GetComponent<Animator>();               //アニメーターのコンポーネントを参照する
-        
+
     }
 
     // Update is called once per frame
