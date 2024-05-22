@@ -36,22 +36,22 @@ public class Controller : MonoBehaviour
         //▼▼▼移動処理▼▼▼
         if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") == 0) //テンキーや3Dスティックの入力(GetAxis)がゼロの時の動作  ボタンが押されていないとき
         {
-            m_animeCon.SetBool("Run", false);                                   //Runモーションを行わない
+//            m_animeCon.SetBool("Run", false);                                   //Runモーションを行わない
         }
         else                                                                    //テンキーや3Dスティックの入力(GetAxis)がゼロではないときの処理　ボタンが押されているとき
         {
             var m_CameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;                             //カメラが追従するための操作
-            Vector3 m_direction = m_CameraForward * Input.GetAxis("Vertical") + Camera.main.transform.right * Input.GetAxis("Horizotal");    //テンキーや3Dスティックの入力(GetAxis)があるとdirectionに値を返す
-            m_animeCon.SetBool("Run", true);                                                                                                 //Runモーションをする
+            Vector3 m_direction = m_CameraForward * Input.GetAxis("Vertical") + Camera.main.transform.right * Input.GetAxis("Horizontal");    //テンキーや3Dスティックの入力(GetAxis)があるとdirectionに値を返す
+//            m_animeCon.SetBool("Run", true);                                                                                                 //Runモーションをする
 
             ChangeDrirection(m_direction);                                                                                                   //向きを返る動作の処理を実行する
             Move(m_direction);                                                                                                               //移動する動作の処理を実行する
 
             //▼▼▼アクション処理▼▼▼
-            m_animeCon.SetBool("Action", Input.GetKey("x") || Input.GetButtonDown("Action1"));                                                //キーorボタンを押したらアクションを実行
-            m_animeCon.SetBool("Action2", Input.GetKey("z") || Input.GetButtonDown("Action2"));                                               //キーorボタンを押したらアクション2を実行
-            m_animeCon.SetBool("Action3", Input.GetKey("c") || Input.GetButtonDown("Action3"));                                               //キーorボタンを押したらアクション3を実行
-            m_animeCon.SetBool("Action4", Input.GetKey("space") || Input.GetButtonDown("Action4"));                                           //キーorボタンを押したらアクションを実行(仮実装)
+//            m_animeCon.SetBool("Action", Input.GetKey("x") || Input.GetButtonDown("Action1"));                                                //キーorボタンを押したらアクションを実行
+//            m_animeCon.SetBool("Action2", Input.GetKey("z") || Input.GetButtonDown("Action2"));                                               //キーorボタンを押したらアクション2を実行
+//            m_animeCon.SetBool("Action3", Input.GetKey("c") || Input.GetButtonDown("Action3"));                                               //キーorボタンを押したらアクション3を実行
+//            m_animeCon.SetBool("Action4", Input.GetKey("space") || Input.GetButtonDown("Action4"));                                           //キーorボタンを押したらアクションを実行(仮実装)
         }
     }
 

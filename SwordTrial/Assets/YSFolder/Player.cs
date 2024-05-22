@@ -12,13 +12,19 @@ public class Player : MonoBehaviour
     private float m_velocity;
     private bool m_isMove;  //移動できるかのフラグ
 
-    
+    private Vector3 m_prevPos;  //前の
+
 
     // Start is called before the first frame update
     void Start()
     {
+        //Mathf.Sin(Radian);
+
+
         m_velocity = 0.01f;
-        m_isMove = false;   
+        m_isMove = false;
+
+
 
     }
 
@@ -30,7 +36,8 @@ public class Player : MonoBehaviour
         //ダッシュ処理
 
         //Aボタン
-        if (Input.GetButton("Fire1"))
+        //押している間はダッシュする
+        if (Input.GetButton("Abutton"))
         {
             m_velocity = 0.02f;
             Debug.Log("dash");
@@ -39,14 +46,14 @@ public class Player : MonoBehaviour
         
 
         //Bボタン
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown("Bbutton"))
         {
 
             Debug.Log("item");
         }
 
         //Xボタン
-        if (Input.GetButtonDown("Fire3"))
+        if (Input.GetButtonDown("Xbutton"))
         {
 
             Debug.Log("attack");
@@ -58,12 +65,36 @@ public class Player : MonoBehaviour
         }
 
         //Yボタン
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Ybutton"))
         {
             Debug.Log("nanimonasi");
+            transform.position = new Vector3 (transform.position.x , transform.position.y + 0.8f, transform.position.z);
         }
 
+        if (Input.GetButtonDown("Pause"))
+        {
+            Debug.Log("ポーズ");
 
+        }
+
+        if (Input.GetButtonDown("Target"))
+        {
+            Debug.Log("ターゲット");
+
+        }
+
+        if (Input.GetButtonDown("R1"))
+        {
+            Debug.Log("R1");
+
+        }
+
+        //if (Input.GetButtonDown("R2"))
+        //{
+
+        //}
+
+        //インプット値を取得
         float inputX = Input.GetAxis("Horizontal") * m_velocity;
         float inputZ = Input.GetAxis("Vertical") * m_velocity;
 
