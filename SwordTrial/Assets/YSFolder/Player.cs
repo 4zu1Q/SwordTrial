@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private float m_velocity;
     private bool m_isMove;  //移動できるかのフラグ
 
+    private int m_frame;
+    private bool m_isDash;
+
     private Vector3 m_prevPos;  //前の
 
 
@@ -22,28 +25,36 @@ public class Player : MonoBehaviour
 
 
         m_velocity = 0.01f;
+        m_frame = 0;
         m_isMove = false;
-
-
+        m_isDash = false; 
 
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-
         //ダッシュ処理
 
         //Aボタン
         //押している間はダッシュする
-        if (Input.GetButton("Abutton"))
+        if (Input.GetButton("Abutton") )
         {
+            m_frame++;
             m_velocity = 0.02f;
             Debug.Log("dash");
         }
         else m_velocity = 0.01f;
         
+        if(m_frame>=30)
+        {
+            m_isDash = true;
+
+        }
+        else
+        {
+            m_isDash=false;
+        }
 
         //Bボタン
         if (Input.GetButtonDown("Bbutton"))
