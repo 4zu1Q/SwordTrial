@@ -110,6 +110,8 @@ public class Player : MonoBehaviour
         float inputZ = Input.GetAxis("Vertical") * m_velocity;
 
 
+
+
         if (!m_isMove)
         {
             //ˆÚ“®ˆ—
