@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; //シーン切り替えのため
+using UnityEngine.SceneManagement;
 
-public class SelectSelsect : MonoBehaviour
+public class GameDebug : MonoBehaviour
 {
     public enum SelectNum
     {
-        kStart, //スタート
+        kRetry, //スタート
         kOption,//説明
-        kEnd,   //終了
+        kSelect,   //終了
     }
 
     private bool m_isSelect;        //連続
@@ -20,7 +20,7 @@ public class SelectSelsect : MonoBehaviour
     {
         //変数初期化
         m_isSelect = false;
-        m_selectNum = SelectNum.kStart;
+        m_selectNum = SelectNum.kRetry;
     }
 
     // Update is called once per frame
@@ -32,8 +32,8 @@ public class SelectSelsect : MonoBehaviour
         if (input <= -0.5f && !m_isSelect)
         {
             m_isSelect = true;
-            m_selectNum = SelectNum.kEnd;
-            Debug.Log("end");
+            m_selectNum = SelectNum.kSelect;
+            Debug.Log("Win");
         }
         else m_isSelect = false;
 
@@ -42,8 +42,8 @@ public class SelectSelsect : MonoBehaviour
         if (input >= 0.5f && !m_isSelect)
         {
             m_isSelect = true;
-            m_selectNum = SelectNum.kStart;
-            Debug.Log("start");
+            m_selectNum = SelectNum.kRetry;
+            Debug.Log("Lose");
         }
         else m_isSelect = false;
 
@@ -54,21 +54,18 @@ public class SelectSelsect : MonoBehaviour
             m_isSelect = false;
         }
 
-        //Bボタンを押したら
-        if (Input.GetButton("Bbutton"))
-        {
-            //前のシーンに戻る
-            SceneManager.LoadScene("TitleScene");
-        }
 
 
         //Aボタンを押したら
-        if (Input.GetButton("Abutton") && m_selectNum == SelectNum.kStart)
+        if (Input.GetButton("Abutton") && m_selectNum == SelectNum.kRetry)
+        {
+            //ゲームシーンに移動
+            SceneManager.LoadScene("WinScene");
+        }
+        else if (Input.GetButton("Abutton") && m_selectNum == SelectNum.kSelect)
         {
             //セレクトシーンに移行
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("LoseScene");
         }
-
-
     }
 }
