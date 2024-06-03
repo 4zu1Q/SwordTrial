@@ -9,14 +9,15 @@ public class Player : MonoBehaviour
 {
     /*変数宣言*/
     GameObject target;  
-    private float m_velocity;
+    private float m_velocity;   //速度
+    private float m_rotateSpeed;   //回転する速度
     private bool m_isMove;  //移動できるかのフラグ
 
     private int m_frame;
     private bool m_isDash;
 
     private Vector3 m_prevPos;  //前の
-
+    private Rigidbody m_rd;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
 
 
         m_velocity = 0.01f;
+        m_rotateSpeed = 0.1f;
         m_frame = 0;
         m_isMove = false;
         m_isDash = false; 
@@ -105,11 +107,14 @@ public class Player : MonoBehaviour
 
         //}
 
+        /*プレイヤー移動処理*/
+
         //インプット値を取得
         float inputX = Input.GetAxis("Horizontal") * m_velocity;
         float inputZ = Input.GetAxis("Vertical") * m_velocity;
 
-
+        //float inputX = Input.GetAxis("Horizontal");
+        //float inputZ = Input.GetAxis("Vertical");
 
 
         if (!m_isMove)
@@ -117,6 +122,34 @@ public class Player : MonoBehaviour
             //移動処理
             transform.position = new Vector3(transform.position.x + inputX, transform.position.y, transform.position.z + inputZ);
 
+            ////
+            //Vector3 cameraFoward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1).normalized);
+
+            ////
+            //Vector3 moveForward = cameraFoward * inputX + Camera.main.transform.right * inputZ;
+
+            //
+
+
         }
+
+
+
+
+        /*アナログスティックの処理*/
+        //float degree = Mathf.Atan2(inputX, inputZ) * Mathf.Rad2Deg;
+
+        //if(degree < 0)
+        //{
+        //    degree += 360;
+        //}
+
+        ////右スティックで回転する
+        //transform.Rotate(new Vector3(0.0f, m_rotateSpeed * Input.GetAxis("Horizontal2"), 0.0f));
+        ////transform.Rotate(new Vector3(0.0f, m_rotateSpeed * degree, 0.0f));
+
+        //Debug.Log(degree);
+
+
     }
 }
