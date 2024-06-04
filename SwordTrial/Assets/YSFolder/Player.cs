@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     /*変数宣言*/
     private GameObject m_target;  //Boss
+    [SerializeField] public GameObject m_camera;
     private float m_velocity;   //速度
     private float m_moveSpeed;
     private bool m_isMove;  //移動できるかのフラグ
@@ -29,11 +30,10 @@ public class Player : MonoBehaviour
 
         m_rb = GetComponent<Rigidbody>();
 
-        m_velocity = 0.01f;                 //速度
-        m_moveSpeed = 3.0f;                 //
+        m_velocity = 5.0f;                 //速度
         m_frame = 0;
         m_isMove = false;
-        m_isDash = false; 
+        m_isDash = false;
 
     }
 
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Abutton") )
         {
             m_frame++;
-            m_velocity = 0.02f;
+            m_velocity = 7.0f;
             Debug.Log("dash");
         }
         else m_velocity = 0.01f;
@@ -112,25 +112,32 @@ public class Player : MonoBehaviour
         //}
 
         //インプット値を取得
-        m_inputHorizontal = Input.GetAxis("Horizontal") * m_velocity;
-        m_inputVertical = Input.GetAxis("Vertical") * m_velocity;
+        m_inputHorizontal = Input.GetAxisRaw("Horizontal") * m_velocity;
+        m_inputVertical = Input.GetAxisRaw("Vertical") * m_velocity;
 
     }
 
     private void FixedUpdate()
     {
         //カメラの方向から、X、Z平面の単位ベクトルを取得
-        Vector3 cameraFoward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+        Vector3 cameraFoward = Vector3.Scale(m_camera.transform.forward, new Vector3(1, 0, 1)).normalized;
+        //Vector3 cameraFoward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
         //方向キーの入力値とカメラの向きから、移動方向を決定
-        Vector3 moveForward = cameraFoward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
+        Vector3 moveForward = cameraFoward * m_inputVertical + m_camera.transform.right * m_inputHorizontal;
+        //Vector3 moveForward = cameraFoward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
         //移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
-        m_rb.velocity = moveForward * m_moveSpeed + new Vector3(0, m_rb.velocity.y, 0);
+        m_rb.velocity = moveForward * m_velocity + new Vector3(0, m_rb.velocity.y, 0);
+        //transform.position = moveForward * m_velocity + new Vector3(0, 9, 0);
+
+        transform.position = new Vector3(m_inputHorizontal, m_rb.velocity.y, m_inputVertical);
 
         //キャラクターの向きを進行方向に
-        if(moveForward != Vector3.zero)
+        if (moveForward != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(moveForward);
         }
+
+        //Debug.Log(cameraFoward);
 
     }
 }
