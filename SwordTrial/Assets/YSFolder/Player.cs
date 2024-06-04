@@ -8,10 +8,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     /*変数宣言*/
-    GameObject target;  
+    private GameObject m_target;  //Boss
     private float m_velocity;   //速度
     private float m_moveSpeed;
-    private float m_rotateSpeed;   //回転する速度
     private bool m_isMove;  //移動できるかのフラグ
 
     private float m_inputHorizontal;
@@ -26,12 +25,12 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Mathf.Sin(Radian);
+        m_target = GameObject.Find("Boss"); //ボスの情報
+
         m_rb = GetComponent<Rigidbody>();
 
-        m_velocity = 0.01f;
-        m_moveSpeed = 3.0f;
-        m_rotateSpeed = 0.1f;
+        m_velocity = 0.01f;                 //速度
+        m_moveSpeed = 3.0f;                 //
         m_frame = 0;
         m_isMove = false;
         m_isDash = false; 
@@ -112,60 +111,22 @@ public class Player : MonoBehaviour
 
         //}
 
-        /*プレイヤー移動処理*/
-
         //インプット値を取得
-        //float inputX = Input.GetAxis("Horizontal") * m_velocity;
-        //float inputZ = Input.GetAxis("Vertical") * m_velocity;
-
         m_inputHorizontal = Input.GetAxis("Horizontal") * m_velocity;
         m_inputVertical = Input.GetAxis("Vertical") * m_velocity;
-
-
-        if (!m_isMove)
-        {
-            //移動処理
-            //transform.position = new Vector3(transform.position.x + inputX, transform.position.y, transform.position.z + inputZ);
-
-            ////
-            //Vector3 cameraFoward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1).normalized);
-
-            ////
-
-            //
-
-
-        }
-
-
-
-
-        /*アナログスティックの処理*/
-        //float degree = Mathf.Atan2(inputX, inputZ) * Mathf.Rad2Deg;
-
-        //if(degree < 0)
-        //{
-        //    degree += 360;
-        //}
-
-        ////右スティックで回転する
-        //transform.Rotate(new Vector3(0.0f, m_rotateSpeed * Input.GetAxis("Horizontal2"), 0.0f));
-        ////transform.Rotate(new Vector3(0.0f, m_rotateSpeed * degree, 0.0f));
-
-        //Debug.Log(degree);
-
 
     }
 
     private void FixedUpdate()
     {
+        //カメラの方向から、X、Z平面の単位ベクトルを取得
         Vector3 cameraFoward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
-
+        //方向キーの入力値とカメラの向きから、移動方向を決定
         Vector3 moveForward = cameraFoward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
-
+        //移動方向にスピードを掛ける。ジャンプや落下がある場合は、別途Y軸方向の速度ベクトルを足す。
         m_rb.velocity = moveForward * m_moveSpeed + new Vector3(0, m_rb.velocity.y, 0);
 
-
+        //キャラクターの向きを進行方向に
         if(moveForward != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(moveForward);
