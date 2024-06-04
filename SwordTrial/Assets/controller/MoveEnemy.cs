@@ -14,28 +14,28 @@ public class MoveEnemy : MonoBehaviour
     }
 
     private CharacterController m_enemyController;
-    private Animator m_animator;
+   // private Animator m_animator;
 
     private Vector3 m_destination;          //目的地
-    [SerializeField]                            //歩くスピード
-    private float m_walkSpeed = 1.0f;     //現状は1.0f　追々変更になる可能性はある
+    [SerializeField]                        //歩くスピード
+    private float m_walkSpeed = 1.0f;       //現状は1.0f　追々変更になる可能性はある
     private Vector3 m_velocity;        　   //速度
     private Vector3 m_direction;            //移動方向
-    private bool m_arrived;              //プレイヤーとの到着フラグ
-                                         //  private SetPosition m_setPosition;          //SetPositionスクリプト
-    [SerializeField]                            //待ち時間
-    private float m_waitTime = 5f;        //現状は5f　追々変更になる可能性はある
-    private float m_elapsedTime;          //経過時間
-    private EnemyState m_state;                //敵の状態
-    private Transform m_playerTransform;      //プレイヤーTransform
+    private bool m_arrived;                 //プレイヤーとの到着フラグ
+                                            //  private SetPosition m_setPosition;          //SetPositionスクリプト
+    [SerializeField]                        //待ち時間
+    private float m_waitTime = 5f;          //現状は5f　追々変更になる可能性はある
+    private float m_elapsedTime;            //経過時間
+    private EnemyState m_state;             //敵の状態
+    private Transform m_playerTransform;    //プレイヤーTransform
 
     // Start is called before the first frame update
     void Start()
     {
         m_enemyController = GetComponent<CharacterController>();
-        m_animator = GetComponent<Animator>();
+       // m_animator = GetComponent<Animator>();
         // m_setPosition     = GetComponent<SetPosition>;
-        m_setPosition.CreateRandomPosition();
+        //m_setPosition.CreateRandomPosition();
         m_velocity = Vector3.zero;
         m_arrived = false;
         m_elapsedTime = 0;
@@ -54,7 +54,7 @@ public class MoveEnemy : MonoBehaviour
         if (m_enemyController.isGrounded)
         {
             m_velocity = Vector3.zero;
-            m_animator.SetFloat("Speed", 0.0f);
+           // m_animator.SetFloat("Speed", 0.0f);
             //   m_direction  = (m_setPosition.GetDestination() - transform.position).normalized;
             //   transform.LookAt(new Vector3(m_setPosition.GetDestination().x,transform.position.y, m_setPosition.GetDestination().z));))
             m_velocity = m_direction * m_walkSpeed;
@@ -71,7 +71,7 @@ public class MoveEnemy : MonoBehaviour
             m_arrived = false;
             m_elapsedTime = 0f;
             m_state = tempState;
-            m_setPosition.CreateRandomPosition();
+         //   m_setPosition.CreateRandomPosition();
         }
         else if (tempState == EnemyState.Chase)
         {
@@ -87,7 +87,7 @@ public class MoveEnemy : MonoBehaviour
             m_state = tempState;
             m_arrived = true;
             m_velocity = Vector3.zero;
-            m_animator.SetFloat("Speed", 0f);
+           // m_animator.SetFloat("Speed", 0f);
         }
     }
     //敵キャラクターとの状態取得メソッド
