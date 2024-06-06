@@ -54,7 +54,14 @@ public class SelectionUI : MonoBehaviour
     /// </summary>
     private void SelectionMove()
     {
-        
+        if (Input.GetButtonDown("Xbutton"))
+        {
+            m_currentHorizontalSelectionNum++;
+            if (m_currentHorizontalSelectionNum > 2)
+            {
+                m_currentHorizontalSelectionNum=0;
+            }
+        }
     }
 
     /// <summary>
@@ -72,7 +79,7 @@ public class SelectionUI : MonoBehaviour
             {
                 m_rectTransform.position = m_Items[1].position;
             }
-            else if (m_currentHorizontalSelectionNum == (int)HorizontalSelectItem.Item2)
+            else if (m_currentHorizontalSelectionNum == (int)HorizontalSelectItem.Item3)
             {
                 m_rectTransform.position = m_Items[2].position;
             }
