@@ -19,6 +19,8 @@ public class MoveEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.position += new Vector3(0.001f,0,0);
+
         //プレイヤーの位置から自分の位置を引いた数だけノーマライズする
         Vector3 dir = (PlayerObj.transform.position - this.transform.position).normalized;
         float   mag = (PlayerObj.transform.position - this.transform.position).magnitude;
