@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         //ダッシュ処理
+        transform.position += new Vector3(0.001f, 0, 0);
 
         //Aボタン
         //押している間はダッシュする
