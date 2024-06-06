@@ -25,18 +25,17 @@ public class CameraTracking : MonoBehaviour
 
         //スティックの入力値を格納
         float input = Input.GetAxis("Horizontal2");
-        float inputX = Input.GetAxis("Horizontal2");
 
         if (input <= -0.5f)
         {
 
-            transform.RotateAround(m_targetPos, Vector3.up, inputX * Time.deltaTime * 200f);
+            transform.RotateAround(m_targetPos, Vector3.up, input * Time.deltaTime * 200f);
 
             //transform.RotateAround(m_targetPos, transform.right, inputZ * Time.deltaTime * 200f);
         }
         else if (input >= 0.5f)
         {
-            transform.RotateAround(m_targetPos, Vector3.up, inputX * Time.deltaTime * 200f);
+            transform.RotateAround(m_targetPos, Vector3.up, input * Time.deltaTime * 200f);
 
         }
 
