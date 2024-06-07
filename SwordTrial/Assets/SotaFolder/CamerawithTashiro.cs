@@ -8,55 +8,33 @@ public class CamerawithTashiro : MonoBehaviour
 {
 
     /* 定数 */
-
     private const float kDistance = 5.2f;   // ターゲットとカメラとの距離
-
     private const float kShiftPosY = 1.2f;   // ターゲット中心から上にずらす量
-
     private const float kAxisMinThershold = 0.2f; // 入力情報の最小のしきい値:無視する割合
-
     private const float kAxisMaxThershold = 0.8f; // 入力情報の最大のしきい値:1.0とみなす割合
-
     private const float kRotLimitUpdownSwing = 30.0f * Mathf.Deg2Rad;   // 上下の回転制限
-
     private const float kRotSpeedLeftright = 0.4f * Mathf.Deg2Rad;  // 左右の回転スピード(ラジアン)
-
     private const float kRotSpeedUpdown = 0.25f * Mathf.Deg2Rad;  // 上下の回転スピード(ラジアン)
 
     // FIXME: 名前いい感じに変更
-
     private float kRangeCursorDot = Mathf.Cos(10 * Mathf.Deg2Rad);   // カーソル内とする内積の範囲
-
     private const float kCursorLimitDistance = 30.0f;
-
     private const float kCursorLimitSqrDistance = kCursorLimitDistance * kCursorLimitDistance;
 
     /* 変数 */
-
     private GameObject _target;         // ターゲットのオブジェクト情報
-
     private Transform _targetTrs;       // ターゲットのTransform情報
-
     private Vector3 _centerPos;         // 中心座標
-
     private float _rotLeftrightSwing;   // 左右のカメラの回転量
-
     private float _rotUpdownSwing;      // 上下のカメラの回転量
-
     private bool _isUpdownSwing;        // 上下にカメラを揺らしているか
-
     private bool _isLeftrightSwing;     // 左右に入力したか
-
     private bool _isUpdownInput;        // 上下に入力したか
-
     private bool _isReset;              // リセットしたか
 
     // FIXME: なんかいい感じの変数名に変更
-
     private List<GameObject> _cursorObjs;    // カーソルとあうオブジェクトの情報たち
-
     private GameObject _hpBarObj;            // HPバーの対象となるオブジェクト
-
     private GameObject _hpBar;               // HPバー自体のオブジェクト
 
     private void Start()
@@ -64,35 +42,26 @@ public class CamerawithTashiro : MonoBehaviour
     {
 
         // ターゲット(プレイヤー)から情報取得
-
         _target = GameObject.Find("Player");
 
         _targetTrs = _target.transform;
 
         /* 初期設定 */
-
         // 中心座標
-
         _centerPos = _targetTrs.position;
 
         // 回転量無しに
-
         _rotLeftrightSwing = 0.0f;
-
         _rotUpdownSwing = 0.0f;
 
         // 回転していないに
-
         _isUpdownSwing = false;
-
         _isLeftrightSwing = false;
 
         // 入力していないに
-
         _isUpdownInput = false;
 
         // リセットしていないに
-
         _isReset = false;
 
     }
@@ -190,13 +159,11 @@ public class CamerawithTashiro : MonoBehaviour
         float inputRate = Input.GetAxis("Vertical2");
 
         // 入力されていないなら終了
-
         if (-kAxisMinThershold < inputRate && inputRate < kAxisMinThershold)
 
         {
 
             _isUpdownInput = false;
-
             return;
 
         }
@@ -204,19 +171,15 @@ public class CamerawithTashiro : MonoBehaviour
         inputRate = LimitValue(inputRate, kAxisMinThershold, kAxisMaxThershold);
 
         // 上下の回転地に代入
-
         _rotUpdownSwing += inputRate * kRotSpeedUpdown;
 
         // 回転の制限
-
         _rotUpdownSwing = Mathf.Max(Mathf.Min(_rotUpdownSwing, kRotLimitUpdownSwing), -kRotLimitUpdownSwing);
 
         // 動かしていることに
-
         _isUpdownSwing = true;
 
         // 入力したことに
-
         _isUpdownInput = true;
 
     }
@@ -232,23 +195,16 @@ public class CamerawithTashiro : MonoBehaviour
     {
 
         // MEMO:ボタン間違えている可能性あり
-
         // Yボタンを押すと方向リセット
-
         if (Input.GetButtonDown("Ybutton"))
 
         {
 
             // TODO:現状Leftrightの回転を0にしているだけなのでプレイヤーの向いている方向を向くように
-
             _rotLeftrightSwing = 0.0f;
-
             _rotUpdownSwing = 0.0f;
-
             _isLeftrightSwing = false;
-
             _isUpdownSwing = false;
-
             _isReset = true;
 
         }
@@ -266,21 +222,15 @@ public class CamerawithTashiro : MonoBehaviour
     {
 
         // 上下方向の入力をしていれば戻さない
-
         if (_isUpdownInput) return;
 
         // 0に近づける
-
         _rotUpdownSwing = Mathf.Lerp(_rotUpdownSwing, 0.0f, 0.05f);
 
         // 限りなく0に近づいたら戻したことにする
-
         if (-0.001f < _rotUpdownSwing && _rotUpdownSwing < 0.001f)
-
         {
-
             _rotUpdownSwing = 0.0f;
-
             _isUpdownSwing = false;
 
         }
@@ -298,25 +248,18 @@ public class CamerawithTashiro : MonoBehaviour
     {
 
         // 中心を更新するか
-
         bool isUpdateCenter = (_centerPos != _targetTrs.position);
 
         // リセットしてないかつどこも更新がなければ変更をしない
-
         if (!_isReset && !_isLeftrightSwing && !_isUpdownSwing && !isUpdateCenter) return;
 
         // 中心位置の更新
-
         if (isUpdateCenter)
-
         {
-
             _centerPos = Vector3.Lerp(_centerPos, _targetTrs.position, 0.5f);
 
             // 限りなく0に近づいたらもう重なっていることに
-
             if ((_centerPos - _targetTrs.position).sqrMagnitude < 0.001f)
-
             {
 
                 _centerPos = _targetTrs.position;
@@ -328,15 +271,11 @@ public class CamerawithTashiro : MonoBehaviour
         Vector3 pos = _centerPos;
 
         // 左右の回転量
-
         float sinLeftright = Mathf.Sin(_rotLeftrightSwing);
-
         float cosLeftright = Mathf.Cos(_rotLeftrightSwing);
 
         // 上下回転のみor左右+上下回転
-
         if (_isUpdownSwing)
-
         {
 
             // 上下の回転量
@@ -356,9 +295,7 @@ public class CamerawithTashiro : MonoBehaviour
         }
 
         // 左右回転のみ
-
         else
-
         {
 
             // 回転した位置の適用
@@ -372,13 +309,11 @@ public class CamerawithTashiro : MonoBehaviour
         }
 
         // 位置の代入 
-
         transform.position = pos;
 
         // リセットまたは回転していれば方向の更新
 
         if (_isReset || _isLeftrightSwing || _isUpdownSwing)
-
         {
 
             // オブジェクトの向き変更
