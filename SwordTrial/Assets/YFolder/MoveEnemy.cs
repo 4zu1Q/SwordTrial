@@ -37,8 +37,6 @@ public class MoveEnemy : MonoBehaviour
             //ƒvƒŒƒCƒ„[‚Ì•ûŒü‚ğŒü‚­ˆ—
             float rot = Mathf.Atan2(dir.x, dir.z);
             transform.rotation = Quaternion.AngleAxis(rot * Mathf.Rad2Deg, Vector3.up);
-
-
         }
         else
         {
