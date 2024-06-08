@@ -57,9 +57,30 @@ public class SelectionUI : MonoBehaviour
         if (Input.GetButtonDown("Xbutton"))
         {
             m_currentHorizontalSelectionNum++;
-            if (m_currentHorizontalSelectionNum > 2)
+
+            if(m_currentVerticalSelectionNum == 0)
             {
-                m_currentHorizontalSelectionNum=0;
+                if (m_currentHorizontalSelectionNum > 2)
+                {
+                    m_currentHorizontalSelectionNum = 0;
+                }
+            }
+            else if (m_currentVerticalSelectionNum == 1)
+            {
+                if (m_currentHorizontalSelectionNum > 3)
+                {
+                    m_currentHorizontalSelectionNum = 0;
+                }
+            }
+            
+        }
+
+        if(Input.GetButtonDown("Ybutton"))
+        {
+            m_currentVerticalSelectionNum++;
+            if(m_currentVerticalSelectionNum > 1)
+            {
+                m_currentVerticalSelectionNum=0;
             }
         }
     }
