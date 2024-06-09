@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; //シーン切り替えのため
 
 
 
@@ -17,6 +18,8 @@ public class Player : MonoBehaviour
         kBom,   //ボム
         kHeal,  //回復
     }
+
+    private ItemType m_itemType;
 
     private string m_tagName = "Boss";
 
@@ -47,12 +50,14 @@ public class Player : MonoBehaviour
         m_acel = new Vector3(1,0,1);
         m_isDash = false;
         m_frame = 0;
-
+        m_itemType = ItemType.kBom;
 
     }
 
     void FixedUpdate()
     {
+
+        /*移動処理*/
         m_inputHorizontal = Input.GetAxis("Horizontal");
         m_inputVertical = Input.GetAxis("Vertical");
 
@@ -63,7 +68,7 @@ public class Player : MonoBehaviour
         Vector3 m_moveForward = m_cameraForward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
 
         // 移動方向にスピードを掛ける。
-        m_rb.velocity = m_moveForward * 8.0f;
+        m_rb.velocity = m_moveForward * m_moveSpeed;
 
         // キャラクターの向きを進行方向に
         if (m_moveForward != Vector3.zero)
@@ -91,12 +96,29 @@ public class Player : MonoBehaviour
 
 
         //Bボタン
-        if (Input.GetButtonDown("Bbutton"))
+        if (Input.GetButtonDown("Bbutton") && m_itemType == ItemType.kBom)
         {
-            Debug.Log("item");
+            Debug.Log("item:Bom");
         }
-        //Yボタン
-        if (Input.GetButtonDown("Ybutton"))
+        else if (Input.GetButtonDown("Bbutton") && m_itemType == ItemType.kHeal)
+        {
+            Debug.Log("item:Heal");
+
+            if(m_hp >= 100)
+            {
+                m_hp = 100;
+            }
+            else if(m_hp < 100)
+            {
+                m_hp += 20;
+                
+            }
+
+        }
+
+
+            //Yボタン
+            if (Input.GetButtonDown("Ybutton"))
         {
             Debug.Log("nanimonasi");
         }
@@ -104,12 +126,25 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Xbutton"))
         {
             Debug.Log("attack");
+            
+            //当たり判定を表示
+
+
         }
         //右スティック押し込み
         if (Input.GetButtonDown("Target"))
         {
             Debug.Log("ターゲット");
         }
+
+
+        //HPがゼロになったら
+        if(m_hp >= 0)
+        {
+            //LoseSceneに移行
+            SceneManager.LoadScene("SceneLose");
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
