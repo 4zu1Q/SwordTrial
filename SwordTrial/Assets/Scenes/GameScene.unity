@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countDownMinutes: 1
-  m_countDownSeconds: 1
+  m_countDownSeconds: 60
 --- !u!1 &331875601
 GameObject:
   m_ObjectHideFlags: 0

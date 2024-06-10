@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
+    // 1分の長さ
+    private const float m_oneMinute = 60;
+
     //カウントダウン分
     [SerializeField] private int m_countDownMinutes = 3;
     //カウントダウン秒
     [SerializeField] private float m_countDownSeconds = 0;
+    // カウントダウン秒
+    private int m_countIntSeconds = 0;
     //現在の時間を表示するテキスト
     private Text m_timerText;
 
@@ -25,7 +30,7 @@ public class Timer : MonoBehaviour
         
         Debug.Log(m_countDownMinutes + "：" + m_countDownSeconds);
 
-
+        m_countIntSeconds = IntConvert(m_countDownSeconds);
 
         if (m_countDownMinutes <= 0 && m_countDownSeconds <= 0)
         {
@@ -33,7 +38,7 @@ public class Timer : MonoBehaviour
         }
         else 
         {
-            m_timerText.text = string.Format(m_countDownMinutes + "：" + m_countDownSeconds);
+            m_timerText.text = string.Format(m_countDownMinutes + "：" + m_countIntSeconds);
         }
         
 
@@ -70,7 +75,7 @@ public class Timer : MonoBehaviour
         if (m_countDownSeconds <= 0 && m_countDownMinutes >= 1)
         {
             m_countDownMinutes -= 1;
-            m_countDownSeconds = 1;
+            m_countDownSeconds = m_oneMinute;
         }
     }
 
