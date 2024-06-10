@@ -24,8 +24,10 @@ public class Player : MonoBehaviour
     private string m_tagName = "Boss";
 
     /**/
+    GameObject m_boss;
 
-    GameObject m_Boss;
+    GameObject m_player;
+    Transform m_attack;
 
     private int m_frame;
 
@@ -44,7 +46,9 @@ public class Player : MonoBehaviour
     void Start()
     {
         m_rb = GetComponent<Rigidbody>();
-        m_Boss = GameObject.Find("Boss");
+        m_boss = GameObject.Find("Boss");
+        m_player = GameObject.Find("Player");
+        m_attack = m_player.transform.Find("Attack");
         m_hp = 100;
         m_moveSpeed = 5.0f;
         m_acel = new Vector3(1,0,1);
@@ -122,15 +126,19 @@ public class Player : MonoBehaviour
         {
             Debug.Log("nanimonasi");
         }
+
         //Xボタン
         if (Input.GetButtonDown("Xbutton"))
         {
             Debug.Log("attack");
-            
-            //当たり判定を表示
 
+            //当たり判定を表示
+            m_attack.gameObject.SetActive(true);
 
         }
+        //else m_attack.gameObject.SetActive(false);
+
+
         //右スティック押し込み
         if (Input.GetButtonDown("Target"))
         {
@@ -139,17 +147,18 @@ public class Player : MonoBehaviour
 
 
         //HPがゼロになったら
-        if(m_hp >= 0)
+        if(m_hp <= 0)
         {
-            //LoseSceneに移行
-            SceneManager.LoadScene("SceneLose");
+            ////LoseSceneに移行
+            //SceneManager.LoadScene("SceneLose");
+            Debug.Log("負け");
         }
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-       if(collision.gameObject.tag == m_tagName)
+       if(other.gameObject.name == m_tagName)
         {
             m_hp -= 10;
         }

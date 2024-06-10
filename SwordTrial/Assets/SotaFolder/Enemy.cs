@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private int m_hp = 100;
+
     private string m_targetObjectName;  //目標オブジェクトの名前
     private float speed = 0.1f;         //スピード
     GameObject m_targetObject;
@@ -18,6 +20,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(m_hp);
+
+
         //正規化
         Vector3 dir = (m_targetObject.transform.position - this.transform.position).normalized;
 
@@ -26,5 +31,22 @@ public class Enemy : MonoBehaviour
         float vz = dir.z * speed;
 
         this.transform.Translate(vx / 50, 0, vz / 50); 
+
+        if(m_hp <= 0)
+        {
+            Debug.Log("勝ち");
+
+        }
+
+    }
+
+   
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.name == "Sword")
+        {
+            m_hp -= 10;
+        }
     }
 }
