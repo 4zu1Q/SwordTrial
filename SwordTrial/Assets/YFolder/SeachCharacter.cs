@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class SeachCharacter : MonoBehaviour
 {
-    private Enemy m_moveEnemy;
+    private Enemy moveEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_moveEnemy = GetComponentInParent<Enemy>();
+        //Enemy‚Ìî•ñ‚ğæ“¾‚·‚é
+        moveEnemy = GetComponentInParent<Enemy>();
     }
 
     private void OnTriggerStay(Collider col)

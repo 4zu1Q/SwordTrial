@@ -5,18 +5,19 @@ using UnityEngine.UI;
 
 public class EnemyHp : MonoBehaviour
 {
-    public Slider m_enemyHp;
+    public Slider enemyHp;  //HPバーの追加処理
     // Start is called before the first frame update
     void Start()
     {
-        m_enemyHp.value = 100;
+        enemyHp.value = 100; //HPの値の入力現状は100にしているが仕様書が出来次第変更する
     }
 
     private void OnTriggerExit(Collider col)
     {
+        //どのオブジェクトに当たったら以下の処理するかの設定
         if (col.gameObject.tag == "Player")
         {
-            m_enemyHp.value -= 10;
+            enemyHp.value -= 10;
             Debug.Log("プレイヤーの攻撃,10のダメージ");
         }
     }
