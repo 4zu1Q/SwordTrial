@@ -26,6 +26,8 @@ public class GameDebug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log($"{name}");
+
         //スティックの入力値を格納
         float input = Input.GetAxis("Vertical");
 
