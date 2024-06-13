@@ -53,7 +53,7 @@ public class TitleUIOperation : MonoBehaviour
         if (Input.GetButton("Bbutton") && m_selectNum == SelectNum.kStart)
         {
             //セレクトシーンに移行
-            SceneManager.LoadScene("SelectScene");
+            SceneManager.LoadScene("GameScene");
         }
         else if (Input.GetButton("Bbutton") && m_selectNum == SelectNum.kOption)
         {
