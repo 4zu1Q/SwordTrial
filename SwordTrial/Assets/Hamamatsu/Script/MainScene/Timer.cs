@@ -9,26 +9,24 @@ public class Timer : MonoBehaviour
     private const float m_oneMinute = 60;
 
     //カウントダウン分
-    [SerializeField] private int m_countDownMinutes = 3;
-    //カウントダウン秒
+    [SerializeField] public static int m_countDownMinutes = 3;
+    //カウントダウン秒(float)
     [SerializeField] private float m_countDownSeconds = 0;
-    // カウントダウン秒
-    private int m_countIntSeconds = 0;
+    //カウントダウン秒(int)
+    public static int m_countIntSeconds = 0;
     //現在の時間を表示するテキスト
     private Text m_timerText;
 
     void Start()
     {
+        m_countDownMinutes = 3;
         m_timerText = GameObject.Find("TimerText").GetComponent<Text>();
-        //m_countDownSeconds = m_countDownMinutes * 60;
     }
 
     void Update()
     {
         //秒を減らす
         CountDown();
-        
-        //Debug.Log(m_countDownMinutes + "：" + m_countDownSeconds);
 
         m_countIntSeconds = IntConvert(m_countDownSeconds);
 
