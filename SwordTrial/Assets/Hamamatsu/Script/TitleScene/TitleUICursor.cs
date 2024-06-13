@@ -2,7 +2,6 @@
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 
 public class TitleUICursor : UIOperationBase
 {
@@ -13,7 +12,6 @@ public class TitleUICursor : UIOperationBase
         kEnd,   //I—¹
     }
 
-    //ˆ—
     void Update()
     {
         UpdateFunction();
