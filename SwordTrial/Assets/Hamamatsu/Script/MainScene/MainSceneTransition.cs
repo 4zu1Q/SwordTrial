@@ -1,9 +1,11 @@
+//メインシーンのシーン遷移
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameDebug : MonoBehaviour
+public class MainSceneTransition : MonoBehaviour
 {
     public enum SelectNum
     {
@@ -26,8 +28,6 @@ public class GameDebug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"{name}");
-
         //スティックの入力値を格納
         float input = Input.GetAxis("Vertical");
 

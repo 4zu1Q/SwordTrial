@@ -28,17 +28,17 @@ public class Timer : MonoBehaviour
         //秒を減らす
         CountDown();
         
-        Debug.Log(m_countDownMinutes + "：" + m_countDownSeconds);
+        //Debug.Log(m_countDownMinutes + "：" + m_countDownSeconds);
 
         m_countIntSeconds = IntConvert(m_countDownSeconds);
 
         if (m_countDownMinutes <= 0 && m_countDownSeconds <= 0)
         {
-            m_timerText.text = string.Format("00：00");
+            m_timerText.text = string.Format("Time 00：00");
         }
         else 
         {
-            m_timerText.text = string.Format(m_countDownMinutes + "：" + m_countIntSeconds);
+            m_timerText.text = string.Format("Time " + m_countDownMinutes + "：" + m_countIntSeconds);
         }
         
 
