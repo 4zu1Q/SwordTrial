@@ -21,10 +21,14 @@ public class MainSceneTransition : MonoBehaviour
             //ゲームシーンに移動
             SceneManager.LoadScene("WinScene");
         }
+        //Bボタンを押したら
         else if (Input.GetButton("Bbutton"))
         {
             //セレクトシーンに移行
             SceneManager.LoadScene("LoseScene");
         }
     }
+
+
+
 }

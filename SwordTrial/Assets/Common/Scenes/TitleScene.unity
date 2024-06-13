@@ -665,7 +665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28acff18a591b494db115707d3214afe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_selectUI: {fileID: 805945256}
+  m_selectNum: 0
+  m_selectCursor: {fileID: 805945256}
   m_itemUI:
   - {fileID: 1937568082}
   - {fileID: 1626811031}
