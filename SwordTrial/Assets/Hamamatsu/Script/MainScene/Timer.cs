@@ -36,7 +36,7 @@ public class Timer : MonoBehaviour
         }
         else 
         {
-            m_timerText.text = string.Format("Time " + m_countDownMinutes + "ÅF" + m_countIntSeconds);
+            m_timerText.text = string.Format("Time " + m_countDownMinutes + ":" + m_countIntSeconds);
         }
         
 
