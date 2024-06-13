@@ -50,18 +50,18 @@ public class TitleUIOperation : MonoBehaviour
 
 
         //Aボタンを押したら
-        if (Input.GetButton("Abutton") && m_selectNum == SelectNum.kStart)
+        if (Input.GetButton("Bbutton") && m_selectNum == SelectNum.kStart)
         {
             //セレクトシーンに移行
             SceneManager.LoadScene("SelectScene");
         }
-        else if (Input.GetButton("Abutton") && m_selectNum == SelectNum.kOption)
+        else if (Input.GetButton("Bbutton") && m_selectNum == SelectNum.kOption)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
             Debug.Log("説明書開く");
 
         }
-        else if (Input.GetButton("Abutton") && m_selectNum == SelectNum.kEnd)
+        else if (Input.GetButton("Bbutton") && m_selectNum == SelectNum.kEnd)
         {
             //ゲーム終了させる
             //End();
