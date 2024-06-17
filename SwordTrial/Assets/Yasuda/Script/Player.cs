@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     GameObject m_boss;
 
     GameObject m_player;
-    Transform m_attack;
+    Collider m_isAttack;
 
     private int m_frame;
 
@@ -48,7 +48,7 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
-        m_attack = m_player.transform.Find("Attack");
+        m_isAttack = GameObject.Find("Attack").GetComponent<SphereCollider>();
         m_hp = 100;
         m_moveSpeed = 5.0f;
         m_acel = new Vector3(1,0,1);
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(m_moveForward);
         }
 
-        Debug.Log(m_hp);
+        //Debug.Log(m_hp);
     }
 
     void Update()
@@ -104,18 +104,14 @@ public class Player : MonoBehaviour
         {
             Debug.Log("item:Bom");
         }
-        else if (Input.GetButtonDown("Bbutton") && m_itemType == ItemType.kHeal)
+        else if (Input.GetButtonDown("Bbutton") && m_itemType == ItemType.kHeal && m_hp <= 100)
         {
             Debug.Log("item:Heal");
 
-            if(m_hp >= 100)
-            {
-                m_hp = 100;
-            }
-            else if(m_hp < 100)
+
+            if(m_hp < 100)
             {
                 m_hp += 20;
-                
             }
 
         }
@@ -133,7 +129,9 @@ public class Player : MonoBehaviour
             Debug.Log("attack");
 
             //“–‚½‚è”»’è‚ð•\Ž¦
-            m_attack.gameObject.SetActive(true);
+            m_isAttack.enabled = true;
+
+            Invoke("ColliderReset", 1.4f);
 
         }
         //else m_attack.gameObject.SetActive(false);
@@ -164,9 +162,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Attack()
+    private void ColliderReset()
     {
-
+        m_isAttack.enabled = false;
     }
 
 }
