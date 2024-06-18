@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
             //“–‚½‚è”»’è‚ð•\Ž¦
             m_isAttack.enabled = true;
 
-            Invoke("ColliderReset", 1.4f);
+            //Invoke("ColliderReset", 1.4f);
 
         }
         //else m_attack.gameObject.SetActive(false);
