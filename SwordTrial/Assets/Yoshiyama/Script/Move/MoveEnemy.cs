@@ -30,9 +30,14 @@ public class MoveEnemy : MonoBehaviour
     {
         if(other.gameObject.name == "Player")
         {
+
+        }
+        else
+        {
             transform.LookAt(Player);
-            transform.Translate(0, 0, 0.1f);
+            transform.Translate(0, 0, 0.01f);
             Debug.Log("Œ©‚Â‚¯‚½");
+
         }
     }
 }
