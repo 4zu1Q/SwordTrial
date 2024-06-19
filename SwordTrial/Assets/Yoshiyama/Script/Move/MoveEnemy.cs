@@ -18,26 +18,31 @@ public class MoveEnemy : MonoBehaviour
     void Update()
     {
 
-        //Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position, Vector3.up);//クオータニオンで移動の処理
-        //lookRotation.z = 0;                                                              //座標の初期設定
-        //lookRotation.x = 0;                                                              //座標の初期設定
-        //transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, 0.1f);    //座標移動の確定処理
-        //Vector3 speed = new Vector3(0f, 0f, 0.005f);                                     //ターゲットに向かって追跡する処理
-        //transform.Translate(speed);                                                      //スピードの実行処理
+       
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.name == "Player")
-        {
-
-        }
-        else
+        bool isCheck = false;   //攻撃処理を行う時にtrueにして動きを止める処理
+        //プレイヤーが指定したサークル内に進入したら追いかける
+        if(other.gameObject.name == "Player" && isCheck == false)
         {
             transform.LookAt(Player);
             transform.Translate(0, 0, 0.01f);
             Debug.Log("見つけた");
-
+        }
+        if(other == Player)
+        {
+            isCheck = true;
+        }
+    }
+    private void OnTriggerMove(Collider collider)
+    {
+        if(collider.gameObject.name == "Player")
+        {
+            transform.LookAt(Player);
+            transform.Translate(0, 0, 0); ;
+            Debug.Log("攻撃準備");
         }
     }
 }
