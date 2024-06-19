@@ -5,7 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainSceneTransition : MonoBehaviour
 {
-    void Update()
+    //タイマー情報
+    private Timer m_timer;
+
+    private void Start()
+    {
+        m_timer = GetComponent<Timer>();
+    }
+
+    private void Update()
     {
         DebugSceneTransition();
     }
@@ -18,17 +26,14 @@ public class MainSceneTransition : MonoBehaviour
         //Aボタンを押したら
         if (Input.GetButton("Abutton"))
         {
-            //ゲームシーンに移動
+            //勝利シーンに移動
             SceneManager.LoadScene("WinScene");
         }
-        //Bボタンを押したら
-        else if (Input.GetButton("Bbutton"))
+        //Bボタンを押したら、またはカウントダウンが終了したらシーン遷移
+        else if (Input.GetButton("Bbutton") || m_timer.GetFinishCountDown())
         {
-            //セレクトシーンに移行
+            //敗北シーンに移行
             SceneManager.LoadScene("LoseScene");
         }
     }
-
-
-
 }
