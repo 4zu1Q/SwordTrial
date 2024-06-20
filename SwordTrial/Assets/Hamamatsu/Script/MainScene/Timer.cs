@@ -16,11 +16,17 @@ public class Timer : MonoBehaviour
     public static int m_countIntSeconds = 0;
     //現在の時間を表示するテキスト
     private Text m_timerText;
+    //メニューの処理
+    private Menu m_menu;
+
+    //カウントダウン終了フラグ
+    private bool m_finishCountDown = false;
 
     void Start()
     {
-        m_countDownMinutes = 3;
+        m_countDownMinutes = 0;
         m_timerText = GameObject.Find("TimerText").GetComponent<Text>();
+        m_menu = GetComponent<Menu>();
     }
 
     void Update()
@@ -33,20 +39,15 @@ public class Timer : MonoBehaviour
         if (m_countDownMinutes <= 0 && m_countDownSeconds <= 0)
         {
             m_timerText.text = string.Format("Time 00：00");
+
+            //カウントダウン終了
+            m_finishCountDown = true;
         }
         else 
         {
             m_timerText.text = string.Format("Time " + m_countDownMinutes + ":" + m_countIntSeconds);
         }
         
-
-
-        //タイマーがゼロになったら
-        if (m_countDownSeconds <= 0)
-        {
-            //ゲームオーバーシーンに移行
-
-        }
     }
 
     /// <summary>
@@ -54,17 +55,8 @@ public class Timer : MonoBehaviour
     /// </summary>
     private void CountDown()
     {
-        // タイムオーバーになると処理を止める
-        //if(m_countDownMinutes < 0 && m_countDownSeconds < 0)
-        //{
-        //    m_countDownMinutes = 0; 
-        //    m_countDownSeconds = 0;
-        //    return;
-        //}
-        //else
-        //{
-            
-        //}
+        if (m_menu.GetMenu()) return;
+
 
         //カウントを減らす
         m_countDownSeconds -= Time.deltaTime;
@@ -88,4 +80,6 @@ public class Timer : MonoBehaviour
 
         return result;
     }
+
+    public bool GetFinishCountDown() { return m_finishCountDown; }
 }
