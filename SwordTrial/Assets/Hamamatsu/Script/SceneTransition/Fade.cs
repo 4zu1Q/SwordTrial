@@ -12,16 +12,12 @@ public class Fade : MonoBehaviour
 
     //フェードの画像の透明度
     private byte m_colorA = 0;
-    //フェードインスピード
-    private byte m_fadeInSpeed = 0;
     //フェードイン終了時の透明度
-    private float m_fadeInFinish = 0.01f;
-    //フェードアウトスピード
-    private byte m_fadeOutSpeed = 0;
+    private readonly float m_fadeInFinish = 0.01f;
     //フェードアウト終了時の透明度
-    private float m_fadeOutFinish = 0.99f;
-
-
+    private readonly float m_fadeOutFinish = 0.99f;
+    //フェードスピード
+    [SerializeField] private byte m_fadeSpeed = 0;
 
     void Start()
     {
@@ -66,7 +62,7 @@ public class Fade : MonoBehaviour
 
             return;
         }
-        m_colorA -= m_fadeInSpeed;
+        m_colorA -= m_fadeSpeed;
     }
 
     /// <summary>
@@ -80,7 +76,7 @@ public class Fade : MonoBehaviour
             m_fadeEnd = true;
             return;
         }
-        m_colorA += m_fadeOutSpeed;
+        m_colorA += m_fadeSpeed;
     }
 
     /// <summary>
