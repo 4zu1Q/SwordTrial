@@ -11,23 +11,13 @@ public class Player : MonoBehaviour
     public int m_hp;
 
     /*移動変数*/
-
-    /*アイテム変数*/
-    public enum ItemType
-    {
-        kBom,   //ボム
-        kHeal,  //回復
-    }
-
-    private ItemType m_itemType;
-
     private string m_tagName = "Boss";
 
     /**/
     GameObject m_boss;
 
     GameObject m_player;
-    Collider m_isAttack;
+    Transform m_attack;
 
     private int m_frame;
 
@@ -48,13 +38,12 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
-        m_isAttack = GameObject.Find("Attack").GetComponent<SphereCollider>();
+        m_attack = m_player.transform.Find("Attack");
         m_hp = 100;
         m_moveSpeed = 5.0f;
         m_acel = new Vector3(1,0,1);
         m_isDash = false;
         m_frame = 0;
-        m_itemType = ItemType.kBom;
 
     }
 
@@ -73,6 +62,7 @@ public class Player : MonoBehaviour
 
         // 移動方向にスピードを掛ける。
         m_rb.velocity = m_moveForward * m_moveSpeed;
+        Debug.Log("速度ベクトル: " + m_rb.velocity);
 
         // キャラクターの向きを進行方向に
         if (m_moveForward != Vector3.zero)
@@ -80,31 +70,37 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(m_moveForward);
         }
 
+        //Aボタン
+        //押している間はダッシュする
+        if (Input.GetButton("Abutton") && !m_isDash)
+        {
+            m_frame++;
+
+            m_rb.velocity = m_moveForward * m_moveSpeed * 2.0f;
+        }
+
+
+
+
+
+
+
         //Debug.Log(m_hp);
     }
 
     void Update()
     {
 
-        //Aボタン
-        //押している間はダッシュする
-        if (Input.GetButton("Abutton") && !m_isDash)
-        {
-            Debug.Log("dash");
-            Debug.Log(m_frame);
-            m_frame++;
 
-            m_rb.velocity = m_moveForward * m_moveSpeed;
-        }
 
 
 
         //Bボタン
-        if (Input.GetButtonDown("Bbutton") && m_itemType == ItemType.kBom)
+        if (Input.GetButtonDown("Bbutton"))
         {
             Debug.Log("item:Bom");
         }
-        else if (Input.GetButtonDown("Bbutton") && m_itemType == ItemType.kHeal && m_hp <= 100)
+        else if (Input.GetButtonDown("Bbutton") && m_hp <= 100)
         {
             Debug.Log("item:Heal");
 
@@ -116,24 +112,28 @@ public class Player : MonoBehaviour
 
         }
 
-
-            //Yボタン
-            if (Input.GetButtonDown("Ybutton"))
-        {
-            Debug.Log("nanimonasi");
-        }
-
         //Xボタン
         if (Input.GetButtonDown("Xbutton"))
         {
             Debug.Log("attack");
 
             //当たり判定を表示
-            m_isAttack.enabled = true;
-
-            //Invoke("ColliderReset", 1.4f);
+            m_attack.gameObject.SetActive(true);
 
         }
+        else
+        {
+            m_attack.gameObject.SetActive(false);
+
+        }
+
+        //Yボタン
+        if (Input.GetButtonDown("Ybutton"))
+        {
+            Debug.Log("nanimonasi");
+        }
+
+
         //else m_attack.gameObject.SetActive(false);
 
 
@@ -158,14 +158,15 @@ public class Player : MonoBehaviour
     {
        if(other.gameObject.name == m_tagName)
         {
+            m_rb.velocity = m_moveForward * m_moveSpeed * -2.0f;
             m_hp -= 10;
         }
     }
 
-    private void ColliderReset()
-    {
-        m_isAttack.enabled = false;
-    }
+    //private void ColliderReset()
+    //{
+    //    m_isAttack.enabled = false;
+    //}
 
 }
 
