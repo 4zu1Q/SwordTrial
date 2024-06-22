@@ -125,7 +125,7 @@ public class MoveEnemy : MonoBehaviour
         //プレイヤーが指定したサークル内に進入したら追いかける
         if (other.gameObject.name == "Player")
         {
-            transform.LookAt(m_prlayer);
+            //transform.LookAt(m_prlayer);
             transform.Translate(0, 0, 0.01f);
             Debug.Log("見つけた");
         }
