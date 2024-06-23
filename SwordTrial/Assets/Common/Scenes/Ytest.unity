@@ -2500,7 +2500,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882892944}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15adee297c2467049b5003c7bf3a5e03, type: 3}
   m_Name: 
@@ -2509,6 +2509,7 @@ MonoBehaviour:
   m_player: {fileID: 1433800602}
   m_minTime: 1
   m_maxTime: 4
+  m_hp: 0
 --- !u!95 &882892949
 Animator:
   serializedVersion: 5
@@ -2551,6 +2552,26 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &882892952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882892944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a5687b79b39484192330c532ac1141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_target: {fileID: 1433800598}
+  m_player: {fileID: 1433800602}
+  player: {fileID: 0}
+  enemy: {fileID: 0}
+  distance: 0
+  m_minTime: 1
+  m_maxTime: 4
+  m_hp: 0
 --- !u!1 &908572475
 GameObject:
   m_ObjectHideFlags: 0
@@ -3057,6 +3078,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99b62ec75c52edf46aa932b5f338ad19, type: 3}
       insertIndex: -1
       addedObject: {fileID: 882892950}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 99b62ec75c52edf46aa932b5f338ad19, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 882892952}
   m_SourcePrefab: {fileID: 100100000, guid: 99b62ec75c52edf46aa932b5f338ad19, type: 3}
 --- !u!1 &1141594560
 GameObject:
@@ -4349,6 +4373,7 @@ MonoBehaviour:
   m_player: {fileID: 0}
   m_minTime: 1
   m_maxTime: 4
+  m_hp: 0
 --- !u!95 &1435581599
 Animator:
   serializedVersion: 5
