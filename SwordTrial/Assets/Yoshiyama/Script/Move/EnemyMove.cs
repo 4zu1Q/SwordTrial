@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    public GameObject m_target;                    //GameObject型を変数targetで宣言します
-    public Transform m_player;                     //どの座標を基準にするか
+    //public GameObject m_target;                    //GameObject型を変数targetで宣言します
+    //public Transform m_player;                     //どの座標を基準にするか
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject enemy;
-    Vector3 playerPos;
-    Vector3 enemyPos;
-    public float distance;
+    private Vector3 playerPos;
+    private Vector3 enemyPos;
+    [SerializeField]
+    private float maxDistance = 100f;// 想定される最大距離（マップが無限に広いということはないはずなので）
+    public float distance { get; private set; }
 
     //時間の最大値と最小値の設定
     public int m_minTime = 1;                   //時間間隔の最小値
@@ -28,10 +30,17 @@ public class EnemyMove : MonoBehaviour
     {
         //時間間隔を決定する
         m_GoTime = GetRandomTime();
-        Vector3 m_EnemyPos = this.transform.position;
+        //Vector3 m_EnemyPos = this.transform.position;
 
-        player = GameObject.Find("Player");
-        enemy = GameObject.Find("Enemy");
+        if (!player)
+            player = GameObject.Find("Player");
+
+        if (!enemy)
+            enemy = GameObject.Find("Enemy");
+
+        if (!player && !enemy)
+            return;
+
         playerPos = player.transform.position;
         enemyPos = enemy.transform.position;
         distance = Vector3.Distance(playerPos, enemyPos);
@@ -43,7 +52,14 @@ public class EnemyMove : MonoBehaviour
         playerPos = player.transform.position;
         enemyPos = enemy.transform.position;
         distance = Vector3.Distance(playerPos, enemyPos);
-        if (distance < 5)
+
+        if (distance > maxDistance)
+        {
+            Debug.Log("マップの外に出てます");
+        }
+        //Debug.Log(enemyPos);//相対距離を0~100で定義する
+        //Debug.Log(distance);
+        if (distance < 1)
         {
             m_time += Time.deltaTime;
             //時間経過によって攻撃の処理を分ける
@@ -134,16 +150,30 @@ public class EnemyMove : MonoBehaviour
                 }
 
             }
-            transform.Translate(0, 0, 0);
+        }
+        else if(distance < 3)
+        {
+            var m_moveVec = playerPos - transform.position;
+            m_moveVec.Normalize();
+            // 回転実行
+            transform.rotation = Quaternion.Slerp(
+                       transform.rotation,
+                       Quaternion.LookRotation(m_moveVec),
+                       1.0f);
+            transform.Translate(0, 0, 0.01f);
+            //Debug.Log("見つけた");
         }
         else
         {
-            // Quaternion(回転値)を取得
-            Quaternion quaternion = Quaternion.LookRotation(playerPos);
-            // 算出した回転値をこのゲームオブジェクトのrotationに代入
-            this.transform.rotation = quaternion;
-            transform.Translate(0, 0, 0.01f);
-            Debug.Log("見つけた");
+            var m_moveVec = playerPos - transform.position;
+            m_moveVec.Normalize();
+            // 回転実行
+            transform.rotation = Quaternion.Slerp(
+                       transform.rotation,
+                       Quaternion.LookRotation(m_moveVec),
+                       1.0f);
+            transform.Translate(0, 0, 0.02f);
+            //Debug.Log("見つけた");
         }
     }
     //ランダムな時間を生成する関数
@@ -151,5 +181,17 @@ public class EnemyMove : MonoBehaviour
     {
         return Random.Range(m_minTime, m_maxTime);
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.name == "Player")
+        {
+            m_hp -= 10;
+
+        }
+        Debug.Log($"{m_hp}");
+    }
+
+
 
 }
