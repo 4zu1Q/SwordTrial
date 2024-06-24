@@ -1,20 +1,21 @@
 //メインシーンのシーン遷移
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class MainSceneTransition : MonoBehaviour
+public class MainSceneTransition : SceneTransitionBase
 {
     //タイマー情報
     private Timer m_timer;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         m_timer = GetComponent<Timer>();
     }
 
-    private void Update()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         DebugSceneTransition();
     }
 
@@ -26,14 +27,14 @@ public class MainSceneTransition : MonoBehaviour
         //Aボタンを押したら
         if (Input.GetButton("Abutton"))
         {
-            //勝利シーンに移動
-            SceneManager.LoadScene("WinScene");
+            m_fade.m_isFading = false;
+            GetNextScene((int)SceneKinds.kWinScene);
         }
         //Bボタンを押したら、またはカウントダウンが終了したらシーン遷移
         else if (Input.GetButton("Bbutton") || m_timer.GetFinishCountDown())
         {
-            //敗北シーンに移行
-            SceneManager.LoadScene("LoseScene");
+            m_fade.m_isFading = false;
+            GetNextScene((int)SceneKinds.kLoseScene);
         }
     }
 }

@@ -1,13 +1,13 @@
-// タイトルシーンにおけるシーン遷移処理
+//勝利シーンのシーン遷移
 
-public class TitleSceneTransition : SceneTransitionBase
+public class VictorySceneTransition : SceneTransitionBase
 {
-    TitleUICursor m_Ui;
+    VictoryUICursor m_UI;
 
     protected override void Start()
     {
         base.Start();
-        m_Ui = GetComponent<TitleUICursor>();
+        m_UI = GetComponent<VictoryUICursor>();
     }
 
     protected override void FixedUpdate()
@@ -21,11 +21,15 @@ public class TitleSceneTransition : SceneTransitionBase
     /// </summary>
     private void SceneTransitionTrigger()
     {
-        if (m_Ui.m_selectItem[(int)TitleUICursor.SelectNum.kStart])
+        if (m_UI.m_selectItem[(int)VictoryUICursor.SelectNum.KRetry])
         {
             m_fade.m_isFading = false;
             GetNextScene((int)SceneKinds.kMainScene);
         }
-        
+        else if (m_UI.m_selectItem[(int)VictoryUICursor.SelectNum.kHome])
+        {
+            m_fade.m_isFading=false;
+            GetNextScene((int)SceneKinds.kTitleScene);
+        }
     }
 }

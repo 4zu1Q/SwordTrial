@@ -13,9 +13,6 @@ public class UIOperationBase : MonoBehaviour
     private RectTransform m_selectRectTransform;
     private RectTransform[] m_itemRectTransform;
 
-    //フェード情報
-    protected Fade m_fade;
-
     protected virtual void Start()
     {
         //変数の初期化
@@ -29,8 +26,6 @@ public class UIOperationBase : MonoBehaviour
         {
             m_itemRectTransform[UINum] = m_itemUI[UINum].GetComponent<RectTransform>();
         }
-
-        m_fade = GameObject.Find("Fade").GetComponent<Fade>();
     }
 
     //Updateに呼び出す関数

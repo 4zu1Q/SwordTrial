@@ -8,22 +8,22 @@ public class SceneTransitionBase : MonoBehaviour
     //シーンの種類
     protected enum SceneKinds
     {
-        TitleScene,
-        MainScene,
-        WinScene,
-        LoseScene,
-        MaxNum
+        kTitleScene,
+        kMainScene,
+        kWinScene,
+        kLoseScene,
+        kMaxNum
     }
 
     //フェード情報
-    Fade m_fade;
+    protected Fade m_fade;
     //現在のシーンは何か
     protected bool[] m_nextSceneKinds; 
 
     protected virtual void Start()
     {
         m_fade = GameObject.Find("Fade").GetComponent<Fade>();
-        m_nextSceneKinds = new bool[(int)SceneKinds.MaxNum];
+        m_nextSceneKinds = new bool[(int)SceneKinds.kMaxNum];
     }
 
     protected virtual void FixedUpdate()
@@ -37,22 +37,22 @@ public class SceneTransitionBase : MonoBehaviour
     private void SceneTransition()
     {
         //タイトルシーンへ
-        if(m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.TitleScene])
+        if(m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.kTitleScene])
         {
             SceneManager.LoadScene("TitleScene");
         }
         //メインシーンへ
-        else if (m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.MainScene])
+        else if (m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.kMainScene])
         {
             SceneManager.LoadScene("GameScene");
         }
         //勝利シーンへ
-        else if (m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.WinScene])
+        else if (m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.kWinScene])
         {
             SceneManager.LoadScene("WinScene");
         }
         //敗北シーンへ
-        else if (m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.LoseScene])
+        else if (m_fade.GetFadeEnd() && m_nextSceneKinds[(int)SceneKinds.kLoseScene])
         {
             SceneManager.LoadScene("LoseScene");
         }
@@ -61,7 +61,7 @@ public class SceneTransitionBase : MonoBehaviour
     /// <summary>
     /// 現在のシーン
     /// </summary>
-    protected void GetCurrentScene(int NextSceneNumber)
+    protected void GetNextScene(int NextSceneNumber)
     {
         m_nextSceneKinds[NextSceneNumber] = true;
     }

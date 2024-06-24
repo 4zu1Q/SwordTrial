@@ -9,6 +9,16 @@ public class TitleUICursor : UIOperationBase
         kStart, //スタート
         kOption,//オプション
         kEnd,   //終了
+        kMaxNum
+    }
+
+    //選択されている項目
+    public bool[] m_selectItem;
+
+    protected override void Start()
+    {
+        base.Start();
+        m_selectItem = new bool[(int)SelectNum.kMaxNum];
     }
 
     void Update()
@@ -25,7 +35,7 @@ public class TitleUICursor : UIOperationBase
         //Aボタンを押したら
         if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kStart)
         {
-            m_fade.m_isFading = false;
+            m_selectItem[(int)SelectNum.kStart] = true;
         }
         else if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kOption)
         {
