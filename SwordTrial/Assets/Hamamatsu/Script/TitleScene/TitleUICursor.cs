@@ -1,7 +1,6 @@
 //タイトル画面のカーソルの操作
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class TitleUICursor : UIOperationBase
 {
@@ -10,6 +9,16 @@ public class TitleUICursor : UIOperationBase
         kStart, //スタート
         kOption,//オプション
         kEnd,   //終了
+        kMaxNum
+    }
+
+    //選択されている項目
+    public bool[] m_selectItem;
+
+    protected override void Start()
+    {
+        base.Start();
+        m_selectItem = new bool[(int)SelectNum.kMaxNum];
     }
 
     void Update()
@@ -24,18 +33,16 @@ public class TitleUICursor : UIOperationBase
     private void SceneTransition()
     {
         //Aボタンを押したら
-        if (Input.GetButton("Bbutton") && m_selectNum == (int)SelectNum.kStart)
+        if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kStart)
         {
-            //セレクトシーンに移行
-            SceneManager.LoadScene("GameScene");
+            m_selectItem[(int)SelectNum.kStart] = true;
         }
-        else if (Input.GetButton("Bbutton") && m_selectNum == (int)SelectNum.kOption)
+        else if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kOption)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
             Debug.Log("説明書開く");
-
         }
-        else if (Input.GetButton("Bbutton") && m_selectNum == (int)SelectNum.kEnd)
+        else if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kEnd)
         {
             //ゲーム終了させる
             //End();

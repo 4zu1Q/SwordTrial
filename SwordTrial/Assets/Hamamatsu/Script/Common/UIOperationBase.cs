@@ -13,7 +13,7 @@ public class UIOperationBase : MonoBehaviour
     private RectTransform m_selectRectTransform;
     private RectTransform[] m_itemRectTransform;
 
-    public void Start()
+    protected virtual void Start()
     {
         //•Ï”‚Ì‰Šú‰»
         m_isSelect=false;

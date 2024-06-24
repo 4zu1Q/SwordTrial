@@ -19,6 +19,8 @@ public class Menu : MonoBehaviour
     {
         MenuFlag();
         DrawMenu();
+
+        //Debug.Log(m_openMenu);
     }
 
     /// <summary>
@@ -36,6 +38,8 @@ public class Menu : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
+            Debug.Log(m_openMenu);
+
             if (m_openMenu)
             {
                 m_openMenu = false;
