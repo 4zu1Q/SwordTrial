@@ -23,6 +23,7 @@ public class Fade : MonoBehaviour
     {
         m_image = GetComponent<Image>();
         m_isFading = true;
+        m_fadeEnd = false;
         m_colorA = 255;
     }
 
@@ -70,6 +71,7 @@ public class Fade : MonoBehaviour
     /// </summary>
     private void FadeOut()
     {
+        //透明度が255の時はスキップ
         if(m_image.color.a >= m_fadeOutFinish)
         {
             m_colorA = 255;
@@ -86,5 +88,11 @@ public class Fade : MonoBehaviour
     {
         m_image.color = new Color32(0, 0, 0, m_colorA);
     }
+
+    /// <summary>
+    /// フェードアウトが終了したかの情報を取得
+    /// </summary>
+    /// <returns></returns>
+    public bool GetFadeEnd() {  return m_fadeEnd; }
 
 }
