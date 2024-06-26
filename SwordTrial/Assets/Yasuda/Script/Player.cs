@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private Rigidbody m_rb;
 
     private bool m_isDash;
+    private bool m_isGard;
     private bool m_isItem;
 
     private float m_moveSpeed;
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         m_moveSpeed = 5.0f;
         m_acel = new Vector3(1,0,1);
         m_isDash = false;
+        m_isGard = false;
         m_isItem = false;
         m_frame = 0;
 
@@ -64,8 +66,21 @@ public class Player : MonoBehaviour
         // 方向キーの入力値とカメラの向きから、移動方向を決定
         Vector3 m_moveForward = m_cameraForward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
 
-        // 移動方向にスピードを掛ける。
-        m_rb.velocity = m_moveForward * m_moveSpeed;
+        if(!m_isGard)
+        {
+            // 移動方向にスピードを掛ける。
+            m_rb.velocity = m_moveForward * m_moveSpeed;
+
+            //Aボタン
+            //押している間はダッシュする
+            if (Input.GetButton("Abutton") && !m_isDash)
+            {
+
+                m_rb.velocity = m_moveForward * m_moveSpeed * 2.0f;
+            }
+        }
+
+
         //Debug.Log("速度ベクトル: " + m_rb.velocity);
 
         // キャラクターの向きを進行方向に
@@ -75,24 +90,13 @@ public class Player : MonoBehaviour
         }
 
         /*ボタン操作*/
-        //Aボタン
-        //押している間はダッシュする
-        if (Input.GetButton("Abutton") && !m_isDash)
-        {
 
-            m_rb.velocity = m_moveForward * m_moveSpeed * 2.0f;
-        }
 
 
         //Bボタン
         if (Input.GetButtonDown("Bbutton"))
         {
             m_isItem = true;
-
-            //else if (m_hp >= 90) 
-            //{
-            //    m_hp += 10;
-            //}
 
         }
 
@@ -116,11 +120,12 @@ public class Player : MonoBehaviour
         {
             Debug.Log("ガード");
             m_gard.gameObject.SetActive(true);
-
+            m_isGard = true;
         }
         else
         {
             m_gard.gameObject.SetActive(false);
+            m_isGard = false;
 
         }
 
@@ -152,9 +157,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(m_hp);
 
-        //else m_attack.gameObject.SetActive(false);
 
 
         //右スティック押し込み
@@ -174,19 +177,15 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-       if(other.gameObject.name == m_tagName)
+       if(other.tag == "PlayerAttack")
         {
-            m_rb.velocity = -m_moveForward * m_moveSpeed * 2.0f;
+            //m_rb.velocity = -m_moveForward * m_moveSpeed * 2.0f;
             
             m_hp -= 10;
         }
     }
 
-    //private void ColliderReset()
-    //{
-    //    m_isAttack.enabled = false;
-    //}
 
 }
