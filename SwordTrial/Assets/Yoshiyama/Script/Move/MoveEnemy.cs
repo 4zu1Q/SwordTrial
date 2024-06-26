@@ -6,19 +6,19 @@ using UnityEngine.AI;
 
 public class MoveEnemy : MonoBehaviour
 {
-    public GameObject m_target;                    //GameObjectŒ^‚ğ•Ï”target‚ÅéŒ¾‚µ‚Ü‚·
-    public Transform m_player;                     //‚Ç‚ÌÀ•W‚ğŠî€‚É‚·‚é‚©
+    public GameObject m_target;                    //GameObjectå‹ã‚’å¤‰æ•°targetã§å®£è¨€ã—ã¾ã™
+    public Transform m_player;                     //ã©ã®åº§æ¨™ã‚’åŸºæº–ã«ã™ã‚‹ã‹
 
-    //ŠÔ‚ÌÅ‘å’l‚ÆÅ¬’l‚Ìİ’è
-    public int m_minTime = 1;                   //ŠÔŠÔŠu‚ÌÅ¬’l
-    public int m_maxTime = 4;                   //ŠÔŠÔŠu‚ÌÅ‘å’l
+    //æ™‚é–“ã®æœ€å¤§å€¤ã¨æœ€å°å€¤ã®è¨­å®š
+    public int m_minTime = 1;                   //æ™‚é–“é–“éš”ã®æœ€å°å€¤
+    public int m_maxTime = 4;                   //æ™‚é–“é–“éš”ã®æœ€å¤§å€¤
 
-    public int m_hp;                            //Enemy‚ÌHPˆ—
+    public int m_hp;                            //Enemyã®HPå‡¦ç†
 
-    private float m_GoTime;                     //“G‚ÌUŒ‚ƒ^ƒCƒ~ƒ“ƒO
-    private float m_time;                       //ŠÔ
-    private bool m_isTrigger = false;           //UŒ‚‚µ‚Ä‚¢‚¢‚©
-    private float m_interval = 0f;              //ƒCƒ“ƒ^[ƒoƒ‹
+    private float m_GoTime;                     //æ•µã®æ”»æ’ƒã‚¿ã‚¤ãƒŸãƒ³ã‚°
+    private float m_time;                       //æ™‚é–“
+    private bool m_isTrigger = false;           //æ”»æ’ƒã—ã¦ã„ã„ã‹
+    private float m_interval = 0f;              //ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«
 
     private string m_tagName = "Player";
 
@@ -28,7 +28,7 @@ public class MoveEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ŠÔŠÔŠu‚ğŒˆ’è‚·‚é
+        //æ™‚é–“é–“éš”ã‚’æ±ºå®šã™ã‚‹
         m_GoTime = GetRandomTime();
     }
 
@@ -36,13 +36,13 @@ public class MoveEnemy : MonoBehaviour
     void Update()
     {
         m_time += Time.deltaTime;
-        //ŠÔŒo‰ß‚É‚æ‚Á‚ÄUŒ‚‚Ìˆ—‚ğ•ª‚¯‚é
+        //æ™‚é–“çµŒéã«ã‚ˆã£ã¦æ”»æ’ƒã®å‡¦ç†ã‚’åˆ†ã‘ã‚‹
         if (m_GoTime == 1 && m_isTrigger == false)
         {
             m_isTrigger = true;
             if (m_time == 2)
             {
-                Debug.Log("’ÊíUŒ‚");
+                Debug.Log("é€šå¸¸æ”»æ’ƒ");
                 m_time = 0;
             }
         }
@@ -51,7 +51,7 @@ public class MoveEnemy : MonoBehaviour
             m_isTrigger = true;
             if (m_time == 5)
             {
-                Debug.Log("—­‚ßUŒ‚");
+                Debug.Log("æºœã‚æ”»æ’ƒ");
                 m_time = 0;
             }
         }
@@ -60,7 +60,7 @@ public class MoveEnemy : MonoBehaviour
             m_isTrigger = true;
             if (m_time == 1)
             {
-                Debug.Log("˜A‘ÅUŒ‚");
+                Debug.Log("é€£æ‰“æ”»æ’ƒ");
                 m_time = 0;
             }
 
@@ -70,11 +70,11 @@ public class MoveEnemy : MonoBehaviour
             m_isTrigger = true;
             if (m_time == 4)
             {
-                Debug.Log("‚®‚é‚®‚éUŒ‚");
+                Debug.Log("ãã‚‹ãã‚‹æ”»æ’ƒ");
                 m_time = 0;
             }
         }
-        //true‚É‚µ‚½‚Æ‚«‚Ìˆ— UŒ‚‚µ‚½Œã‚ÌƒCƒ“ƒ^[ƒoƒ‹‚Ìˆ—
+        //trueã«ã—ãŸã¨ãã®å‡¦ç† æ”»æ’ƒã—ãŸå¾Œã®ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ã®å‡¦ç†
         if (m_isTrigger == true)
         {
             m_time += Time.deltaTime;
@@ -114,23 +114,25 @@ public class MoveEnemy : MonoBehaviour
                     m_time = 0;
                 }
             }
-            //Ÿ‚É”­¶‚·‚éŠÔŠÔŠu‚ğŒˆ’è‚·‚é
+            //æ¬¡ã«ç™ºç”Ÿã™ã‚‹æ™‚é–“é–“éš”ã‚’æ±ºå®šã™ã‚‹
             m_GoTime = GetRandomTime();
         }
     }
 
-    //ƒ^[ƒQƒbƒg‚ª”ÍˆÍ‚É“ü‚Á‚½‚ÌŠÖ”
+    //ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒç¯„å›²ã«å…¥ã£ãŸæ™‚ã®é–¢æ•°
     private void OnTriggerStay(Collider other)
     {
-        //ƒvƒŒƒCƒ„[‚ªw’è‚µ‚½ƒT[ƒNƒ‹“à‚Éi“ü‚µ‚½‚ç’Ç‚¢‚©‚¯‚é
+        //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãŒæŒ‡å®šã—ãŸã‚µãƒ¼ã‚¯ãƒ«å†…ã«é€²å…¥ã—ãŸã‚‰è¿½ã„ã‹ã‘ã‚‹
         if (other.gameObject.name == "Player")
         {
+
             //transform.LookAt(m_player);     
+
             transform.Translate(0, 0, 0.01f);
-            Debug.Log("Œ©‚Â‚¯‚½");
+            Debug.Log("è¦‹ã¤ã‘ãŸ");
         }
     }
-    //ƒ‰ƒ“ƒ_ƒ€‚ÈŠÔ‚ğ¶¬‚·‚éŠÖ”
+    //ãƒ©ãƒ³ãƒ€ãƒ ãªæ™‚é–“ã‚’ç”Ÿæˆã™ã‚‹é–¢æ•°
     private float GetRandomTime()
     {
         return Random.Range(m_minTime, m_maxTime);
