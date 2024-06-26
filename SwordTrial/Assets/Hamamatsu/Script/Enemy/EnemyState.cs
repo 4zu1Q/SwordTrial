@@ -6,10 +6,21 @@ using UnityEngine.UIElements;
 
 public class EnemyState : MonoBehaviour
 {
+    //攻撃の種類
+    enum AttackKinds
+    {
+        kNormalAttack,//通常
+        kChargeAttack,//溜め
+        kComboAttack,//連続
+        kRotateAttack,//回転
+        kAttackMaxKinds//最大種類
+    }
+
     //追跡するターゲットのオブジェクト
     [SerializeField] private GameObject m_target;
     //移動する速度
     [SerializeField] private float m_speed;
+
     //座標------------------------------------------------------
     private Vector3 m_targetPosition;//追跡するターゲット
     private Vector3 m_enemyPosition;//敵
@@ -32,6 +43,28 @@ public class EnemyState : MonoBehaviour
     //生きているかどうかを取得
     private bool m_isAlive = true;
 
+    //攻撃-------------------------------------------------------
+    //攻撃と攻撃の間にあるインターバル、攻撃によってインターバルの時間を変更
+    private int m_attackInterval = 10;
+    private int m_currentAttackInterval = 0;//現在のインターバル
+
+    private int m_attackKinds = 0;//何の攻撃をするのかを決める
+
+    private bool m_isCombat = false;//戦闘態勢に入っているかどうか
+
+    private bool[] m_currentAttackState;//現在の攻撃状況
+
+    public GameObject m_attackCol;//攻撃の当たり判定
+
+    private bool m_isActive = false;//存在しているかどうか
+
+    //-----------------------------------------------------------
+
+    //別のスクリプトを取得---------------------------------------
+    EnemyNormalAttack m_normalAttack;// 通常攻撃
+
+    //-----------------------------------------------------------
+
 
     void Start()
     {
@@ -40,7 +73,7 @@ public class EnemyState : MonoBehaviour
 
     void Update()
     {
-        
+        GetAttackKinds();
     }
 
     private void FixedUpdate()
@@ -54,6 +87,16 @@ public class EnemyState : MonoBehaviour
 
         UpdateVariable();
         GoToTarget();
+        IntervalReset();
+
+
+        if (m_isCombat)
+        {
+            AttackIntervalAdd();
+        }
+
+        AttackActive();
+        UpdateAttack();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,7 +105,6 @@ public class EnemyState : MonoBehaviour
         //TODO:条件分が仮なのでアルファで変更する
         if(other.tag == "PlayerAttack")
         {
-            Debug.Log("通る");
             ReceiveDamage();
         }
     }
@@ -74,6 +116,12 @@ public class EnemyState : MonoBehaviour
     private void Initialization()
     {
         m_currentHP = 100;
+        m_attackKinds = 3;
+        m_currentAttackState = new bool[(int)AttackKinds.kAttackMaxKinds];
+
+        m_normalAttack = new EnemyNormalAttack();
+
+        m_isActive = false;
     }
 
     /// <summary>
@@ -97,9 +145,6 @@ public class EnemyState : MonoBehaviour
     private void SetDistance()
     {
         m_currentDistance = Vector3.Distance(m_targetPosition, m_enemyPosition);
-
-        //m_currentDistance = Vector3.Distance(new Vector3(m_targetPosition.x, 0, m_targetPosition.y),
-        //    new Vector3(m_enemyPosition.x, 0, m_enemyPosition.y));
     }
 
     /// <summary>
@@ -113,10 +158,22 @@ public class EnemyState : MonoBehaviour
         TurnTowards();
         SpeedChange();
 
+        // プレイヤーが離れると移動
         if (m_currentDistance >= m_shortDistance)
         {
             //オブジェクトの前方に進ませる
             transform.Translate(0, 0, m_speed, Space.Self);
+            m_isCombat = false;
+            for(int i = 0; i< (int)AttackKinds.kAttackMaxKinds; i++)
+            {
+                m_currentAttackState[i] = false;
+            }
+            m_isActive = false;
+        }
+        //プレイヤーに近づいた状態になると戦闘態勢に移る
+        else if(m_currentDistance <= m_shortDistance)
+        {
+            m_isCombat = true;
         }
         
     }
@@ -167,5 +224,154 @@ public class EnemyState : MonoBehaviour
     private void Dead()
     {
         m_isAlive = false;
+    }
+
+    /// <summary>
+    /// インターバルをリセット
+    /// </summary>
+    private void IntervalReset()
+    {
+        if (!m_isCombat)
+        {
+            m_currentAttackInterval = 0;
+        }
+    }
+
+    /// <summary>
+    /// 攻撃の種類をRandomで決める
+    /// </summary>
+    private void GetAttackKinds()
+    {
+        m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
+    }
+
+    /// <summary>
+    /// 攻撃のインターバルを加算していく
+    /// </summary>
+    private void AttackIntervalAdd()
+    {
+        m_currentAttackInterval++;
+
+        // 一定のインターバルが過ぎると攻撃を行う
+        if (m_currentAttackInterval >= m_attackInterval)
+        {
+            
+            AttackNumber();
+            m_currentAttackInterval = 0;
+        }
+    }
+
+    /// <summary>
+    /// 攻撃をm_attackKindsの値によって変える
+    /// (int)AttackKinds.kNormalAttack = 通常攻撃
+    /// (int)AttackKinds.kChargeAttack = 溜め攻撃
+    /// (int)AttackKinds.kComboAttack = 連続攻撃
+    /// (int)AttackKinds.kRotateAttack = 回転攻撃
+    /// </summary>
+    private void AttackNumber()
+    {
+        // 通常攻撃
+        if(m_attackKinds == (int)AttackKinds.kNormalAttack)
+        {
+            Debug.Log("通常攻撃");
+            m_currentAttackState[(int)AttackKinds.kNormalAttack] = true;
+            m_attackInterval = 400;
+        }
+        else if(m_attackKinds == (int)AttackKinds.kChargeAttack)
+        {
+            Debug.Log("溜め攻撃");
+            m_currentAttackState[(int)AttackKinds.kChargeAttack] = true;
+            m_attackInterval = 400;
+        }
+        else if(m_attackKinds == (int)AttackKinds.kComboAttack)
+        {
+            Debug.Log("連続攻撃");
+            m_currentAttackState[(int)AttackKinds.kComboAttack] = true;
+            m_attackInterval = 400;
+        }
+        else if (m_attackKinds == (int)AttackKinds.kRotateAttack)
+        {
+            Debug.Log("回転攻撃");
+            m_currentAttackState[(int)AttackKinds.kRotateAttack] = true;
+            m_attackInterval = 400;
+        }
+    }
+
+    /// <summary>
+    /// 攻撃判定が存在しているか
+    /// </summary>
+    private void AttackActive()
+    {
+        Debug.Log(m_isActive);
+        m_attackCol.SetActive(m_isActive);
+    }
+
+    /// <summary>
+    /// 攻撃の処理
+    /// </summary>
+    private void UpdateAttack()
+    {
+        if (m_currentAttackState[(int)AttackKinds.kNormalAttack])
+        {
+            if (m_currentAttackInterval >= m_attackInterval)
+            {
+                m_currentAttackState[(int)AttackKinds.kNormalAttack] = false;
+            }
+            DebugAttack(100, 200, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(1.0f, 1.0f, 1.0f));
+            Debug.Log("通常攻撃");
+        }
+        else if (m_currentAttackState[(int)AttackKinds.kChargeAttack])
+        {
+            if (m_currentAttackInterval >= m_attackInterval)
+            {
+                m_currentAttackState[(int)AttackKinds.kChargeAttack] = false;
+            }
+            DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(2.0f, 2.0f, 2.0f));
+            Debug.Log("溜め攻撃");
+        }
+        else if (m_currentAttackState[(int)AttackKinds.kComboAttack])
+        {
+            if (m_currentAttackInterval >= m_attackInterval)
+            {
+                m_currentAttackState[(int)AttackKinds.kComboAttack] = false;
+            }
+            DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
+            Debug.Log("連続攻撃");
+        }
+        else if (m_currentAttackState[(int)AttackKinds.kRotateAttack])
+        {
+            if (m_currentAttackInterval >= m_attackInterval)
+            {
+                m_currentAttackState[(int)AttackKinds.kRotateAttack] = false;
+            }
+            DebugAttack(200, 300, new Vector3(0.0f, 0.1f, 0.0f), new Vector3(2.0f, 2.0f, 2.0f));
+            Debug.Log("回転攻撃");
+        }
+
+        
+    }
+
+    /// <summary>
+    /// デバッグ用当たり判定
+    /// </summary>
+    /// <param name="isActiveTime"></param>
+    /// <param name="noActiveTime"></param>
+    /// <param name="scale"></param>
+    private void DebugAttack(int isActiveTime, int noActiveTime, Vector3 position, Vector3 scale)
+    {
+        if (m_currentAttackInterval == isActiveTime)
+        {
+            m_isActive = true;
+            
+        }
+
+        m_attackCol.transform.localPosition = position;
+        m_attackCol.transform.localScale = scale;
+
+        if (m_currentAttackInterval == noActiveTime)
+        {
+            m_isActive = false;
+            Debug.Log("通る");
+        }
     }
 }
