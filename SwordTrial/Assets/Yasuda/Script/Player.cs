@@ -8,29 +8,34 @@ using UnityEngine.SceneManagement; //シーン切り替えのため
 public class Player : MonoBehaviour
 {
     /*ステータス変数*/
-    public int m_hp;
+    [SerializeField] public int m_hp;
+    [SerializeField] private int m_hpNum;
+    [SerializeField] private float m_speed;
+    [SerializeField] private float m_acel;
 
-    /*移動変数*/
-    private string m_tagName = "Boss";
 
-    /**/
+    /*オブジェクト変数*/
     GameObject m_boss;
-
     GameObject m_player;
     Transform m_attack;
-    Transform m_gard;
 
+    /*タグ変数*/
+    private string m_attackTag;
+    private string m_gardTag;
+
+    /*フレーム変数*/
     private int m_frame;
 
+    /*移動変数*/
     private float m_inputHorizontal;
     private float m_inputVertical;
     private Rigidbody m_rb;
 
     private bool m_isDash;
     private bool m_isItem;
+    private bool m_isGard;
 
-    private float m_moveSpeed;
-    private Vector3 m_acel;
+    /*カメラの変数*/
     private Vector3 m_cameraForward;
     private Vector3 m_moveForward;
 
@@ -41,19 +46,25 @@ public class Player : MonoBehaviour
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
         m_attack = m_player.transform.Find("Attack");
-        m_gard = m_player.transform.Find("Gard");
         m_hp = 100;
-        m_moveSpeed = 5.0f;
-        m_acel = new Vector3(1,0,1);
+        m_hpNum = 3;
+        m_speed = 5.0f;
+        m_acel = 2.0f;
         m_isDash = false;
         m_isItem = false;
+        m_isGard = false;
         m_frame = 0;
+
+        m_inputHorizontal = 0;
+        m_inputVertical = 0;
+
+        m_attackTag = "PlayerAttack";
+        m_gardTag = "PlayerGard";
 
     }
 
     void FixedUpdate()
     {
-
         /*移動処理*/
         m_inputHorizontal = Input.GetAxis("Horizontal");
         m_inputVertical = Input.GetAxis("Vertical");
@@ -64,8 +75,20 @@ public class Player : MonoBehaviour
         // 方向キーの入力値とカメラの向きから、移動方向を決定
         Vector3 m_moveForward = m_cameraForward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
 
-        // 移動方向にスピードを掛ける。
-        m_rb.velocity = m_moveForward * m_moveSpeed;
+        if (!m_isGard)
+        {
+            // 移動方向にスピードを掛ける。
+            m_rb.velocity = m_moveForward * m_speed;
+
+            //Aボタン
+            //押している間はダッシュする
+            if (Input.GetButton("Abutton") && !m_isDash)
+            {
+
+                m_rb.velocity = m_moveForward * m_speed * m_acel;
+            }
+        }
+
         //Debug.Log("速度ベクトル: " + m_rb.velocity);
 
         // キャラクターの向きを進行方向に
@@ -75,26 +98,19 @@ public class Player : MonoBehaviour
         }
 
         /*ボタン操作*/
-        //Aボタン
-        //押している間はダッシュする
-        if (Input.GetButton("Abutton") && !m_isDash)
-        {
 
-            m_rb.velocity = m_moveForward * m_moveSpeed * 2.0f;
-        }
 
 
         //Bボタン
-        if (Input.GetButtonDown("Bbutton"))
+        if(m_hpNum > 0)
         {
-            m_isItem = true;
+            if (Input.GetButtonDown("Bbutton") && m_hp < 100)
+            {
+                m_isItem = true;
 
-            //else if (m_hp >= 90) 
-            //{
-            //    m_hp += 10;
-            //}
-
+            }
         }
+
 
         //Xボタン
         if (Input.GetButtonDown("Xbutton"))
@@ -102,36 +118,43 @@ public class Player : MonoBehaviour
             Debug.Log("attack");
 
             //当たり判定を表示
-            m_attack.gameObject.SetActive(true);
-
+            //m_attack.gameObject.SetActive(true);
+            //SetTag(m_gardTag);
         }
         else
         {
-            m_attack.gameObject.SetActive(false);
-
+            //m_attack.gameObject.SetActive(false);
+            //SetTag(m_attackTag);
         }
 
         //Yボタン
         if (Input.GetButton("Ybutton"))
         {
-            Debug.Log("ガード");
-            m_gard.gameObject.SetActive(true);
+            //Debug.Log("ガード");
+            m_isGard = true;
+            m_player.tag = "PlayerGard";
+            Debug.Log(m_player.tag);
 
         }
         else
         {
-            m_gard.gameObject.SetActive(false);
+            m_isGard = false;
+            m_player.tag = "PlayerAttack";
+            Debug.Log(m_player.tag);
 
         }
 
+        //HPが減っていた場合
         if (m_isItem)
         {
             m_frame++;
             if(m_frame >= 180)
             {
                 m_isItem = false;
-                m_hp += 10;
                 m_frame = 0;
+                m_hp += 10;
+                m_hpNum--;
+
 
             }
         }
@@ -143,11 +166,12 @@ public class Player : MonoBehaviour
 
         }
 
-        Debug.Log(m_frame);
+        //Debug.Log(m_frame);
 
 
 
-        Debug.Log(m_hp);
+        //Debug.Log(m_hp);
+        //Debug.Log(m_hpNum);
     }
 
     void Update()
@@ -176,17 +200,16 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-       if(other.gameObject.name == m_tagName)
+       if(other.gameObject.name == "Boss")
         {
-            m_rb.velocity = -m_moveForward * m_moveSpeed * 2.0f;
+            m_rb.velocity = -m_moveForward * m_speed * 2.0f;
             
             m_hp -= 10;
         }
     }
 
-    //private void ColliderReset()
-    //{
-    //    m_isAttack.enabled = false;
-    //}
-
+    private void SetTag(string newTag)
+    {
+        m_player.tag = newTag;
+    }
 }
