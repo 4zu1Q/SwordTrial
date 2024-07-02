@@ -540,9 +540,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hp: 100
-  m_hpNum: 0
+  m_itemNum: 0
   m_speed: 5
   m_acel: 2
+  m_itemFrame: 0
+  m_attackFrame: 0
 --- !u!54 &592316453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -708,9 +710,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_hp: 0
-  m_hpNum: 0
+  m_itemNum: 0
   m_speed: 0
   m_acel: 0
+  m_itemFrame: 0
+  m_attackFrame: 0
 --- !u!65 &612542578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1266,7 +1270,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951051770}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
