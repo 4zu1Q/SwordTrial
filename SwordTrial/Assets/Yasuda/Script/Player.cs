@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     /*ステータス変数*/
     [SerializeField] public int m_hp;
-    [SerializeField] private int m_hpNum;
+    [SerializeField] private int m_itemNum;       //アイテムの個数
     [SerializeField] private float m_speed;
     [SerializeField] private float m_acel;
 
@@ -24,7 +24,8 @@ public class Player : MonoBehaviour
     private string m_gardTag;
 
     /*フレーム変数*/
-    private int m_frame;
+    [SerializeField] private int m_itemFrame;
+    [SerializeField] private int m_attackFrame;
 
     /*移動変数*/
     private float m_inputHorizontal;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
 
     private bool m_isDash;
     private bool m_isItem;
+    private bool m_isAttack;
     private bool m_isGard;
 
     /*カメラの変数*/
@@ -47,13 +49,18 @@ public class Player : MonoBehaviour
         m_player = GameObject.Find("Player");
         m_attack = m_player.transform.Find("Attack");
         m_hp = 100;
-        m_hpNum = 3;
+        m_itemNum = 3;
+
         m_speed = 5.0f;
         m_acel = 2.0f;
+
         m_isDash = false;
         m_isItem = false;
         m_isGard = false;
-        m_frame = 0;
+        m_isAttack = false;
+
+        m_itemFrame = 0;
+        m_attackFrame = 0;
 
         m_inputHorizontal = 0;
         m_inputVertical = 0;
@@ -97,34 +104,43 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(m_moveForward);
         }
 
+
+
+
         /*ボタン操作*/
-
-
-
         //Bボタン
-        if(m_hpNum > 0)
+        if(m_itemNum > 0)
         {
             if (Input.GetButtonDown("Bbutton") && m_hp < 100)
             {
                 m_isItem = true;
-
             }
         }
 
 
         //Xボタン
-        if (Input.GetButtonDown("Xbutton"))
+        if (Input.GetButton("Xbutton"))
         {
-            Debug.Log("attack");
-
-            //当たり判定を表示
-            //m_attack.gameObject.SetActive(true);
-            //SetTag(m_gardTag);
+            m_isAttack = true;
         }
         else
         {
-            //m_attack.gameObject.SetActive(false);
-            //SetTag(m_attackTag);
+        }
+
+        //当たり判定を表示
+        if (m_isAttack)
+        {
+            m_attackFrame++;
+
+            m_attack.gameObject.SetActive(true);
+
+            if (m_attackFrame >= 50)
+            {
+                m_attackFrame = 0;
+                m_isAttack = false;
+                m_attack.gameObject.SetActive(false);
+
+            }
         }
 
         //Yボタン
@@ -132,28 +148,29 @@ public class Player : MonoBehaviour
         {
             //Debug.Log("ガード");
             m_isGard = true;
-            m_player.tag = "PlayerGard";
-            Debug.Log(m_player.tag);
+            SetTag(m_gardTag);
+            //Debug.Log(m_player.tag);
 
         }
         else
         {
             m_isGard = false;
-            m_player.tag = "PlayerAttack";
-            Debug.Log(m_player.tag);
-
+            SetTag(m_attackTag);
+            //Debug.Log(m_player.tag);
+            
         }
 
         //HPが減っていた場合
         if (m_isItem)
         {
-            m_frame++;
-            if(m_frame >= 180)
+            m_itemFrame++;
+            if(m_itemFrame >= 180)
             {
                 m_isItem = false;
-                m_frame = 0;
+                m_itemFrame = 0;
                 m_hp += 10;
-                m_hpNum--;
+
+                m_itemNum--;
 
 
             }
@@ -166,9 +183,10 @@ public class Player : MonoBehaviour
 
         }
 
+
         //Debug.Log(m_frame);
 
-
+        Debug.Log(m_attackFrame);
 
         //Debug.Log(m_hp);
         //Debug.Log(m_hpNum);
@@ -205,6 +223,23 @@ public class Player : MonoBehaviour
             m_rb.velocity = -m_moveForward * m_speed * 2.0f;
             
             m_hp -= 10;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "EnemyAttack")
+        {
+        }
+
+        if(other.tag == "PlayerAttack")
+        {
+            m_hp -= 10;
+        }
+
+        if(other.tag == "PlayerGard")
+        {
+
         }
     }
 
