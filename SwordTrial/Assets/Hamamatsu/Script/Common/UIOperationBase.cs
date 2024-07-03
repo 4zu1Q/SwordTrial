@@ -1,6 +1,8 @@
 //UIの操作処理
 
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIOperationBase : MonoBehaviour
 {
@@ -13,6 +15,15 @@ public class UIOperationBase : MonoBehaviour
     private RectTransform m_selectRectTransform;
     private RectTransform[] m_itemRectTransform;
 
+    private Image m_selectUIImg;
+    private float m_selectCursorPosX;//カーソルのポジション取得
+    private int m_prevSelectNum;//前に選択した番号
+    private float m_moveCursorSpeed;//カーソルの移動速度
+    private bool m_isDecision;//決定を押したかどうか
+    private Vector3[] m_itemDefaultRectTransform;//もともとの画像のサイズ取得
+    private int m_pressTime;
+    private int m_pressTimeMax;
+
     protected virtual void Start()
     {
         //変数の初期化
@@ -20,12 +31,21 @@ public class UIOperationBase : MonoBehaviour
         m_selectNum = 0;
         //配列の長さは選択項目数
         m_itemRectTransform = new RectTransform[m_itemUI.Length];
+        m_itemDefaultRectTransform = new Vector3[m_itemUI.Length];
         m_selectRectTransform = m_selectCursor.GetComponent<RectTransform>();
-
         for (int UINum = 0; UINum < m_itemUI.Length; UINum++)
         {
             m_itemRectTransform[UINum] = m_itemUI[UINum].GetComponent<RectTransform>();
+            m_itemDefaultRectTransform[UINum] = m_itemRectTransform[UINum].localScale;
         }
+        m_selectUIImg = m_selectCursor.GetComponent<Image>();
+        m_prevSelectNum = -1;
+        m_moveCursorSpeed = 0.2f;
+        m_selectCursorPosX = m_selectRectTransform.position.x;
+        m_pressTime = 0;
+        m_pressTimeMax = 20;
+
+        UIScalseChengeLoop();
     }
 
     //Updateに呼び出す関数
@@ -33,20 +53,27 @@ public class UIOperationBase : MonoBehaviour
     {
         ItemCursorChange();
         SelectUIPosition();
+        UIScaleChengeUpdate();
     }
 
 
     /// <summary>
     /// 選択項目の変更処理
     /// </summary>
-    public void ItemCursorChange()
+    private void ItemCursorChange()
     {
+        //決定ボタンを押されていたら移動できなくする
+        if (m_isDecision) { return; }
+        //前の選んでいた番号の取得
+        m_prevSelectNum = m_selectNum;
+
         //スティックの入力値を格納
         float LeftStick = Input.GetAxis("Vertical");
 
         //カーソルを下に動かす
-        if (LeftStick <= -0.5f && !m_isSelect)
+        if (LeftStick <= -0.5f)
         {
+            if(!IsPressButtom() && m_isSelect) return;
             m_isSelect = true;
             m_selectNum++;
             if (m_selectNum > m_itemUI.Length - 1)
@@ -55,8 +82,9 @@ public class UIOperationBase : MonoBehaviour
             }
         }
         //カーソルを上に動かす
-        else if (LeftStick >= 0.5f && !m_isSelect)
+        else if (LeftStick >= 0.5f)
         {
+            if (!IsPressButtom() && m_isSelect) return;
             m_isSelect = true;
             m_selectNum--;
             if (m_selectNum < 0)
@@ -67,16 +95,79 @@ public class UIOperationBase : MonoBehaviour
         else if (LeftStick >= -0.1f && LeftStick <= 0.1f)
         {
             m_isSelect = false;
+            m_pressTime = 0;
         }
+    }
+    /// <summary>
+    /// ボタンおしっぱの時の処理
+    /// </summary>
+    /// <returns>おしっぱで一定時間経過したかどうか</returns>
+    private bool IsPressButtom()
+    {
+        m_pressTime++;
+        if(m_pressTime >m_pressTimeMax)
+        {
+            m_pressTime = 0;
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
     /// 操作するUIの座標処理
     /// </summary>
-    public void SelectUIPosition()
+    private void SelectUIPosition()
     {
-        //m_selectRectTransform.position = m_itemRectTransform[(int)m_selectNum].position;
-        m_selectRectTransform.position = new Vector3(m_selectRectTransform.position.x,
-            m_itemRectTransform[(int)m_selectNum].position.y, 0);
+        // 前のフレームと選んでいたものが異なるときのみ処理を行う
+        if (m_selectNum != m_prevSelectNum)
+        {
+            //指定した座標にm_moveCursorSpeed秒かけて移動する
+            m_selectRectTransform.transform.DOMove(new Vector3(m_selectCursorPosX,
+                m_itemRectTransform[(int)m_selectNum].position.y, 0), m_moveCursorSpeed).SetEase(Ease.OutCubic);
+        }
+    }
+    /// <summary>
+    /// UIの画像のスケールの更新処理
+    /// </summary>
+    private void UIScaleChengeUpdate()
+    {
+        // 前のフレームと選んでいたものが異なるときのみ処理を行う
+        if (m_selectNum != m_prevSelectNum)
+        {
+            //前に選択していた画像の処理を止める
+            m_itemRectTransform[(int)m_prevSelectNum].DOKill();
+            //m_itemRectTransform[(int)m_prevSelectNum].transform.localScale = m_itemDefaultRectTransform[m_prevSelectNum];
+            m_itemRectTransform[(int)m_prevSelectNum].DOScale((m_itemDefaultRectTransform[m_prevSelectNum]), 0.1f)
+                .SetEase(Ease.InOutSine);
+            UIScalseChengeLoop();
+        }
+    }
+    /// <summary>
+    /// 選んでいる画像が拡大縮小する処理
+    /// </summary>
+    private void UIScalseChengeLoop()
+    {
+        //指定した座標にm_moveCursorSpeed秒かけて移動する
+        m_itemRectTransform[(int)m_selectNum].transform.DOScale(new Vector3(1.3f,
+            1.3f, 0), 1.5f)
+            .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+    }
+    /// <summary>
+    /// 決定を押されたときに色の変更処理
+    /// </summary>
+    public void SlectUIColorChenge()
+    {
+        if(m_selectUIImg.color != Color.red)
+        { 
+            m_selectUIImg.color = Color.red;
+        }
+    }
+    /// <summary>
+    /// 決定を押したかどうかを取得する
+    /// </summary>
+    /// <param name="decison"></param>
+    public void DecisionUpdate(bool decison)
+    {
+        m_isDecision = decison;
     }
 }
