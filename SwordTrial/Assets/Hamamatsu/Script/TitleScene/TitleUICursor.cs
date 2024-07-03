@@ -14,11 +14,13 @@ public class TitleUICursor : UIOperationBase
 
     //選択されている項目
     public bool[] m_selectItem;
+    private bool m_isPress;
 
     protected override void Start()
     {
         base.Start();
         m_selectItem = new bool[(int)SelectNum.kMaxNum];
+        m_isPress = false;
     }
 
     void Update()
@@ -32,21 +34,39 @@ public class TitleUICursor : UIOperationBase
     /// </summary>
     private void SceneTransition()
     {
-        //Aボタンを押したら
-        if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kStart)
+        //ボタンを押した処理
+        PressButton();
+
+        if (m_isPress && m_selectNum == (int)SelectNum.kStart)
         {
             m_selectItem[(int)SelectNum.kStart] = true;
+            SlectUIColorChenge();
         }
-        else if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kOption)
+        else if (m_isPress && m_selectNum == (int)SelectNum.kOption)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
             Debug.Log("説明書開く");
+            SlectUIColorChenge();
         }
-        else if (Input.GetButtonDown("Bbutton") && m_selectNum == (int)SelectNum.kEnd)
+        else if (m_isPress && m_selectNum == (int)SelectNum.kEnd)
         {
             //ゲーム終了させる
             //End();
             Debug.Log("ゲーム終了");
+            SlectUIColorChenge();
         }
+    }
+    /// <summary>
+    /// ボタンを押したときの処理
+    /// </summary>
+    private void PressButton()
+    {
+        //ボタンを押した処理
+        if (Input.GetButtonDown("Bbutton"))
+        {
+            m_isPress = true;
+        }
+
+        DecisionUpdate(m_isPress);
     }
 }
