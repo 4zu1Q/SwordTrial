@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 public class EnemyC : MonoBehaviour
 {
     //UŒ‚‚Ìí—Ş
-    enum AttackKinds
+    public enum AttackKinds
     {
         kNormalAttack,//’Êí
         kChargeAttack,//—­‚ß
@@ -48,7 +48,7 @@ public class EnemyC : MonoBehaviour
     private int m_attackInterval = 10;
     private int m_currentAttackInterval = 0;//Œ»İ‚ÌƒCƒ“ƒ^[ƒoƒ‹
 
-    private int m_attackKinds = 0;//‰½‚ÌUŒ‚‚ğ‚·‚é‚Ì‚©‚ğŒˆ‚ß‚é
+    public int m_attackKinds = 0;//‰½‚ÌUŒ‚‚ğ‚·‚é‚Ì‚©‚ğŒˆ‚ß‚é
 
     private bool m_isCombat = false;//í“¬‘Ô¨‚É“ü‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©
 
