@@ -273,25 +273,25 @@ public class EnemyC : MonoBehaviour
         // ’ÊíUŒ‚
         if (m_attackKinds == (int)AttackKinds.kNormalAttack)
         {
-            Debug.Log("’ÊíUŒ‚");
+           // Debug.Log("’ÊíUŒ‚");
             m_currentAttackState[(int)AttackKinds.kNormalAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kChargeAttack)
         {
-            Debug.Log("—­‚ßUŒ‚");
+            //Debug.Log("—­‚ßUŒ‚");
             m_currentAttackState[(int)AttackKinds.kChargeAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kComboAttack)
         {
-            Debug.Log("˜A‘±UŒ‚");
+            //Debug.Log("˜A‘±UŒ‚");
             m_currentAttackState[(int)AttackKinds.kComboAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kRotateAttack)
         {
-            Debug.Log("‰ñ“]UŒ‚");
+            //Debug.Log("‰ñ“]UŒ‚");
             m_currentAttackState[(int)AttackKinds.kRotateAttack] = true;
             m_attackInterval = 400;
         }
@@ -318,7 +318,7 @@ public class EnemyC : MonoBehaviour
                 m_currentAttackState[(int)AttackKinds.kNormalAttack] = false;
             }
             DebugAttack(100, 200, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(1.0f, 1.0f, 1.0f));
-            Debug.Log("’ÊíUŒ‚");
+           // Debug.Log("’ÊíUŒ‚");
         }
         else if (m_currentAttackState[(int)AttackKinds.kChargeAttack])
         {
@@ -327,7 +327,7 @@ public class EnemyC : MonoBehaviour
                 m_currentAttackState[(int)AttackKinds.kChargeAttack] = false;
             }
             DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(2.0f, 2.0f, 2.0f));
-            Debug.Log("—­‚ßUŒ‚");
+            //Debug.Log("—­‚ßUŒ‚");
         }
         else if (m_currentAttackState[(int)AttackKinds.kComboAttack])
         {
@@ -336,7 +336,7 @@ public class EnemyC : MonoBehaviour
                 m_currentAttackState[(int)AttackKinds.kComboAttack] = false;
             }
             DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
-            Debug.Log("˜A‘±UŒ‚");
+            //Debug.Log("˜A‘±UŒ‚");
         }
         else if (m_currentAttackState[(int)AttackKinds.kRotateAttack])
         {
@@ -345,7 +345,7 @@ public class EnemyC : MonoBehaviour
                 m_currentAttackState[(int)AttackKinds.kRotateAttack] = false;
             }
             DebugAttack(200, 300, new Vector3(0.0f, 0.1f, 0.0f), new Vector3(2.0f, 2.0f, 2.0f));
-            Debug.Log("‰ñ“]UŒ‚");
+            //Debug.Log("‰ñ“]UŒ‚");
         }
 
 
