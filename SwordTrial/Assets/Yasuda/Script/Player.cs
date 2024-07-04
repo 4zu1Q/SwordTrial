@@ -27,6 +27,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int m_itemFrame;
     [SerializeField] private int m_attackFrame;
 
+    /*定数*/
+    [SerializeField] private int kItemFrameCountNum;
+    [SerializeField] private int kAttackFrameCountNum;
+
     /*移動変数*/
     private float m_inputHorizontal;
     private float m_inputVertical;
@@ -82,7 +86,7 @@ public class Player : MonoBehaviour
         // 方向キーの入力値とカメラの向きから、移動方向を決定
         Vector3 m_moveForward = m_cameraForward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
 
-        if (!m_isGard)
+        if (!m_isGard && !m_isAttack)
         {
             // 移動方向にスピードを掛ける。
             m_rb.velocity = m_moveForward * m_speed;
@@ -98,11 +102,15 @@ public class Player : MonoBehaviour
 
         //Debug.Log("速度ベクトル: " + m_rb.velocity);
 
-        // キャラクターの向きを進行方向に
-        if (m_moveForward != Vector3.zero)
+        if (!m_isGard && !m_isAttack)
         {
-            transform.rotation = Quaternion.LookRotation(m_moveForward);
+            // キャラクターの向きを進行方向に
+            if (m_moveForward != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(m_moveForward);
+            }
         }
+
 
 
 
@@ -123,9 +131,7 @@ public class Player : MonoBehaviour
         {
             m_isAttack = true;
         }
-        else
-        {
-        }
+
 
         //当たり判定を表示
         if (m_isAttack)
@@ -134,7 +140,7 @@ public class Player : MonoBehaviour
 
             m_attack.gameObject.SetActive(true);
 
-            if (m_attackFrame >= 50)
+            if (m_attackFrame >= kAttackFrameCountNum)
             {
                 m_attackFrame = 0;
                 m_isAttack = false;
@@ -164,7 +170,7 @@ public class Player : MonoBehaviour
         if (m_isItem)
         {
             m_itemFrame++;
-            if(m_itemFrame >= 180)
+            if(m_itemFrame >= kItemFrameCountNum)
             {
                 m_isItem = false;
                 m_itemFrame = 0;
@@ -179,15 +185,15 @@ public class Player : MonoBehaviour
         //LTボタン
         if (Input.GetButtonDown("LT"))
         {
+        Debug.Log(m_attackFrame);
 
 
         }
 
 
+
+
         //Debug.Log(m_frame);
-
-        Debug.Log(m_attackFrame);
-
         //Debug.Log(m_hp);
         //Debug.Log(m_hpNum);
     }

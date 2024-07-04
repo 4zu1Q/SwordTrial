@@ -329,7 +329,7 @@ InputManager:
     m_Name: LT
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
+    negativeButton: joystick button 11
     positiveButton: joystick button 11
     altNegativeButton: 
     altPositiveButton: 
