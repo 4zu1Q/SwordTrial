@@ -26,6 +26,7 @@ public class VictoryUICursor : UIOperationBase
     {
         UpdateFunction();
         SceneTransition();
+        SlectUIColorChenge(m_isPress);
     }
 
     /// <summary>
@@ -39,12 +40,10 @@ public class VictoryUICursor : UIOperationBase
         if (m_isPress && m_selectNum == (int)SelectNum.KRetry)
         {
             m_selectItem[(int)SelectNum.KRetry] = true;
-            SlectUIColorChenge();
         }
         else if (m_isPress && m_selectNum == (int)SelectNum.kHome)
         {
             m_selectItem[(int)SelectNum.kHome] = true;
-            SlectUIColorChenge();
         }
     }
     /// <summary>

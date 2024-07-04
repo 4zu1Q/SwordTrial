@@ -26,6 +26,8 @@ public class LoseUICursor : UIOperationBase
     {
         UpdateFunction();
         SceneTransition();
+        SlectUIColorChenge(m_isPress);
+
     }
 
     /// <summary>
@@ -39,12 +41,10 @@ public class LoseUICursor : UIOperationBase
         if (m_isPress && m_selectNum == (int)SelectNum.kContinue)
         {
             m_selectItem[(int)SelectNum.kContinue] = true;
-            SlectUIColorChenge();
         }
         else if (m_isPress && m_selectNum == (int)SelectNum.kHome)
         {
             m_selectItem[(int)SelectNum.kHome] = true;
-            SlectUIColorChenge();
         }
     }
     /// <summary>

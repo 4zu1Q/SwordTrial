@@ -27,6 +27,8 @@ public class TitleUICursor : UIOperationBase
     {
         UpdateFunction();
         SceneTransition();
+        SlectUIColorChenge(m_isPress);
+
     }
 
     /// <summary>
@@ -40,20 +42,17 @@ public class TitleUICursor : UIOperationBase
         if (m_isPress && m_selectNum == (int)SelectNum.kStart)
         {
             m_selectItem[(int)SelectNum.kStart] = true;
-            SlectUIColorChenge();
         }
         else if (m_isPress && m_selectNum == (int)SelectNum.kOption)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
             Debug.Log("説明書開く");
-            SlectUIColorChenge();
         }
         else if (m_isPress && m_selectNum == (int)SelectNum.kEnd)
         {
             //ゲーム終了させる
             //End();
             Debug.Log("ゲーム終了");
-            SlectUIColorChenge();
         }
     }
     /// <summary>
@@ -65,6 +64,10 @@ public class TitleUICursor : UIOperationBase
         if (Input.GetButtonDown("Bbutton"))
         {
             m_isPress = true;
+        }
+        if (Input.GetButtonDown("Abutton"))
+        {
+            m_isPress = false;
         }
 
         DecisionUpdate(m_isPress);

@@ -57,4 +57,6 @@ public class PauseMenu : MonoBehaviour
     }
 
     public bool GetMenu() {  return m_openMenu; }
+
+    public void GetPauseFlag(bool isPause) { m_openMenu = isPause; }
 }

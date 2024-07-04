@@ -27,6 +27,7 @@ public class UIOperationBase : MonoBehaviour
     private int m_pressTime;//押したままの時間の取得
     private int m_pressTimeMax;//押したままの時間の最大値
 
+    public bool _isUIScaleChenge = false;
     protected virtual void Start()
     {
         //変数の初期化
@@ -153,6 +154,7 @@ public class UIOperationBase : MonoBehaviour
     /// </summary>
     private void UIScalseChengeLoop()
     {
+        if(_isUIScaleChenge) { return; }
         //指定した座標にm_moveCursorSpeed秒かけて移動する
         m_itemRectTransform[(int)m_selectNum].transform.DOScale(new Vector3(m_scaleChengeSize,
             m_scaleChengeSize, 0), m_scaleChengeSpeed)
@@ -161,11 +163,15 @@ public class UIOperationBase : MonoBehaviour
     /// <summary>
     /// 決定を押されたときに色の変更処理
     /// </summary>
-    public void SlectUIColorChenge()
+    public void SlectUIColorChenge(bool isPress)
     {
-        if(m_selectUIImg.color != Color.red)
+        if(isPress && m_selectUIImg.color != Color.red)
         { 
             m_selectUIImg.color = Color.red;
+        }
+        else if (!isPress && m_selectUIImg.color != Color.white)
+        {
+            m_selectUIImg.color = Color.white;
         }
     }
     /// <summary>
