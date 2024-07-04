@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-public class Menu : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     //ƒƒjƒ…[‚ğŠJ‚­‚©‚Ç‚¤‚©
     private bool m_openMenu = false;
@@ -57,4 +57,6 @@ public class Menu : MonoBehaviour
     }
 
     public bool GetMenu() {  return m_openMenu; }
+
+    public void GetPauseFlag(bool isPause) { m_openMenu = isPause; }
 }

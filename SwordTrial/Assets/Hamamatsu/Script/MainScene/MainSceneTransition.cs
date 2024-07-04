@@ -6,17 +6,20 @@ public class MainSceneTransition : SceneTransitionBase
 {
     //タイマー情報
     private Timer m_timer;
+    PauseUI m_Ui;
 
     protected override void Start()
     {
         base.Start();
         m_timer = GetComponent<Timer>();
+        m_Ui = GetComponent<PauseUI>();
     }
 
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        DebugSceneTransition();
+        //DebugSceneTransition();
+        SceneTransitoinPause();
     }
 
     /// <summary>
@@ -35,6 +38,17 @@ public class MainSceneTransition : SceneTransitionBase
         {
             m_fade.m_isFading = false;
             GetNextScene((int)SceneKinds.kLoseScene);
+        }
+    }
+    /// <summary>
+    /// ポーズのシーン遷移の実装
+    /// </summary>
+    private void SceneTransitoinPause()
+    {
+        if (m_Ui.m_pauseNum[(int)PauseUI.SelectNum.kTitleBack])
+        {
+            m_fade.m_isFading = false;
+            GetNextScene((int)SceneKinds.kTitleScene);
         }
     }
 }
