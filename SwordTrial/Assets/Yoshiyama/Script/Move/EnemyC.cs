@@ -35,9 +35,9 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private float m_rotateSpeed = 0;
 
     //体力-------------------------------------------------------
-    private int m_currentHP = 100;//現在
-    private readonly int m_maxHP = 100;//最大値
-    private readonly int m_minHP = 0;//最小値
+    public int m_currentHP = 100;//現在
+    public readonly int m_maxHP = 100;//最大値
+    public readonly int m_minHP = 0;//最小値
     //-----------------------------------------------------------
 
     //生きているかどうかを取得
