@@ -21,8 +21,11 @@ public class UIOperationBase : MonoBehaviour
     private float m_moveCursorSpeed;//カーソルの移動速度
     private bool m_isDecision;//決定を押したかどうか
     private Vector3[] m_itemDefaultRectTransform;//もともとの画像のサイズ取得
-    private int m_pressTime;
-    private int m_pressTimeMax;
+    private float m_scaleChengeSize;//変更する大きさのサイズ
+    private float m_scaleChengeSpeed;//スケールを変更する時間
+    private float m_scaleChengeRestoreSpeed;
+    private int m_pressTime;//押したままの時間の取得
+    private int m_pressTimeMax;//押したままの時間の最大値
 
     protected virtual void Start()
     {
@@ -42,6 +45,9 @@ public class UIOperationBase : MonoBehaviour
         m_prevSelectNum = -1;
         m_moveCursorSpeed = 0.2f;
         m_selectCursorPosX = m_selectRectTransform.position.x;
+        m_scaleChengeSize = 1.3f;
+        m_scaleChengeSpeed = 1.0f;
+        m_scaleChengeRestoreSpeed = 0.1f;
         m_pressTime = 0;
         m_pressTimeMax = 20;
 
@@ -137,7 +143,7 @@ public class UIOperationBase : MonoBehaviour
             //前に選択していた画像の処理を止める
             m_itemRectTransform[(int)m_prevSelectNum].DOKill();
             //m_itemRectTransform[(int)m_prevSelectNum].transform.localScale = m_itemDefaultRectTransform[m_prevSelectNum];
-            m_itemRectTransform[(int)m_prevSelectNum].DOScale((m_itemDefaultRectTransform[m_prevSelectNum]), 0.1f)
+            m_itemRectTransform[(int)m_prevSelectNum].DOScale((m_itemDefaultRectTransform[m_prevSelectNum]), m_scaleChengeRestoreSpeed)
                 .SetEase(Ease.InOutSine);
             UIScalseChengeLoop();
         }
@@ -148,9 +154,9 @@ public class UIOperationBase : MonoBehaviour
     private void UIScalseChengeLoop()
     {
         //指定した座標にm_moveCursorSpeed秒かけて移動する
-        m_itemRectTransform[(int)m_selectNum].transform.DOScale(new Vector3(1.3f,
-            1.3f, 0), 1.5f)
-            .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+        m_itemRectTransform[(int)m_selectNum].transform.DOScale(new Vector3(m_scaleChengeSize,
+            m_scaleChengeSize, 0), m_scaleChengeSpeed)
+            .SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo).SetUpdate(true);
     }
     /// <summary>
     /// 決定を押されたときに色の変更処理

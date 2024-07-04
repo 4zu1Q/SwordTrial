@@ -17,7 +17,7 @@ public class Timer : MonoBehaviour
     //現在の時間を表示するテキスト
     private Text m_timerText;
     //メニューの処理
-    private Menu m_menu;
+    private PauseMenu m_menu;
 
     //カウントダウン終了フラグ
     private bool m_finishCountDown = false;
@@ -26,7 +26,7 @@ public class Timer : MonoBehaviour
     {
         m_countDownMinutes = 0;
         m_timerText = GameObject.Find("TimerText").GetComponent<Text>();
-        m_menu = GetComponent<Menu>();
+        m_menu = GetComponent<PauseMenu>();
     }
 
     void Update()
