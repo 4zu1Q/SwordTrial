@@ -1,4 +1,4 @@
-using DG.Tweening;
+ï»¿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +8,14 @@ public class PauseUI : UIOperationBase
 {
     public enum SelectNum
     {
-        kBack, //–ß‚·
-        kTitleBack,   //ƒ^ƒCƒgƒ‹‚É–ß‚é
+        kBack, //æˆ»ã™
+        kTitleBack,   //ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹
         kMaxNum
     }
-    public PauseMenu m_pauseMenu;//ƒXƒNƒŠƒvƒg‚Ìæ“¾
-    public Image m_pauseImage;//ƒ|[ƒY‚Ì‰æ‘œæ“¾
-    public Image m_defaultPauseImage;//ƒ|[ƒY‚Ì‰æ‘œæ“¾
-    //‘I‘ğ‚³‚ê‚Ä‚¢‚é€–Ú
+    public PauseMenu m_pauseMenu;//ã‚¹ã‚¯ãƒªãƒ—ãƒˆã®å–å¾—
+    public Image m_pauseImage;//ãƒãƒ¼ã‚ºã®ç”»åƒå–å¾—
+    public Image m_defaultPauseImage;//ãƒãƒ¼ã‚ºã®ç”»åƒå–å¾—
+    //é¸æŠã•ã‚Œã¦ã„ã‚‹é …ç›®
     public bool[] m_pauseNum;
     private bool m_isPress;
     private bool m_isPauseOpen;
@@ -38,27 +38,27 @@ public class PauseUI : UIOperationBase
 
     }
     /// <summary>
-    /// ƒ|[ƒY‰æ–Ê‚Ìˆ—
+    /// ãƒãƒ¼ã‚ºç”»é¢ã®å‡¦ç†
     /// </summary>
     private void PauseUpdate()
     {
-        //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½ˆ—
+        //ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå‡¦ç†
         PressButton();
-        //ƒ|[ƒY‚©‚çƒQ[ƒ€‚É–ß‚éˆ—
+        //ãƒãƒ¼ã‚ºã‹ã‚‰ã‚²ãƒ¼ãƒ ã«æˆ»ã‚‹å‡¦ç†
         if (m_isPress && m_selectNum == (int)SelectNum.kBack)
         {
-            //ƒ|[ƒY‰æ–Ê‚ğŠJ‚­ƒtƒ‰ƒO‚ğ•ÏX‚·‚é
+            //ãƒãƒ¼ã‚ºç”»é¢ã‚’é–‹ããƒ•ãƒ©ã‚°ã‚’å¤‰æ›´ã™ã‚‹
             m_pauseMenu.GetPauseFlag(false);
-            //‰Ÿ‚µ‚½ƒtƒ‰ƒO‚ğ–ß‚µ‚Ä‚¨‚­
+            //æŠ¼ã—ãŸãƒ•ãƒ©ã‚°ã‚’æˆ»ã—ã¦ãŠã
             m_isPress = false;
-            Debug.Log("‚à‚Ç‚é‚æ");
+            Debug.Log("ã‚‚ã©ã‚‹ã‚ˆ");
         }
-        //ƒ|[ƒY‚©‚çƒ^ƒCƒgƒ‹‚É–ß‚éˆ—
+        //ãƒãƒ¼ã‚ºã‹ã‚‰ã‚¿ã‚¤ãƒˆãƒ«ã«æˆ»ã‚‹å‡¦ç†
         else if (m_isPress && m_selectNum == (int)SelectNum.kTitleBack)
         {
-            //à–¾‚â‰¹º‚Ì’²®‚Æ‚©‚Å‚«‚é‚æ‚¤‚ÈƒEƒBƒ“ƒhƒE‚ğ“WŠJ
+            //èª¬æ˜ã‚„éŸ³å£°ã®èª¿æ•´ã¨ã‹ã§ãã‚‹ã‚ˆã†ãªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’å±•é–‹
             m_pauseNum[(int)SelectNum.kTitleBack] = true;
-            Debug.Log("à–¾‘ŠJ‚­");
+            Debug.Log("èª¬æ˜æ›¸é–‹ã");
         }
         if(!m_pauseMenu.GetMenu())
         {
@@ -67,11 +67,11 @@ public class PauseUI : UIOperationBase
     }
 
     /// <summary>
-    /// ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«‚Ìˆ—
+    /// ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã¨ãã®å‡¦ç†
     /// </summary>
     private void PressButton()
     {
-        //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½ˆ—
+        //ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå‡¦ç†
         if (Input.GetButtonDown("Bbutton"))
         {
             m_isPress = true;
