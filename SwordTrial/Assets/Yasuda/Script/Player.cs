@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; //シーン切り替えのため
+using UnityEngine.UI;
 
 
 
 public class Player : MonoBehaviour
 {
     /*ステータス変数*/
-    [SerializeField] public int m_hp;
     [SerializeField] private int m_itemNum;       //アイテムの個数
     [SerializeField] private float m_speed;
     [SerializeField] private float m_acel;
-
+    [SerializeField] public int m_maxHp;
+    [SerializeField] public int m_hp;
 
     /*オブジェクト変数*/
     GameObject m_boss;
@@ -45,6 +46,10 @@ public class Player : MonoBehaviour
     private Vector3 m_cameraForward;
     private Vector3 m_moveForward;
 
+    /*UI*/
+    public Slider m_slider;
+    
+
 
     void Start()
     {
@@ -52,11 +57,13 @@ public class Player : MonoBehaviour
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
         m_attack = m_player.transform.Find("Attack");
-        m_hp = 100;
-        m_itemNum = 3;
+        m_hp = m_maxHp;
+        m_slider.value = m_maxHp;
+        //m_itemNum = 3;
 
-        m_speed = 5.0f;
-        m_acel = 2.0f;
+        //m_speed = 5.0f;
+        //m_acel = 2.0f;
+
 
         m_isDash = false;
         m_isItem = false;
@@ -116,9 +123,10 @@ public class Player : MonoBehaviour
 
 
         /*ボタン操作*/
-        //Bボタン
+        //回復アイテムが残っていた場合
         if(m_itemNum > 0)
         {
+            //Bボタン
             if (Input.GetButtonDown("Bbutton") && m_hp < 100)
             {
                 m_isItem = true;
@@ -175,6 +183,7 @@ public class Player : MonoBehaviour
                 m_isItem = false;
                 m_itemFrame = 0;
                 m_hp += 10;
+                m_slider.value = m_hp;//HPバーのUI変更
 
                 m_itemNum--;
 
@@ -194,7 +203,7 @@ public class Player : MonoBehaviour
 
 
         //Debug.Log(m_frame);
-        //Debug.Log(m_hp);
+        Debug.Log(m_hp);
         //Debug.Log(m_hpNum);
     }
 
@@ -224,21 +233,25 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-       if(other.gameObject.name == "Boss")
+        if (other.gameObject.name == "Boss")
         {
             m_rb.velocity = -m_moveForward * m_speed * 2.0f;
-            
+
             m_hp -= 10;
+            m_slider.value = m_hp;//HPバーのUI変更
         }
     }
 
+    //当たり判定
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "EnemyAttack")
         {
+            m_hp -= 10;        
+            m_slider.value = m_hp;//HPバーのUI変更
         }
 
-        if(other.tag == "PlayerAttack")
+        if (other.tag == "PlayerAttack")
         {
             m_hp -= 10;
         }
@@ -253,4 +266,6 @@ public class Player : MonoBehaviour
     {
         m_player.tag = newTag;
     }
+
+
 }
