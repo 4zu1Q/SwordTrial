@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemyHPBar : MonoBehaviour
 {
     //HP表示用UI
-    [SerializeField] private GameObjrct HPUI;
+  //  [SerializeField] private GameObjrct HPUI;
 
     //HP表示用スライダー
-    private Slider hpSlider;
+  //  private Slider hpSlider;
 
     // Start is called before the first frame update
     void Start()
