@@ -240,7 +240,7 @@ public class EnemyC : MonoBehaviour
     /// <summary>
     /// UŒ‚‚Ìí—Ş‚ğRandom‚ÅŒˆ‚ß‚é
     /// </summary>
-    private void GetAttackKinds()
+    public void GetAttackKinds()
     {
         m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
     }
@@ -268,7 +268,7 @@ public class EnemyC : MonoBehaviour
     /// (int)AttackKinds.kComboAttack = ˜A‘±UŒ‚
     /// (int)AttackKinds.kRotateAttack = ‰ñ“]UŒ‚
     /// </summary>
-    private void AttackNumber()
+    public void AttackNumber()
     {
         // ’ÊíUŒ‚
         if (m_attackKinds == (int)AttackKinds.kNormalAttack)
