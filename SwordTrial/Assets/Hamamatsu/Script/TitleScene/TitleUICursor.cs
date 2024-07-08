@@ -1,6 +1,7 @@
 //タイトル画面のカーソルの操作
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TitleUICursor : UIOperationBase
 {
@@ -15,20 +16,23 @@ public class TitleUICursor : UIOperationBase
     //選択されている項目
     public bool[] m_selectItem;
     private bool m_isPress;
+    [SerializeField] private GameObject m_soundImgObj;
+    [SerializeField] private SoundUICursor m_soundCursor;
 
     protected override void Start()
     {
         base.Start();
         m_selectItem = new bool[(int)SelectNum.kMaxNum];
         m_isPress = false;
+        m_soundImgObj.SetActive(false);
     }
 
     void Update()
     {
+        if (OptionCancellation()) {return; }
         UpdateFunction();
         SceneTransition();
         SlectUIColorChenge(m_isPress);
-
     }
 
     /// <summary>
@@ -45,6 +49,8 @@ public class TitleUICursor : UIOperationBase
         }
         else if (m_isPress && m_selectNum == (int)SelectNum.kOption)
         {
+            m_soundCursor.m_isOptionCancellation = true;
+            m_soundImgObj.SetActive(true);
             //説明や音声の調整とかできるようなウィンドウを展開
             Debug.Log("説明書開く");
         }
@@ -71,5 +77,22 @@ public class TitleUICursor : UIOperationBase
         }
 
         DecisionUpdate(m_isPress);
+    }
+    /// <summary>
+    /// オプションの解除処理
+    /// </summary>
+    public bool OptionCancellation()
+    {
+        if(!m_soundCursor.m_isOptionCancellation)
+        {
+            m_soundImgObj.SetActive(false);
+            m_isPress = false;
+            m_soundCursor.CursorReset();
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
