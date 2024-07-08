@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemyC;
 
 public class EnemyAnimation : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class EnemyAnimation : MonoBehaviour
 
     Animator m_anim;
     bool m_pushFlag = false;
+    private int a;
 
     private void Start()
     {

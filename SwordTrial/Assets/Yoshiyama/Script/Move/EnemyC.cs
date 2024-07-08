@@ -374,4 +374,8 @@ public class EnemyC : MonoBehaviour
             Debug.Log("’Ê‚é");
         }
     }
+    internal void AttackNumber(int a, string m_attack1)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -1,24 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//using UnityEngine;
 
-public class EnemyHPBar : MonoBehaviour
-{
-    //HP表示用UI
-  //  [SerializeField] private GameObjrct HPUI;
+//public class EnemyHPBar : MonoBehaviour
+//{
+//    //敵のMaxHP
+//    [SerializeField] private int m_maxHP = 100;
 
-    //HP表示用スライダー
-  //  private Slider hpSlider;
+//    private Enemy enemy;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+//    //HP表示用UI
+//    [SerializeField] private GameObject HPUI;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}
+//    EnemyC m_pEnemy = new EnemyC();
+//    public Slider m_slider;
+//    private int m_hp;
+
+
+//    // Start is called before the first frame update
+//    void Start()
+//    {
+//        m_hp = m_pEnemy.ReceiveDamage(m_hp);
+//        m_slider.value = m_hp;
+//    }
+
+//    // Update is called once per frame
+//    void FixedUpdate()
+//    {
+//        m_hp = m_pEnemy.ReceiveDamage(m_hp);
+//        m_slider.value = m_hp;
+//    }
+//}
+
+
