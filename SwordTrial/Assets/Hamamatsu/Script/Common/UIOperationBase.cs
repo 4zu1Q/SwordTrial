@@ -16,7 +16,6 @@ public class UIOperationBase : MonoBehaviour
     private RectTransform[] m_itemRectTransform;
 
     private Image m_selectUIImg;
-    private float m_selectCursorPosX;//カーソルのポジション取得
     private int m_prevSelectNum;//前に選択した番号
     private float m_moveCursorSpeed;//カーソルの移動速度
     private bool m_isDecision;//決定を押したかどうか
@@ -45,7 +44,6 @@ public class UIOperationBase : MonoBehaviour
         m_selectUIImg = m_selectCursor.GetComponent<Image>();
         m_prevSelectNum = -1;
         m_moveCursorSpeed = 0.2f;
-        m_selectCursorPosX = m_selectRectTransform.position.x;
         m_scaleChengeSize = 1.3f;
         m_scaleChengeSpeed = 1.0f;
         m_scaleChengeRestoreSpeed = 0.1f;
@@ -129,8 +127,7 @@ public class UIOperationBase : MonoBehaviour
         if (m_selectNum != m_prevSelectNum)
         {
             //指定した座標にm_moveCursorSpeed秒かけて移動する
-            m_selectRectTransform.transform.DOMove(new Vector3(m_selectCursorPosX,
-                m_itemRectTransform[(int)m_selectNum].position.y, 0), m_moveCursorSpeed).SetEase(Ease.OutCubic);
+            m_selectRectTransform.transform.DOMoveY(m_itemRectTransform[(int)m_selectNum].position.y,m_moveCursorSpeed).SetEase(Ease.OutCubic);
         }
     }
     /// <summary>
