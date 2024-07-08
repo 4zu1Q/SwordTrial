@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,5 +51,10 @@ public class Enemy : MonoBehaviour
         {
             m_hp -= 10;
         }
+    }
+
+    internal int ReceiveDamage(int m_hp)
+    {
+        throw new NotImplementedException();
     }
 }
