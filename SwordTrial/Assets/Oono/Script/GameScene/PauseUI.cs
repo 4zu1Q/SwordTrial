@@ -12,16 +12,19 @@ public class PauseUI : UIOperationBase
         kTitleBack,   //タイトルに戻る
         kMaxNum
     }
-    public PauseMenu m_pauseMenu;//スクリプトの取得
+    private PauseMenu m_pauseMenu;//スクリプトの取得
     public Image m_pauseImage;//ポーズの画像取得
     public Image m_defaultPauseImage;//ポーズの画像取得
+
     //選択されている項目
     public bool[] m_pauseNum;
     private bool m_isPress;
     private bool m_isPauseOpen;
+
     protected override void Start()
     {
         base.Start();
+        m_pauseMenu = GetComponent<PauseMenu>();
         m_pauseNum = new bool[(int)SelectNum.kMaxNum];
         m_isPress = false;
         m_isPauseOpen = false;
@@ -34,7 +37,7 @@ public class PauseUI : UIOperationBase
     {
         UpdateFunction();
         PauseUpdate();
-        SlectUIColorChenge(m_isPress);
+        //SlectUIColorChenge(m_isPress);
 
     }
     /// <summary>

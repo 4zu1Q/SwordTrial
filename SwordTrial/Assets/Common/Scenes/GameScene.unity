@@ -418,6 +418,8 @@ GameObject:
   - component: {fileID: 263368887}
   - component: {fileID: 263368886}
   - component: {fileID: 263368888}
+  - component: {fileID: 263368890}
+  - component: {fileID: 263368889}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -465,6 +467,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countDownSeconds: 5
+--- !u!114 &263368889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263368885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b12eb6eaeabb0ef4dae2d127d6c8efdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_menuObject: {fileID: 2008190955}
+--- !u!114 &263368890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263368885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3233d04b41e904428185019393e39fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_selectNum: 0
+  m_selectCursor: {fileID: 1389006420}
+  m_itemUI:
+  - {fileID: 1301551868}
+  - {fileID: 1680217218}
+  _isUIScaleChenge: 0
+  m_pauseImage: {fileID: 0}
+  m_defaultPauseImage: {fileID: 0}
+  m_pauseNum: 000000
 --- !u!1001 &302116358
 PrefabInstance:
   m_ObjectHideFlags: 0
