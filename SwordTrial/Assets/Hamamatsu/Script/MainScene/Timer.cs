@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        m_countDownMinutes = 0;
+        m_countDownMinutes = 3;
         m_timerText = GameObject.Find("TimerText").GetComponent<Text>();
         m_menu = GetComponent<PauseMenu>();
     }

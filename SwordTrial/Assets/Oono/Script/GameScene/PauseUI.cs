@@ -54,14 +54,14 @@ public class PauseUI : UIOperationBase
             m_pauseMenu.GetPauseFlag(false);
             //押したフラグを戻しておく
             m_isPress = false;
-            Debug.Log("もどるよ");
+            //Debug.Log("もどるよ");
         }
         //ポーズからタイトルに戻る処理
         else if (m_isPress && m_selectNum == (int)SelectNum.kTitleBack)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
             m_pauseNum[(int)SelectNum.kTitleBack] = true;
-            Debug.Log("説明書開く");
+            //Debug.Log("説明書開く");
         }
         if(!m_pauseMenu.GetMenu())
         {

@@ -19,7 +19,7 @@ public class MainSceneTransition : SceneTransitionBase
     {
         base.FixedUpdate();
         //DebugSceneTransition();
-        SceneTransitoinPause();
+        //SceneTransitoinPause();
     }
 
     /// <summary>
