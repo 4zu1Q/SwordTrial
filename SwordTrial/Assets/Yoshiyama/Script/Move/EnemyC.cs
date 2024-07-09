@@ -45,7 +45,7 @@ public class EnemyC : MonoBehaviour
 
     //UŒ‚-------------------------------------------------------
     //UŒ‚‚ÆUŒ‚‚ÌŠÔ‚É‚ ‚éƒCƒ“ƒ^[ƒoƒ‹AUŒ‚‚É‚æ‚Á‚ÄƒCƒ“ƒ^[ƒoƒ‹‚ÌŠÔ‚ğ•ÏX
-    private int m_attackInterval = 10;
+    public int m_attackInterval = 10;
     private int m_currentAttackInterval = 0;//Œ»İ‚ÌƒCƒ“ƒ^[ƒoƒ‹
 
     public int m_attackKinds = 0;//‰½‚ÌUŒ‚‚ğ‚·‚é‚Ì‚©‚ğŒˆ‚ß‚é
@@ -57,6 +57,11 @@ public class EnemyC : MonoBehaviour
     public GameObject m_attackCol;//UŒ‚‚Ì“–‚½‚è”»’è
 
     private bool m_isActive = false;//‘¶İ‚µ‚Ä‚¢‚é‚©‚Ç‚¤‚©
+
+    public bool m_isAttackAnimation1 = false;
+    public bool m_isAttackAnimation2 = false;
+    public bool m_isAttackAnimation3 = false;
+    public bool m_isAttackAnimation4 = false;
 
     //-----------------------------------------------------------
 
@@ -97,6 +102,7 @@ public class EnemyC : MonoBehaviour
 
         AttackActive();
         UpdateAttack();
+        if (!m_isAttackAnimation4) return;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -274,24 +280,28 @@ public class EnemyC : MonoBehaviour
         if (m_attackKinds == (int)AttackKinds.kNormalAttack)
         {
             Debug.Log("’ÊíUŒ‚");
+            m_isAttackAnimation1 = true;
             m_currentAttackState[(int)AttackKinds.kNormalAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kChargeAttack)
         {
             Debug.Log("—­‚ßUŒ‚");
+            m_isAttackAnimation2 = true;
             m_currentAttackState[(int)AttackKinds.kChargeAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kComboAttack)
         {
             Debug.Log("˜A‘±UŒ‚");
+            m_isAttackAnimation3 = true;
             m_currentAttackState[(int)AttackKinds.kComboAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kRotateAttack)
         {
             Debug.Log("‰ñ“]UŒ‚");
+            m_isAttackAnimation4 = true;
             m_currentAttackState[(int)AttackKinds.kRotateAttack] = true;
             m_attackInterval = 400;
         }
@@ -302,7 +312,7 @@ public class EnemyC : MonoBehaviour
     /// </summary>
     private void AttackActive()
     {
-        Debug.Log(m_isActive);
+        Debug.Log(m_isActive);  
         m_attackCol.SetActive(m_isActive);
     }
 
@@ -316,6 +326,7 @@ public class EnemyC : MonoBehaviour
             if (m_currentAttackInterval >= m_attackInterval)
             {
                 m_currentAttackState[(int)AttackKinds.kNormalAttack] = false;
+                m_isAttackAnimation1 = false;
             }
             DebugAttack(100, 200, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(1.0f, 1.0f, 1.0f));
             Debug.Log("’ÊíUŒ‚");
@@ -325,6 +336,7 @@ public class EnemyC : MonoBehaviour
             if (m_currentAttackInterval >= m_attackInterval)
             {
                 m_currentAttackState[(int)AttackKinds.kChargeAttack] = false;
+                m_isAttackAnimation2 = false;
             }
             DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(2.0f, 2.0f, 2.0f));
             Debug.Log("—­‚ßUŒ‚");
@@ -334,6 +346,7 @@ public class EnemyC : MonoBehaviour
             if (m_currentAttackInterval >= m_attackInterval)
             {
                 m_currentAttackState[(int)AttackKinds.kComboAttack] = false;
+                m_isAttackAnimation3 = false;
             }
             DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
             Debug.Log("˜A‘±UŒ‚");
@@ -343,11 +356,11 @@ public class EnemyC : MonoBehaviour
             if (m_currentAttackInterval >= m_attackInterval)
             {
                 m_currentAttackState[(int)AttackKinds.kRotateAttack] = false;
+                m_isAttackAnimation4 = false;
             }
             DebugAttack(200, 300, new Vector3(0.0f, 0.1f, 0.0f), new Vector3(2.0f, 2.0f, 2.0f));
             Debug.Log("‰ñ“]UŒ‚");
         }
-
 
     }
 

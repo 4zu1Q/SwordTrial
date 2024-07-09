@@ -11,16 +11,20 @@ public class EnemyAnimation : MonoBehaviour
     private string m_attack4 = "isAttack4";
 
     Animator m_anim;
-    bool m_isPushFlag = false;
+    bool m_isPushFlag1 = false;
+    bool m_isPushFlag2 = false;
+    bool m_isPushFlag3 = false;
+    bool m_isPushFlag4 = false;
+    private int m_animationInterval = 10;
 
     private EnemyC m_pEnemy;
     private int m_animationNo;
+    private bool m_isGoTime = false;
 
     private void Start()
     {
         m_anim = GetComponent<Animator>();
         //ƒ‰ƒ“ƒ_ƒ€’l‚Ì’l‚É‰‚¶‚ÄƒAƒjƒ[ƒVƒ‡ƒ“‚ğØ‚è‘Ö‚¦‚é
-        m_isPushFlag = false;
 
         m_pEnemy = GetComponent<EnemyC>();
     }
@@ -29,60 +33,47 @@ public class EnemyAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        m_animationNo = m_pEnemy.m_attackKinds;
+        Debug.Log("ahahahahahahahhah");
         // ’ÊíUŒ‚
-        if (Input.GetKeyDown("up"))
+        if (m_pEnemy.m_isAttackAnimation1 == true && m_isPushFlag1 == false)
         {
-            Debug.Log("’ÊíUŒ‚");
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_attack1, m_isPushFlag);
+            m_isPushFlag1 = true;
+            m_isGoTime = true;
         }
-        else if (Input.GetKeyDown("down"))
+        else if (m_pEnemy.m_isAttackAnimation2 == true && m_isPushFlag2 == false)
         {
-            Debug.Log("—­‚ßUŒ‚");
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_attack2, m_isPushFlag);
+            m_isPushFlag2 = true;
+            m_isGoTime = true;
         }
-        else if (Input.GetKeyDown("right"))
+        else if (m_pEnemy.m_isAttackAnimation3 == true && m_isPushFlag3 == false)
         {
-            Debug.Log("˜A‘±UŒ‚");
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_attack3, m_isPushFlag);
+            m_isPushFlag3 = true;
+            m_isGoTime = true;
         }
-        else if (Input.GetKeyDown("left"))
+        else if (m_pEnemy.m_isAttackAnimation4 == true && m_isPushFlag4 == false)
         {
-            Debug.Log("‰ñ“]UŒ‚");
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_attack4, m_isPushFlag);
+            m_isPushFlag4 = true;
+            m_isGoTime = true;
         }
-        Debug.Log(m_animationNo);
+        if (m_isGoTime == true)
+        {
+            m_animationInterval++;
+        }
+        if (m_animationInterval >= 400)
+        {
+            m_isPushFlag1 = false;
+            m_isPushFlag2 = false;
+            m_isPushFlag3 = false;
+            m_isPushFlag4 = false;
+            m_animationInterval = 0;
+            Debug.Log("hai");
+        }
+        m_anim.SetBool(m_attack1, m_isPushFlag1);
+        m_anim.SetBool(m_attack2, m_isPushFlag2);
+        m_anim.SetBool(m_attack3, m_isPushFlag3);
+        m_anim.SetBool(m_attack4, m_isPushFlag4);
+
     }
+
 }
+
