@@ -18,12 +18,13 @@ public class TitleUICursor : UIOperationBase
     private bool m_isPress;
     [SerializeField] private GameObject m_soundImgObj;
     [SerializeField] private SoundUICursor m_soundCursor;
-
+    private bool m_isOptionOpen;
     protected override void Start()
     {
         base.Start();
         m_selectItem = new bool[(int)SelectNum.kMaxNum];
         m_isPress = false;
+        m_isOptionOpen = false;
         m_soundImgObj.SetActive(false);
     }
 
@@ -50,7 +51,10 @@ public class TitleUICursor : UIOperationBase
         else if (m_isPress && m_selectNum == (int)SelectNum.kOption)
         {
             m_soundCursor.m_isOptionCancellation = true;
+            m_soundCursor.m_isOptionClose = false;
+            m_isOptionOpen = true;
             m_soundImgObj.SetActive(true);
+            m_isOptionOpen = true;
             //説明や音声の調整とかできるようなウィンドウを展開
             Debug.Log("説明書開く");
         }
@@ -83,16 +87,25 @@ public class TitleUICursor : UIOperationBase
     /// </summary>
     public bool OptionCancellation()
     {
-        if(!m_soundCursor.m_isOptionCancellation)
+        if(m_soundCursor == null) { return false; }
+        Debug.Log(m_soundCursor.m_isOptionCancellation + "こことおった" + m_isOptionOpen);
+        if (!m_soundCursor.m_isOptionCancellation && m_isOptionOpen)
         {
+            Debug.Log("こことおった");
             m_soundImgObj.SetActive(false);
             m_isPress = false;
             m_soundCursor.CursorReset();
-            return false;
+            m_soundCursor.m_isOptionClose = true;
+            m_isOptionOpen = false;
+            return true;
+        }
+        else if (m_soundCursor.m_isOptionCancellation && m_isOptionOpen)
+        { 
+            return true;
         }
         else
         {
-            return true;
+            return false;
         }
     }
 }

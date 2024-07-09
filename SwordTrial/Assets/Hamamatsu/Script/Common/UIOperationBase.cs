@@ -42,7 +42,7 @@ public class UIOperationBase : MonoBehaviour
             m_itemDefaultRectTransform[UINum] = m_itemRectTransform[UINum].localScale;
         }
         m_selectUIImg = m_selectCursor.GetComponent<Image>();
-        m_prevSelectNum = -1;
+        m_prevSelectNum = 0;
         m_moveCursorSpeed = 0.2f;
         m_scaleChengeSize = 1.3f;
         m_scaleChengeSpeed = 1.0f;
