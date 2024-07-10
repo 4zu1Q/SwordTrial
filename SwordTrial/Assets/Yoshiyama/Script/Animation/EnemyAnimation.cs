@@ -11,10 +11,10 @@ public class EnemyAnimation : MonoBehaviour
     private string m_attack4 = "isAttack4";
 
     Animator m_anim;
-    bool m_isPushFlag1 = false;
-    bool m_isPushFlag2 = false;
-    bool m_isPushFlag3 = false;
-    bool m_isPushFlag4 = false;
+    public bool m_isPushFlag1 = false;
+    public bool m_isPushFlag2 = false;
+    public bool m_isPushFlag3 = false;
+    public bool m_isPushFlag4 = false;
     private int m_animationInterval = 10;
 
     private EnemyC m_pEnemy;
@@ -61,10 +61,10 @@ public class EnemyAnimation : MonoBehaviour
         }
         if (m_animationInterval >= 400)
         {
-            m_isPushFlag1 = false;
-            m_isPushFlag2 = false;
-            m_isPushFlag3 = false;
-            m_isPushFlag4 = false;
+            //m_isPushFlag1 = false;
+            //m_isPushFlag2 = false;
+            //m_isPushFlag3 = false;
+            //m_isPushFlag4 = false;
             m_animationInterval = 0;
             Debug.Log("hai");
         }
@@ -73,6 +73,10 @@ public class EnemyAnimation : MonoBehaviour
         m_anim.SetBool(m_attack3, m_isPushFlag3);
         m_anim.SetBool(m_attack4, m_isPushFlag4);
 
+        Debug.Log(m_isPushFlag1);
+        Debug.Log(m_isPushFlag2);
+        Debug.Log(m_isPushFlag3);
+        Debug.Log(m_isPushFlag4);
     }
 
 }
