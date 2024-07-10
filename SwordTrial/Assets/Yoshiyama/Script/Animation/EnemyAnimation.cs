@@ -5,10 +5,10 @@ using static EnemyC;
 
 public class EnemyAnimation : MonoBehaviour
 {
-    private string m_attack1 = "isAttack1";
-    private string m_attack2 = "isAttack2";
-    private string m_attack3 = "isAttack3";
-    private string m_attack4 = "isAttack4";
+    private string m_attack1 = "Attack1";
+    private string m_attack2 = "Attack2";
+    private string m_attack3 = "Attack3";
+    private string m_attack4 = "Attack4";
 
     Animator m_anim;
     public bool m_isPushFlag1 = false;
@@ -20,38 +20,70 @@ public class EnemyAnimation : MonoBehaviour
     private EnemyC m_pEnemy;
     private int m_animationNo;
     private bool m_isGoTime = false;
+    private float m_frame = 0;
 
     private void Start()
     {
         m_anim = GetComponent<Animator>();
-        //ƒ‰ƒ“ƒ_ƒ€’l‚Ì’l‚É‰‚¶‚ÄƒAƒjƒ[ƒVƒ‡ƒ“‚ğØ‚è‘Ö‚¦‚é
+        //ãƒ©ãƒ³ãƒ€ãƒ å€¤ã®å€¤ã«å¿œã˜ã¦ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 
         m_pEnemy = GetComponent<EnemyC>();
     }
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Debug.Log("ahahahahahahahhah");
-        // ’ÊíUŒ‚
-        if (m_pEnemy.m_isAttackAnimation1 == true && m_isPushFlag1 == false)
+        // é€šå¸¸æ”»æ’ƒ
+        if (m_pEnemy.m_isAttackAnimation1 == true)
         {
-            m_isPushFlag1 = true;
-            m_isGoTime = true;
+            m_frame++;
+            if (m_frame == 3)
+            {
+                m_anim.SetTrigger(m_attack1);
+            }
+            else if(m_frame == 200)
+            {
+                m_frame = 0;
+            }
         }
-        else if (m_pEnemy.m_isAttackAnimation2 == true && m_isPushFlag2 == false)
+        else if (m_pEnemy.m_isAttackAnimation2 == true)
         {
-            m_isPushFlag2 = true;
-            m_isGoTime = true;
+            m_frame++;
+            if (m_frame == 3)
+            {
+                m_anim.SetTrigger(m_attack2);
+            }
+            else if (m_frame == 200)
+            {
+                m_frame = 0;
+            }
         }
-        else if (m_pEnemy.m_isAttackAnimation3 == true && m_isPushFlag3 == false)
+        else if (m_pEnemy.m_isAttackAnimation3 == true)
         {
-            m_isPushFlag3 = true;
-            m_isGoTime = true;
+            m_frame++;
+            if (m_frame == 3)
+            {
+                m_anim.SetTrigger(m_attack3);
+            }
+            else if (m_frame == 200)
+            {
+                m_frame = 0;
+            }
         }
-        else if (m_pEnemy.m_isAttackAnimation4 == true && m_isPushFlag4 == false)
+        else if (m_pEnemy.m_isAttackAnimation4 == true)
         {
+            m_frame++;
+            if (m_frame == 3)
+            {
+                m_anim.SetTrigger(m_attack4);
+            }
+            else if (m_frame == 200)
+            {
+                m_frame = 0;
+            }
+
             m_isPushFlag4 = true;
             m_isGoTime = true;
         }
@@ -68,10 +100,6 @@ public class EnemyAnimation : MonoBehaviour
             m_animationInterval = 0;
             Debug.Log("hai");
         }
-        m_anim.SetBool(m_attack1, m_isPushFlag1);
-        m_anim.SetBool(m_attack2, m_isPushFlag2);
-        m_anim.SetBool(m_attack3, m_isPushFlag3);
-        m_anim.SetBool(m_attack4, m_isPushFlag4);
 
         Debug.Log(m_isPushFlag1);
         Debug.Log(m_isPushFlag2);
