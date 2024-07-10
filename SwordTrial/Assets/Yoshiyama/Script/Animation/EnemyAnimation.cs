@@ -9,12 +9,14 @@ public class EnemyAnimation : MonoBehaviour
     private string m_attack2 = "Attack2";
     private string m_attack3 = "Attack3";
     private string m_attack4 = "Attack4";
+    private string m_dash = "Dash";
 
     Animator m_anim;
     public bool m_isPushFlag1 = false;
     public bool m_isPushFlag2 = false;
     public bool m_isPushFlag3 = false;
     public bool m_isPushFlag4 = false;
+    private bool m_isDashFlag = false;
     private int m_animationInterval = 10;
 
     private EnemyC m_pEnemy;
@@ -34,7 +36,6 @@ public class EnemyAnimation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("ahahahahahahahhah");
         // 通常攻撃
         if (m_pEnemy.m_isAttackAnimation1 == true)
         {
@@ -43,7 +44,7 @@ public class EnemyAnimation : MonoBehaviour
             {
                 m_anim.SetTrigger(m_attack1);
             }
-            else if(m_frame == 200)
+            else if (m_frame == 200)
             {
                 m_frame = 0;
             }
@@ -84,28 +85,18 @@ public class EnemyAnimation : MonoBehaviour
                 m_frame = 0;
             }
 
-            m_isPushFlag4 = true;
-            m_isGoTime = true;
         }
-        if (m_isGoTime == true)
+        if (m_pEnemy.m_dashAnimation == true)
         {
-            m_animationInterval++;
+            m_isDashFlag = true;
         }
-        if (m_animationInterval >= 400)
+        else if (m_pEnemy.m_dashAnimation == false)
         {
-            //m_isPushFlag1 = false;
-            //m_isPushFlag2 = false;
-            //m_isPushFlag3 = false;
-            //m_isPushFlag4 = false;
-            m_animationInterval = 0;
-            Debug.Log("hai");
+            m_isDashFlag = false;
         }
-
-        Debug.Log(m_isPushFlag1);
-        Debug.Log(m_isPushFlag2);
-        Debug.Log(m_isPushFlag3);
-        Debug.Log(m_isPushFlag4);
+        m_anim.SetBool(m_dash,m_isDashFlag);
     }
 
 }
+
 

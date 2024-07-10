@@ -24,6 +24,7 @@ public class EnemyC : MonoBehaviour
     //À•W------------------------------------------------------
     private Vector3 m_targetPosition;//’ÇÕ‚·‚éƒ^[ƒQƒbƒg
     private Vector3 m_enemyPosition;//“G
+    public bool m_dashAnimation = false;
     //----------------------------------------------------------
 
     //–¡•û‚Æ“G‚Ì‹——£--------------------------------------------
@@ -195,10 +196,12 @@ public class EnemyC : MonoBehaviour
         if (m_currentDistance >= 3)
         {
             m_speed = 0.05f;
+            m_dashAnimation = true;
         }
         else
         {
             m_speed = 0.01f;
+            m_dashAnimation = false;
         }
     }
 
