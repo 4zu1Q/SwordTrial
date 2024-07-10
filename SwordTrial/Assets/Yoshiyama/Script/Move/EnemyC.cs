@@ -65,6 +65,8 @@ public class EnemyC : MonoBehaviour
 
     //-----------------------------------------------------------
 
+    private EnemyAnimation m_pAnimation;
+
     //別のスクリプトを取得---------------------------------------
     EnemyNormalAttack m_normalAttack;// 通常攻撃
 
@@ -74,6 +76,7 @@ public class EnemyC : MonoBehaviour
     void Start()
     {
         Initialization();
+        m_pAnimation = GetComponent<EnemyAnimation>();
     }
 
     void Update()
@@ -262,6 +265,14 @@ public class EnemyC : MonoBehaviour
         if (m_currentAttackInterval >= m_attackInterval)
         {
 
+            m_pAnimation.m_isPushFlag1 = false;
+            m_pAnimation.m_isPushFlag2 = false;
+            m_pAnimation.m_isPushFlag3 = false;
+            m_pAnimation.m_isPushFlag4 = false;
+            Debug.Log(m_pAnimation.m_isPushFlag1);
+            Debug.Log(m_pAnimation.m_isPushFlag2);
+            Debug.Log(m_pAnimation.m_isPushFlag3);
+            Debug.Log(m_pAnimation.m_isPushFlag4);
             AttackNumber();
             m_currentAttackInterval = 0;
         }
