@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     //カウントダウン分
     [SerializeField] public static int m_countDownMinutes = 3;
     //カウントダウン秒(float)
-    [SerializeField] private float m_countDownSeconds = 0;
+    [SerializeField] public float m_countDownSeconds = 0;
     //カウントダウン秒(int)
     public static int m_countIntSeconds = 0;
     //現在の時間を表示するテキスト
@@ -24,7 +24,7 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        m_countDownMinutes = 0;
+        m_countDownMinutes = 3;
         m_timerText = GameObject.Find("TimerText").GetComponent<Text>();
         m_menu = GetComponent<PauseMenu>();
     }
@@ -81,5 +81,9 @@ public class Timer : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// カウントダウン終了下かを取得
+    /// </summary>
+    /// <returns></returns>
     public bool GetFinishCountDown() { return m_finishCountDown; }
 }

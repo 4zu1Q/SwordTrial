@@ -11,10 +11,10 @@ public class EnemyAnimation : MonoBehaviour
     private string m_attack4 = "Attack4";
 
     Animator m_anim;
-    bool m_isPushFlag1 = false;
-    bool m_isPushFlag2 = false;
-    bool m_isPushFlag3 = false;
-    bool m_isPushFlag4 = false;
+    public bool m_isPushFlag1 = false;
+    public bool m_isPushFlag2 = false;
+    public bool m_isPushFlag3 = false;
+    public bool m_isPushFlag4 = false;
     private int m_animationInterval = 10;
 
     private EnemyC m_pEnemy;
@@ -25,7 +25,7 @@ public class EnemyAnimation : MonoBehaviour
     private void Start()
     {
         m_anim = GetComponent<Animator>();
-        //ƒ‰ƒ“ƒ_ƒ€’l‚Ì’l‚É‰‚¶‚ÄƒAƒjƒ[ƒVƒ‡ƒ“‚ğØ‚è‘Ö‚¦‚é
+        //ãƒ©ãƒ³ãƒ€ãƒ å€¤ã®å€¤ã«å¿œã˜ã¦ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 
         m_pEnemy = GetComponent<EnemyC>();
     }
@@ -35,7 +35,7 @@ public class EnemyAnimation : MonoBehaviour
     void FixedUpdate()
     {
         Debug.Log("ahahahahahahahhah");
-        // ’ÊíUŒ‚
+        // é€šå¸¸æ”»æ’ƒ
         if (m_pEnemy.m_isAttackAnimation1 == true)
         {
             m_frame++;
@@ -84,8 +84,27 @@ public class EnemyAnimation : MonoBehaviour
                 m_frame = 0;
             }
 
+            m_isPushFlag4 = true;
+            m_isGoTime = true;
+        }
+        if (m_isGoTime == true)
+        {
+            m_animationInterval++;
+        }
+        if (m_animationInterval >= 400)
+        {
+            //m_isPushFlag1 = false;
+            //m_isPushFlag2 = false;
+            //m_isPushFlag3 = false;
+            //m_isPushFlag4 = false;
+            m_animationInterval = 0;
+            Debug.Log("hai");
         }
 
+        Debug.Log(m_isPushFlag1);
+        Debug.Log(m_isPushFlag2);
+        Debug.Log(m_isPushFlag3);
+        Debug.Log(m_isPushFlag4);
     }
 
 }

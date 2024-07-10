@@ -66,25 +66,25 @@ AnimatorStateMachine:
     m_Position: {x: 320, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 704602958362794875}
-    m_Position: {x: 800, y: -80, z: 0}
+    m_Position: {x: 820, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9035440364821705851}
     m_Position: {x: 580, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4774403171700435652}
-    m_Position: {x: 810, y: 80, z: 0}
+    m_Position: {x: 830, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4745630144176124275}
-    m_Position: {x: 810, y: 230, z: 0}
+    m_Position: {x: 840, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -909412361103891626}
-    m_Position: {x: 810, y: 370, z: 0}
+    m_Position: {x: 830, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8091067652456804133}
-    m_Position: {x: 580, y: 450, z: 0}
+    m_Position: {x: 830, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7559529977096580575}
-    m_Position: {x: 330, y: 450, z: 0}
+    m_Position: {x: 830, y: 430, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -312,49 +312,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isDash
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isAttack
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isGard
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isItem
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isLose
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isWin
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isDamage
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
