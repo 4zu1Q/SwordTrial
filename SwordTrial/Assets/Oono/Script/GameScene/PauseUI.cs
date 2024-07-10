@@ -12,16 +12,19 @@ public class PauseUI : UIOperationBase
         kTitleBack,   //タイトルに戻る
         kMaxNum
     }
-    public PauseMenu m_pauseMenu;//スクリプトの取得
+    private PauseMenu m_pauseMenu;//スクリプトの取得
     public Image m_pauseImage;//ポーズの画像取得
     public Image m_defaultPauseImage;//ポーズの画像取得
+
     //選択されている項目
     public bool[] m_pauseNum;
     private bool m_isPress;
     private bool m_isPauseOpen;
+
     protected override void Start()
     {
         base.Start();
+        m_pauseMenu = GetComponent<PauseMenu>();
         m_pauseNum = new bool[(int)SelectNum.kMaxNum];
         m_isPress = false;
         m_isPauseOpen = false;
@@ -34,7 +37,7 @@ public class PauseUI : UIOperationBase
     {
         UpdateFunction();
         PauseUpdate();
-        SlectUIColorChenge(m_isPress);
+        //SlectUIColorChenge(m_isPress);
 
     }
     /// <summary>
@@ -51,14 +54,14 @@ public class PauseUI : UIOperationBase
             m_pauseMenu.GetPauseFlag(false);
             //押したフラグを戻しておく
             m_isPress = false;
-            Debug.Log("もどるよ");
+            //Debug.Log("もどるよ");
         }
         //ポーズからタイトルに戻る処理
         else if (m_isPress && m_selectNum == (int)SelectNum.kTitleBack)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
             m_pauseNum[(int)SelectNum.kTitleBack] = true;
-            Debug.Log("説明書開く");
+            //Debug.Log("説明書開く");
         }
         if(!m_pauseMenu.GetMenu())
         {
