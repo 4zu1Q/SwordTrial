@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     /*定数*/
     [SerializeField] private int kItemFrameCountNum;
     [SerializeField] private int kAttackFrameCountNum;
+    [SerializeField] private int kAttackPower;
+
 
     /*移動変数*/
     private float m_inputHorizontal;
@@ -64,7 +66,7 @@ public class Player : MonoBehaviour
         //m_speed = 5.0f;
         //m_acel = 2.0f;
 
-
+        
         m_isDash = false;
         m_isItem = false;
         m_isGard = false;
@@ -158,9 +160,9 @@ public class Player : MonoBehaviour
         }
 
         //Yボタン
-        if (Input.GetButton("Ybutton"))
+        if (Input.GetButtonDown("LT"))
         {
-            //Debug.Log("ガード");
+            Debug.Log("ガード");
             m_isGard = true;
             SetTag(m_gardTag);
             //Debug.Log(m_player.tag);
@@ -191,19 +193,12 @@ public class Player : MonoBehaviour
             }
         }
 
-        //LTボタン
-        if (Input.GetButtonDown("LT"))
-        {
-        Debug.Log(m_attackFrame);
-
-
-        }
 
 
 
 
         //Debug.Log(m_frame);
-        Debug.Log(m_hp);
+        //Debug.Log(m_hp);
         //Debug.Log(m_hpNum);
     }
 
@@ -231,36 +226,59 @@ public class Player : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.name == "Boss")
-        {
-            m_rb.velocity = -m_moveForward * m_speed * 2.0f;
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    if (other.tag == "EnemyAttack")
+    //    {
+    //        m_hp -= 10;
+    //        m_slider.value = m_hp;//HPバーのUI変更
+    //    }
 
+    //    if (other.tag == "PlayerAttack")
+    //    {
+    //        m_hp -= 10;
+    //    }
+
+    //    if (other.tag == "PlayerGard")
+    //    {
+
+    //    }
+
+    //    //if (other.gameObject.name == "Boss")
+    //    //{
+    //    //    m_rb.velocity = -m_moveForward * m_speed * 2.0f;
+
+    //    //    m_hp -= 10;
+    //    //    m_slider.value = m_hp;//HPバーのUI変更
+    //    //}
+    //}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.transform.tag == "EnemyAttack")
+        {
+            m_hp -= 10;
+            m_slider.value = m_hp;//HPバーのUI変更
+        }
+
+        if (collision.transform.tag == "EnemyAttack")
+        {
+            m_hp -= 10;
+            m_slider.value = m_hp;//HPバーのUI変更
+        }
+
+        if (collision.transform.tag == "EnemyAttack")
+        {
             m_hp -= 10;
             m_slider.value = m_hp;//HPバーのUI変更
         }
     }
 
     //当たり判定
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "EnemyAttack")
-        {
-            m_hp -= 10;        
-            m_slider.value = m_hp;//HPバーのUI変更
-        }
+    //private void OnCollisionEnter(Collider other)
+    //{
 
-        if (other.tag == "PlayerAttack")
-        {
-            m_hp -= 10;
-        }
-
-        if(other.tag == "PlayerGard")
-        {
-
-        }
-    }
+    //}
 
     private void SetTag(string newTag)
     {
