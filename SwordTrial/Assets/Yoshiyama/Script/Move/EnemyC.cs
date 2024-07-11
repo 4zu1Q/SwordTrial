@@ -223,7 +223,7 @@ public class EnemyC : MonoBehaviour
     /// <summary>
     /// ƒ_ƒ[ƒW‚ğ‚à‚ç‚¤
     /// </summary>
-    private void ReceiveDamage()
+    public void ReceiveDamage()
     {
         if (!m_isAlive) return;
 
