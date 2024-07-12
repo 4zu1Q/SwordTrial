@@ -21,6 +21,23 @@ public class EnemyC : MonoBehaviour
     //移動する速度
     [SerializeField] private float m_speed;
 
+    //アニメーション-------------------------------------------
+    private string m_attack1 = "Attack1";
+    private string m_attack2 = "Attack2";
+    private string m_attack3 = "Attack3";
+    private string m_attack4 = "Attack4";
+    private string m_dash = "Dash";
+
+    Animator m_anim;
+    public bool m_isPushFlag1 = false;
+    public bool m_isPushFlag2 = false;
+    public bool m_isPushFlag3 = false;
+    public bool m_isPushFlag4 = false;
+    private bool m_isDashFlag = false;
+    private int m_animationInterval = 10;
+    private float m_frame = 0;
+
+
     //座標------------------------------------------------------
     private Vector3 m_targetPosition;//追跡するターゲット
     private Vector3 m_enemyPosition;//敵
@@ -78,6 +95,7 @@ public class EnemyC : MonoBehaviour
     {
         Initialization();
         m_pAnimation = GetComponent<EnemyAnimation>();
+        m_anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -254,7 +272,8 @@ public class EnemyC : MonoBehaviour
     /// </summary>
     public void GetAttackKinds()
     {
-        m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
+        m_attackKinds = 0;
+        //m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
     }
 
     /// <summary>
@@ -267,15 +286,6 @@ public class EnemyC : MonoBehaviour
         // 一定のインターバルが過ぎると攻撃を行う
         if (m_currentAttackInterval >= m_attackInterval)
         {
-
-            m_pAnimation.m_isPushFlag1 = false;
-            m_pAnimation.m_isPushFlag2 = false;
-            m_pAnimation.m_isPushFlag3 = false;
-            m_pAnimation.m_isPushFlag4 = false;
-            Debug.Log(m_pAnimation.m_isPushFlag1);
-            Debug.Log(m_pAnimation.m_isPushFlag2);
-            Debug.Log(m_pAnimation.m_isPushFlag3);
-            Debug.Log(m_pAnimation.m_isPushFlag4);
             AttackNumber();
             m_currentAttackInterval = 0;
         }
@@ -343,6 +353,19 @@ public class EnemyC : MonoBehaviour
                 m_isAttackAnimation1 = false;
             }
             DebugAttack(100, 200, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(1.0f, 1.0f, 1.0f));
+            m_frame++;
+            if (m_frame == 120)
+            {
+                m_anim.SetTrigger(m_attack1);
+            }
+            else if (m_frame == 140)
+            {
+                m_anim.SetTrigger(m_attack1);
+            }
+            else if (m_frame == 400)
+            {
+                m_frame = 0;
+            }
             Debug.Log("通常攻撃");
         }
         else if (m_currentAttackState[(int)AttackKinds.kChargeAttack])
@@ -353,6 +376,15 @@ public class EnemyC : MonoBehaviour
                 m_isAttackAnimation2 = false;
             }
             DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(2.0f, 2.0f, 2.0f));
+            m_frame++;
+            if (m_frame == 250)
+            {
+                m_anim.SetTrigger(m_attack2);
+            }
+            else if (m_frame == 400)
+            {
+                m_frame = 0;
+            }
             Debug.Log("溜め攻撃");
         }
         else if (m_currentAttackState[(int)AttackKinds.kComboAttack])
@@ -363,6 +395,15 @@ public class EnemyC : MonoBehaviour
                 m_isAttackAnimation3 = false;
             }
             DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
+            m_frame++;
+            if (m_frame == 250)
+            {
+                m_anim.SetTrigger(m_attack3);
+            }
+            else if (m_frame == 400)
+            {
+                m_frame = 0;
+            }
             Debug.Log("連続攻撃");
         }
         else if (m_currentAttackState[(int)AttackKinds.kRotateAttack])
@@ -373,6 +414,16 @@ public class EnemyC : MonoBehaviour
                 m_isAttackAnimation4 = false;
             }
             DebugAttack(200, 300, new Vector3(0.0f, 0.1f, 0.0f), new Vector3(2.0f, 2.0f, 2.0f));
+            m_frame++;
+            if (m_frame == 230)
+            {
+                m_anim.SetTrigger(m_attack4);
+            }
+            else if (m_frame == 400)
+            {
+                m_frame = 0;
+            }
+
             Debug.Log("回転攻撃");
         }
 

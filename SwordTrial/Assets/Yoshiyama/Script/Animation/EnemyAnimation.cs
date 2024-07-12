@@ -40,11 +40,11 @@ public class EnemyAnimation : MonoBehaviour
         if (m_pEnemy.m_isAttackAnimation1 == true)
         {
             m_frame++;
-            if (m_frame == 3)
+            if (m_frame == 120)
             {
                 m_anim.SetTrigger(m_attack1);
             }
-            else if (m_frame == 200)
+            else if (m_frame == 400)
             {
                 m_frame = 0;
             }
@@ -52,11 +52,11 @@ public class EnemyAnimation : MonoBehaviour
         else if (m_pEnemy.m_isAttackAnimation2 == true)
         {
             m_frame++;
-            if (m_frame == 3)
+            if (m_frame == 250)
             {
                 m_anim.SetTrigger(m_attack2);
             }
-            else if (m_frame == 200)
+            else if (m_frame == 400)
             {
                 m_frame = 0;
             }
@@ -64,11 +64,11 @@ public class EnemyAnimation : MonoBehaviour
         else if (m_pEnemy.m_isAttackAnimation3 == true)
         {
             m_frame++;
-            if (m_frame == 3)
+            if (m_frame == 250)
             {
                 m_anim.SetTrigger(m_attack3);
             }
-            else if (m_frame == 200)
+            else if (m_frame == 400)
             {
                 m_frame = 0;
             }
@@ -76,11 +76,11 @@ public class EnemyAnimation : MonoBehaviour
         else if (m_pEnemy.m_isAttackAnimation4 == true)
         {
             m_frame++;
-            if (m_frame == 3)
+            if (m_frame == 230)
             {
                 m_anim.SetTrigger(m_attack4);
             }
-            else if (m_frame == 200)
+            else if (m_frame == 400)
             {
                 m_frame = 0;
             }
