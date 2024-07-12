@@ -17,7 +17,6 @@ public class SoundUICursor : UIOperationBase
 
     //選択されている項目
     public bool[] m_selectItem;
-    private bool m_isPress;
     public bool m_isOptionCancellation;
     public bool m_isOptionClose;
 
@@ -30,14 +29,8 @@ public class SoundUICursor : UIOperationBase
     {
         base.Start();
         m_selectItem = new bool[(int)SelectNum.kMaxNum];
-        m_isPress = false;
         m_isOptionCancellation = false;
         m_isOptionClose = true;
-
-        //// ボリュームのセット
-        //m_slider[(int)SoundType.kMaster].value = mastarVolume;
-        //m_slider[(int)SoundType.kBGM].value = bgmVolume;
-        //m_slider[(int)SoundType.kSE].value = seVolume;
     }
 
     void Update()
@@ -46,40 +39,34 @@ public class SoundUICursor : UIOperationBase
         if (m_isOptionClose)
         { 
             m_istest = false;
+            ResetCursor();
             return;
         }
         CursorTransition();
-        SlectUIColorChenge(m_isPress);
         UpdateFunction();
         m_istest = true;
     }
 
     /// <summary>
-    /// シーン遷移
+    /// サウンドの音量調整
     /// </summary>
     private void CursorTransition()
     {
         //ボタンを押した処理
         PressButton();
 
-        if (m_isPress && m_selectNum == (int)SelectNum.kMastar)
+        if (m_selectNum == (int)SelectNum.kMastar)
         {
             m_selectItem[(int)SelectNum.kMastar] = true;
         }
-        else if (m_isPress && m_selectNum == (int)SelectNum.kBGM)
+        else if (m_selectNum == (int)SelectNum.kBGM)
         {
             m_selectItem[(int)SelectNum.kBGM] = true;
         }
-        else if (m_isPress && m_selectNum == (int)SelectNum.kSE)
+        else if (m_selectNum == (int)SelectNum.kSE)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
             m_selectItem[(int)SelectNum.kSE] = true;
-        }
-        else if (m_isPress && m_selectNum == (int)SelectNum.kEnd)
-        {
-            //終了させる
-            Debug.Log("とじる");
-            m_isOptionCancellation = false;
         }
     }
     /// <summary>
@@ -88,26 +75,17 @@ public class SoundUICursor : UIOperationBase
     private void PressButton()
     {
         if (!m_istest) { return; }
-        //ボタンを押した処理
-        if (Input.GetButtonDown("Bbutton"))
-        {
-            m_isPress = true;
-        }
         if (Input.GetButtonDown("Abutton"))
         {
             m_selectItem[(int)SelectNum.kMastar] = false;
             m_selectItem[(int)SelectNum.kBGM] = false;
             m_selectItem[(int)SelectNum.kSE] = false;
 
-            m_isPress = false;
+            
+            m_selectNum = 0;
+            m_isOptionCancellation = false;
         }
 
-        DecisionUpdate(m_isPress);
-    }
-    public void CursorReset()
-    {
-        m_isPress = false;
-        m_selectNum = 0;
     }
     /// <summary>
     /// サウンドのVolumeの更新処理
@@ -116,16 +94,16 @@ public class SoundUICursor : UIOperationBase
     {
         // サウンドの音量を変える処理
         int selectNum = -1;
-        Debug.Log(m_slider[(int)SoundType.kSE].value);
-        if (m_selectItem[(int)SoundType.kMaster])
+        Debug.Log(m_selectNum);
+        if (m_selectItem[(int)SoundType.kMaster] && m_selectNum == (int)SoundType.kMaster)
         {
             selectNum = (int)SoundType.kMaster;
         }
-        else if (m_selectItem[(int)SoundType.kBGM])
+        else if (m_selectItem[(int)SoundType.kBGM]&& m_selectNum == (int)SelectNum.kBGM)
         {
             selectNum = (int)SoundType.kBGM;
         }
-        else if (m_selectItem[(int)SoundType.kSE])
+        else if (m_selectItem[(int)SoundType.kSE] && m_selectNum == (int)SelectNum.kSE)
         {
             selectNum = (int)SoundType.kSE;
         }
