@@ -974,9 +974,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2756296246376217282, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
+      propertyPath: m_soundSEData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2756296246376217282, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
+      propertyPath: m_soundSEData.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 76b75557b8cbd5f40be88f70443a050d, type: 3}
     - target: {fileID: 2813542641550333704, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
       propertyPath: m_Name
       value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488888449655042429, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
+      propertyPath: Loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488888449655042429, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8610252988612629459, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
       propertyPath: m_LocalPosition.x

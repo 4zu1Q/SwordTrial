@@ -8,13 +8,14 @@ public class SoundManager : SoundBase
 {
     public enum SoundType
     {
-        kMaster, //BGM
         kBGM, //BGM
         kSE,//SE
         kMaxNum
     }
     //Audioミキサーを入れるとこです
-    [SerializeField] public AudioMixer m_audioMixer;
+    [SerializeField] private AudioMixer m_audioMixer;
+    [SerializeField] private AudioSource m_soundBGM;
+    [SerializeField] private AudioSource m_soundSE;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -29,6 +30,9 @@ public class SoundManager : SoundBase
         //SEMのデータセット
         m_audioMixer.GetFloat("SE", out float seVolume);
 
+        m_soundBGM = gameObject.transform.GetChild((int)SoundType.kBGM).GetComponent<AudioSource>();
+        m_soundSE = gameObject.transform.GetChild((int)SoundType.kSE).GetComponent<AudioSource>();
+
     }
 
     /// <summary>
@@ -41,5 +45,10 @@ public class SoundManager : SoundBase
         m_audioMixer.SetFloat(name, vol);
     }
    
+    public void SoundSEPlay()
+    {
+        m_soundSE.clip = m_soundSEData[0];
+        m_soundSE.Play();
+    }
 
 }

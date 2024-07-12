@@ -6,9 +6,9 @@ using static SoundManager;
 
 public class SoundUICursor : UIOperationBase
 {
-    public enum SelectNum
+    public enum SoundTypeNum
     {
-        kMastar, //BGM
+        kMaster, //BGM
         kBGM, //BGM
         kSE,//SE
         kEnd,//おわる
@@ -28,7 +28,7 @@ public class SoundUICursor : UIOperationBase
     protected override void Start()
     {
         base.Start();
-        m_selectItem = new bool[(int)SelectNum.kMaxNum];
+        m_selectItem = new bool[(int)SoundTypeNum.kMaxNum];
         m_isOptionCancellation = false;
         m_isOptionClose = true;
     }
@@ -55,18 +55,18 @@ public class SoundUICursor : UIOperationBase
         //ボタンを押した処理
         PressButton();
 
-        if (m_selectNum == (int)SelectNum.kMastar)
+        if (m_selectNum == (int)SoundTypeNum.kMaster)
         {
-            m_selectItem[(int)SelectNum.kMastar] = true;
+            m_selectItem[(int)SoundTypeNum.kMaster] = true;
         }
-        else if (m_selectNum == (int)SelectNum.kBGM)
+        else if (m_selectNum == (int)SoundTypeNum.kBGM)
         {
-            m_selectItem[(int)SelectNum.kBGM] = true;
+            m_selectItem[(int)SoundTypeNum.kBGM] = true;
         }
-        else if (m_selectNum == (int)SelectNum.kSE)
+        else if (m_selectNum == (int)SoundTypeNum.kSE)
         {
             //説明や音声の調整とかできるようなウィンドウを展開
-            m_selectItem[(int)SelectNum.kSE] = true;
+            m_selectItem[(int)SoundTypeNum.kSE] = true;
         }
     }
     /// <summary>
@@ -77,9 +77,9 @@ public class SoundUICursor : UIOperationBase
         if (!m_istest) { return; }
         if (Input.GetButtonDown("Abutton"))
         {
-            m_selectItem[(int)SelectNum.kMastar] = false;
-            m_selectItem[(int)SelectNum.kBGM] = false;
-            m_selectItem[(int)SelectNum.kSE] = false;
+            m_selectItem[(int)SoundTypeNum.kMaster] = false;
+            m_selectItem[(int)SoundTypeNum.kBGM] = false;
+            m_selectItem[(int)SoundTypeNum.kSE] = false;
 
             
             m_selectNum = 0;
@@ -95,17 +95,17 @@ public class SoundUICursor : UIOperationBase
         // サウンドの音量を変える処理
         int selectNum = -1;
         Debug.Log(m_selectNum);
-        if (m_selectItem[(int)SoundType.kMaster] && m_selectNum == (int)SoundType.kMaster)
+        if (m_selectItem[(int)SoundTypeNum.kMaster] && m_selectNum == (int)SoundTypeNum.kMaster)
         {
-            selectNum = (int)SoundType.kMaster;
+            selectNum = (int)SoundTypeNum.kMaster;
         }
-        else if (m_selectItem[(int)SoundType.kBGM]&& m_selectNum == (int)SelectNum.kBGM)
+        else if (m_selectItem[(int)SoundTypeNum.kBGM]&& m_selectNum == (int)SoundTypeNum.kBGM)
         {
-            selectNum = (int)SoundType.kBGM;
+            selectNum = (int)SoundTypeNum.kBGM;
         }
-        else if (m_selectItem[(int)SoundType.kSE] && m_selectNum == (int)SelectNum.kSE)
+        else if (m_selectItem[(int)SoundTypeNum.kSE] && m_selectNum == (int)SoundTypeNum.kSE)
         {
-            selectNum = (int)SoundType.kSE;
+            selectNum = (int)SoundTypeNum.kSE;
         }
         else
         {
@@ -127,15 +127,15 @@ public class SoundUICursor : UIOperationBase
             m_slider[selectNum].value--;
 
         }
-        if (selectNum == (int)SoundType.kMaster)
+        if (selectNum == (int)SoundTypeNum.kMaster)
         {
             m_soundManager.SetVolume("Master", m_slider[selectNum].value);
         }
-        else if (selectNum == (int)SoundType.kBGM)
+        else if (selectNum == (int)SoundTypeNum.kBGM)
         {
             m_soundManager.SetVolume("BGM", m_slider[selectNum].value);
         }
-        else if (selectNum == (int)SoundType.kSE)
+        else if (selectNum == (int)SoundTypeNum.kSE)
         {
             m_soundManager.SetVolume("SE", m_slider[selectNum].value);
         }
