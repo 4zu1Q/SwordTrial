@@ -88,13 +88,10 @@ public class TitleUICursor : UIOperationBase
     public bool OptionCancellation()
     {
         if(m_soundCursor == null) { return false; }
-        Debug.Log(m_soundCursor.m_isOptionCancellation + "‚±‚±‚Æ‚¨‚Á‚½" + m_isOptionOpen);
         if (!m_soundCursor.m_isOptionCancellation && m_isOptionOpen)
         {
-            Debug.Log("‚±‚±‚Æ‚¨‚Á‚½");
             m_soundImgObj.SetActive(false);
             m_isPress = false;
-            m_soundCursor.CursorReset();
             m_soundCursor.m_isOptionClose = true;
             m_isOptionOpen = false;
             return true;

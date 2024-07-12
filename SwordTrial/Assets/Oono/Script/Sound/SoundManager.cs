@@ -28,10 +28,6 @@ public class SoundManager : SoundBase
         m_audioMixer.GetFloat("BGM", out float bgmVolume);
         //SEMのデータセット
         m_audioMixer.GetFloat("SE", out float seVolume);
-        //// ボリュームのセット
-        //m_slider[(int)SoundType.kMaster].value = mastarVolume;
-        //m_slider[(int)SoundType.kBGM].value = bgmVolume;
-        //m_slider[(int)SoundType.kSE].value = seVolume;
 
     }
 

@@ -179,4 +179,13 @@ public class UIOperationBase : MonoBehaviour
     {
         m_isDecision = decison;
     }
+    /// <summary>
+    /// カーソルの場所のリセット
+    /// </summary>
+    public void ResetCursor()
+    {
+        var pos = m_selectRectTransform.transform.position;
+        pos.y = m_itemRectTransform[0].position.y;
+        m_selectRectTransform.transform.position = pos;
+    }
 }
