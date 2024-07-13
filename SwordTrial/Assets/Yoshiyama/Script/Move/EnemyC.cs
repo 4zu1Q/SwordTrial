@@ -272,8 +272,7 @@ public class EnemyC : MonoBehaviour
     /// </summary>
     public void GetAttackKinds()
     {
-        m_attackKinds = 0;
-        //m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
+        m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
     }
 
     /// <summary>
@@ -381,6 +380,10 @@ public class EnemyC : MonoBehaviour
             {
                 m_anim.SetTrigger(m_attack2);
             }
+            else if (m_frame == 370)
+            {
+                m_anim.SetTrigger(m_attack2);
+            }
             else if (m_frame == 400)
             {
                 m_frame = 0;
@@ -400,6 +403,10 @@ public class EnemyC : MonoBehaviour
             {
                 m_anim.SetTrigger(m_attack3);
             }
+            else if (m_frame == 370)
+            {
+                m_anim.SetTrigger(m_attack3);
+            }
             else if (m_frame == 400)
             {
                 m_frame = 0;
@@ -416,6 +423,10 @@ public class EnemyC : MonoBehaviour
             DebugAttack(200, 300, new Vector3(0.0f, 0.1f, 0.0f), new Vector3(2.0f, 2.0f, 2.0f));
             m_frame++;
             if (m_frame == 230)
+            {
+                m_anim.SetTrigger(m_attack4);
+            }
+            else if (m_frame == 350)
             {
                 m_anim.SetTrigger(m_attack4);
             }
