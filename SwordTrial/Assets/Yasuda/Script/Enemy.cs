@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(m_hp);
+        Debug.Log(m_hp);
 
 
         //ê≥ãKâª
@@ -43,14 +43,13 @@ public class Enemy : MonoBehaviour
 
    
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hit");
-
-        if(other.gameObject.name == "Sword")
+        if(collision.transform.tag == "PlayerAttack")
         {
             m_hp -= 10;
         }
+
     }
 
     internal int ReceiveDamage(int m_hp)

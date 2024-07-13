@@ -18,7 +18,13 @@ public class Player : MonoBehaviour
     /*オブジェクト変数*/
     GameObject m_boss;
     GameObject m_player;
-    Transform m_attack;
+    GameObject m_attack;
+    GameObject m_gard;
+
+    /*オブジェクトの座標変数*/
+    private Vector3 m_playerPosition;
+    private Vector3 m_attackPosition;
+    private Vector3 m_gardPosition;
 
     /*タグ変数*/
     private string m_attackTag;
@@ -32,7 +38,6 @@ public class Player : MonoBehaviour
     [SerializeField] private int kItemFrameCountNum;
     [SerializeField] private int kAttackFrameCountNum;
     [SerializeField] private int kAttackPower;
-
 
     /*移動変数*/
     private float m_inputHorizontal;
@@ -58,7 +63,8 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
-        m_attack = m_player.transform.Find("Attack");
+        m_attack = GameObject.Find("Attack");
+        m_gard = GameObject.Find("Gard");
         m_hp = m_maxHp;
         m_slider.value = m_maxHp;
         //m_itemNum = 3;
@@ -81,10 +87,20 @@ public class Player : MonoBehaviour
         m_attackTag = "PlayerAttack";
         m_gardTag = "PlayerGard";
 
+
     }
 
     void FixedUpdate()
     {
+        Vector3 attackAdd = new Vector3(0, 0, 1);
+        Vector3 gardAdd = new Vector3(0, 0, 0);
+
+        m_playerPosition = this.transform.position;
+
+        m_attackPosition = m_playerPosition + attackAdd;
+        m_gardPosition = m_playerPosition + gardAdd;
+
+
         /*移動処理*/
         m_inputHorizontal = Input.GetAxis("Horizontal");
         m_inputVertical = Input.GetAxis("Vertical");
@@ -147,6 +163,7 @@ public class Player : MonoBehaviour
         if (m_isAttack)
         {
             m_attackFrame++;
+            m_attack.transform.position = m_attackPosition;
 
             m_attack.gameObject.SetActive(true);
 
@@ -160,7 +177,7 @@ public class Player : MonoBehaviour
         }
 
         //Yボタン
-        if (Input.GetButtonDown("LT"))
+        if (Input.GetButtonDown("YButton"))
         {
             Debug.Log("ガード");
             m_isGard = true;
@@ -206,14 +223,7 @@ public class Player : MonoBehaviour
     {
         //Debug.Log(m_hp);
 
-        //else m_attack.gameObject.SetActive(false);
 
-
-        //右スティック押し込み
-        if (Input.GetButtonDown("Target"))
-        {
-            Debug.Log("ターゲット");
-        }
 
 
         //HPがゼロになったら
@@ -226,33 +236,6 @@ public class Player : MonoBehaviour
 
     }
 
-    //private void OnCollisionEnter(Collision other)
-    //{
-    //    if (other.tag == "EnemyAttack")
-    //    {
-    //        m_hp -= 10;
-    //        m_slider.value = m_hp;//HPバーのUI変更
-    //    }
-
-    //    if (other.tag == "PlayerAttack")
-    //    {
-    //        m_hp -= 10;
-    //    }
-
-    //    if (other.tag == "PlayerGard")
-    //    {
-
-    //    }
-
-    //    //if (other.gameObject.name == "Boss")
-    //    //{
-    //    //    m_rb.velocity = -m_moveForward * m_speed * 2.0f;
-
-    //    //    m_hp -= 10;
-    //    //    m_slider.value = m_hp;//HPバーのUI変更
-    //    //}
-    //}
-
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.transform.tag == "EnemyAttack")
@@ -261,24 +244,10 @@ public class Player : MonoBehaviour
             m_slider.value = m_hp;//HPバーのUI変更
         }
 
-        if (collision.transform.tag == "EnemyAttack")
-        {
-            m_hp -= 10;
-            m_slider.value = m_hp;//HPバーのUI変更
-        }
 
-        if (collision.transform.tag == "EnemyAttack")
-        {
-            m_hp -= 10;
-            m_slider.value = m_hp;//HPバーのUI変更
-        }
     }
 
-    //当たり判定
-    //private void OnCollisionEnter(Collider other)
-    //{
 
-    //}
 
     private void SetTag(string newTag)
     {
