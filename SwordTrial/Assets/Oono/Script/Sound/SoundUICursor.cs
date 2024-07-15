@@ -1,4 +1,4 @@
-//ƒTƒEƒ“ƒh‚ÌXVˆ—
+ï»¿//ã‚µã‚¦ãƒ³ãƒ‰ã®æ›´æ–°å‡¦ç†
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -11,17 +11,17 @@ public class SoundUICursor : UIOperationBase
         kMastar, //BGM
         kBGM, //BGM
         kSE,//SE
-        kEnd,//‚¨‚í‚é
+        kEnd,//ãŠã‚ã‚‹
         kMaxNum
     }
 
-    //‘I‘ğ‚³‚ê‚Ä‚¢‚é€–Ú
+    //é¸æŠã•ã‚Œã¦ã„ã‚‹é …ç›®
     public bool[] m_selectItem;
     public bool m_isOptionCancellation;
     public bool m_isOptionClose;
 
     private bool m_istest;
-    //‚»‚ê‚¼‚ê‚ÌƒXƒ‰ƒCƒ_[‚ğ“ü‚ê‚é‚Æ‚±‚Å‚·BB
+    //ãã‚Œãã‚Œã®ã‚¹ãƒ©ã‚¤ãƒ€ãƒ¼ã‚’å…¥ã‚Œã‚‹ã¨ã“ã§ã™ã€‚ã€‚
     [SerializeField] private Slider[] m_slider;
     [SerializeField] private SoundManager m_soundManager;
 
@@ -48,11 +48,11 @@ public class SoundUICursor : UIOperationBase
     }
 
     /// <summary>
-    /// ƒTƒEƒ“ƒh‚Ì‰¹—Ê’²®
+    /// ã‚µã‚¦ãƒ³ãƒ‰ã®éŸ³é‡èª¿æ•´
     /// </summary>
     private void CursorTransition()
     {
-        //ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½ˆ—
+        //ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸå‡¦ç†
         PressButton();
 
         if (m_selectNum == (int)SelectNum.kMastar)
@@ -65,12 +65,12 @@ public class SoundUICursor : UIOperationBase
         }
         else if (m_selectNum == (int)SelectNum.kSE)
         {
-            //à–¾‚â‰¹º‚Ì’²®‚Æ‚©‚Å‚«‚é‚æ‚¤‚ÈƒEƒBƒ“ƒhƒE‚ğ“WŠJ
+            //èª¬æ˜ã‚„éŸ³å£°ã®èª¿æ•´ã¨ã‹ã§ãã‚‹ã‚ˆã†ãªã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚’å±•é–‹
             m_selectItem[(int)SelectNum.kSE] = true;
         }
     }
     /// <summary>
-    /// ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚Æ‚«‚Ìˆ—
+    /// ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã¨ãã®å‡¦ç†
     /// </summary>
     private void PressButton()
     {
@@ -88,11 +88,11 @@ public class SoundUICursor : UIOperationBase
 
     }
     /// <summary>
-    /// ƒTƒEƒ“ƒh‚ÌVolume‚ÌXVˆ—
+    /// ã‚µã‚¦ãƒ³ãƒ‰ã®Volumeã®æ›´æ–°å‡¦ç†
     /// </summary>
     private void SoundVolumeUpdate()
     {
-        // ƒTƒEƒ“ƒh‚Ì‰¹—Ê‚ğ•Ï‚¦‚éˆ—
+        // ã‚µã‚¦ãƒ³ãƒ‰ã®éŸ³é‡ã‚’å¤‰ãˆã‚‹å‡¦ç†
         int selectNum = -1;
         Debug.Log(m_selectNum);
         if (m_selectItem[(int)SoundType.kMaster] && m_selectNum == (int)SoundType.kMaster)
@@ -113,10 +113,10 @@ public class SoundUICursor : UIOperationBase
         }
         if (selectNum == -1) { return; }
 
-        //ƒXƒeƒBƒbƒN‚Ì“ü—Í’l‚ğŠi”[
+        //ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›å€¤ã‚’æ ¼ç´
         float RightStick = Input.GetAxis("Horizontal");
 
-        //ƒJ[ƒ\ƒ‹‚ğ‰º‚É“®‚©‚·
+        //ã‚«ãƒ¼ã‚½ãƒ«ã‚’ä¸‹ã«å‹•ã‹ã™
         if (RightStick >= 0.5f)
         {
             m_slider[selectNum].value++;
