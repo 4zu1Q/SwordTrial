@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundBase : MonoBehaviour
 {
-    [Header("ƒTƒEƒ“ƒhƒf[ƒ^")]
+    [Header("ã‚µã‚¦ãƒ³ãƒ‰ãƒ‡ãƒ¼ã‚¿")]
     public AudioClip[] m_soundBGMData;
     public AudioClip[] m_soundSEData;
     private AudioSource m_bgmSource;
