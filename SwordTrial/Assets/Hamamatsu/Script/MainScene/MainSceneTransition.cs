@@ -6,7 +6,7 @@ public class MainSceneTransition : SceneTransitionBase
 {
     //タイマー情報
     private Timer m_timer;
-    PauseUI m_Ui;
+    private PauseUI m_Ui;
 
     //Player情報
     [SerializeField] private Player m_player;
@@ -30,7 +30,7 @@ public class MainSceneTransition : SceneTransitionBase
         base.FixedUpdate();
         SetBoolScene();
         DebugSceneTransition();
-        //SceneTransitoinPause();
+        SceneTransitoinPause();
     }
 
     /// <summary>
