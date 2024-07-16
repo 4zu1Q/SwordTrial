@@ -177,7 +177,7 @@ public class Player : MonoBehaviour
         }
 
         //Yボタン
-        if (Input.GetButtonDown("YButton"))
+        if (Input.GetButtonDown("Ybutton"))
         {
             Debug.Log("ガード");
             m_isGard = true;

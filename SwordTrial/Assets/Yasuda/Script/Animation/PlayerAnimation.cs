@@ -1,82 +1,189 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
     /*変数*/
-    private string m_walk = "isWalk";
-    private string m_attack = "isAttack";
-    private string m_dash = "isDash";
-    private string m_gard = "isGard";
-    private string m_item = "isItem";
-    private string m_damage = "isDamage";
-    private string m_win = "isWin";
-    private string m_lose = "isLose";
+    //private string m_walk = "isWalk";
+    //private string m_attack = "isAttack";
+    //private string m_dash = "isDash";
+    //private string m_gard = "isGard";
+    //private string m_item = "isItem";
+    //private string m_damage = "isDamage";
+    //private string m_win = "isWin";
+    //private string m_lose = "isLose";
+
+    //アニメーションのトリガー
+    private string m_idle = "Idle";         //待機
+    private string m_run = "Run";           //走る
+    private string m_dash = "Dash";         //ダッシュ
+    private string m_attack = "Attack";     //攻撃
+    private string m_recovery = "Recovery"; //回復
+    private string m_guard = "Guard";       //防御
 
     Animator m_anim;
-    private bool m_isPushFlag;
+
+    //現在のフレーム数
+    private int m_currentFlameNum = 0;
+    //待機状態に遷移するタイミング
+    private int m_changeFlameNum = 0;
+
+    private string m_currentAnim;
+
+    //ゲームパッド入力値-----------------------------------
+
+    //右スティックの入力値
+    private float m_leftStickHorizontal = 0;
+    private float m_leftStickVertical = 0;
+
+    private bool m_walkStick = false;           // 移動スティック
+
+    private bool m_dashAButton = false;         // ダッシュボタン
+    private bool m_recoveryBButton = false;     // 回復ボタン
+    private bool m_attackXButton = false;       // 攻撃ボタン
+    private bool m_guardYButton = false;        // 防御ボタン
+
+    //-----------------------------------------------------
+
 
     // Start is called before the first frame update
     void Start()
     {
         m_anim = GetComponent<Animator>();
-        //ランダム値の値に応じてアニメーションを切り替る
-        m_isPushFlag = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        GamePadInputUpdate();
+        AnimTransitionUpdate();
+    }
 
-        if (Input.GetButton("Abutton"))
+    private void FixedUpdate()
+    {
+        m_currentFlameNum++;
+
+        AnimEnd(m_currentAnim);
+    }
+
+    /// <summary>
+    /// アニメーション終了時の処理
+    /// </summary>
+    private void AnimEnd(string anim)
+    {
+        if (m_currentFlameNum == m_changeFlameNum)
         {
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_dash, m_isPushFlag);
+            m_anim.SetBool(anim, false);
         }
-        if (Input.GetButton("Bbutton"))
+    }
+
+    /// <summary>
+    /// アニメーション遷移
+    /// </summary>
+    private void AnimTransitionUpdate()
+    {
+        //回復
+        if (m_recoveryBButton)
         {
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_item, m_isPushFlag);
+            NextAnim(m_recovery, 0, 40);
+            m_recoveryBButton = false;
         }
-        if (Input.GetButton("Ybutton"))
+        //攻撃
+        else if(m_attackXButton)
         {
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_gard, m_isPushFlag);
-        }
-        if (Input.GetButton("Xbutton"))
-        {
-            if (m_isPushFlag)
-            {
-                m_isPushFlag = false;
-            }
-            else
-            {
-                m_isPushFlag = true;
-            }
-            m_anim.SetBool(m_attack, m_isPushFlag);
+            NextAnim(m_attack, 0, 19);
+            m_attackXButton = false;
         }
 
+        //移動
+        if (m_walkStick)
+        {
+            m_anim.SetBool(m_run, true);
+            if (!m_dashAButton)
+            {
+                m_anim.SetBool(m_dash, false);
+            }
+            else if (m_dashAButton)
+            {
+                m_anim.SetBool(m_dash, true);
+            }
+        }
+        else if (!m_walkStick)
+        {
+            m_anim.SetBool(m_run, false);
+            m_anim.SetBool(m_dash, false);
+        }
+        //防御
+        if (m_guardYButton)
+        {
+            m_anim.SetBool(m_guard, true);
+        }
+        else if (!m_guardYButton)
+        {
+            m_anim.SetBool(m_guard, false);
+        }
+    }
+
+    /// <summary>
+    /// 次に遷移するアニメーションの情報
+    /// </summary>
+    /// <param name="m_nextAnim">次のアニメーション</param>
+    /// <param name="currentFlameNum">現在のフレーム</param>
+    /// <param name="changeFlameNum">待機状態に遷移するタイミング</param>
+    private void NextAnim(string m_nextAnim, int currentFlameNum, int changeFlameNum)
+    {
+        m_anim.SetBool(m_nextAnim, true);
+        m_currentFlameNum = currentFlameNum;
+        m_changeFlameNum = changeFlameNum;
+        m_currentAnim = m_nextAnim;
+    }
+
+    /// <summary>
+    /// コントローラーの入力情報更新
+    /// </summary>
+    private void GamePadInputUpdate()
+    {
+        //左スティックの入力情報
+        m_leftStickHorizontal = Input.GetAxis("Horizontal");
+        m_leftStickVertical = Input.GetAxis("Vertical");
+
+        if(m_leftStickHorizontal != 0 || m_leftStickVertical != 0)
+        {
+            m_walkStick = true;
+        }
+        else if(m_leftStickHorizontal == 0 && m_leftStickVertical == 0)
+        {
+            Debug.Log("ddd");
+            m_walkStick = false;
+        }
+
+        // ボタンを押した瞬間
+        if (Input.GetButtonDown("Abutton"))
+        {
+            m_dashAButton = true;
+        }
+        else if(Input.GetButtonDown("Bbutton"))
+        {
+            m_recoveryBButton = true;
+        }
+        else if (Input.GetButtonDown("Ybutton"))
+        {
+            m_guardYButton = true;
+        }
+        else if (Input.GetButtonDown("Xbutton"))
+        {
+            m_attackXButton = true;
+        }
+
+        if (Input.GetButtonUp("Abutton"))
+        {
+            m_dashAButton = false;
+        }
+        else if(Input.GetButtonUp("Ybutton"))
+        {
+            m_guardYButton = false;
+        }
     }
 }
