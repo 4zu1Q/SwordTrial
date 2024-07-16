@@ -23,7 +23,6 @@ public class SoundUICursor : UIOperationBase
     private bool m_istest;
     //それぞれのスライダーを入れるとこです。。
     [SerializeField] private Slider[] m_slider;
-    [SerializeField] private SoundManager m_soundManager;
 
     protected override void Start()
     {
@@ -77,11 +76,11 @@ public class SoundUICursor : UIOperationBase
         if (!m_istest) { return; }
         if (Input.GetButtonDown("Abutton"))
         {
+            m_soundManager.PlaySoundSE(SoundSEName.Cancel);
             m_selectItem[(int)SelectNum.kMastar] = false;
             m_selectItem[(int)SelectNum.kBGM] = false;
             m_selectItem[(int)SelectNum.kSE] = false;
-
-            
+            //カーソルを元の位置に戻すために0をいれる
             m_selectNum = 0;
             m_isOptionCancellation = false;
         }
@@ -94,7 +93,6 @@ public class SoundUICursor : UIOperationBase
     {
         // サウンドの音量を変える処理
         int selectNum = -1;
-        Debug.Log(m_selectNum);
         if (m_selectItem[(int)SoundType.kMaster] && m_selectNum == (int)SoundType.kMaster)
         {
             selectNum = (int)SoundType.kMaster;
@@ -116,7 +114,7 @@ public class SoundUICursor : UIOperationBase
         //スティックの入力値を格納
         float RightStick = Input.GetAxis("Horizontal");
 
-        //カーソルを下に動かす
+        //カーソルを上下に動かす
         if (RightStick >= 0.5f)
         {
             m_slider[selectNum].value++;
@@ -127,6 +125,7 @@ public class SoundUICursor : UIOperationBase
             m_slider[selectNum].value--;
 
         }
+        // 選んでいる番号の音量変更処理
         if (selectNum == (int)SoundType.kMaster)
         {
             m_soundManager.SetVolume("Master", m_slider[selectNum].value);

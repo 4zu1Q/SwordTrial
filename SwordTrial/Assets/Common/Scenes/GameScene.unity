@@ -2283,6 +2283,7 @@ MonoBehaviour:
   - {fileID: 1301551868}
   - {fileID: 1680217218}
   _isUIScaleChenge: 0
+  m_soundManager: {fileID: 0}
   m_pauseImage: {fileID: 0}
   m_defaultPauseImage: {fileID: 0}
   m_pauseNum: 000000
@@ -11369,6 +11370,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 123949524}
     m_Modifications:
+    - target: {fileID: 2134230370924011597, guid: b52d6203d9ef48e48b02633179c9e316, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5831618956201529555, guid: b52d6203d9ef48e48b02633179c9e316, type: 3}
       propertyPath: m_Name
       value: Fade
