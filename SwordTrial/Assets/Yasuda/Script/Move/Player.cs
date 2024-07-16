@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField] private int m_itemNum;       //アイテムの個数
     [SerializeField] private float m_speed;
     [SerializeField] private float m_acel;
-    [SerializeField] public int m_maxHp;
     [SerializeField] public int m_hp;
 
     /*オブジェクト変数*/
@@ -20,6 +19,8 @@ public class Player : MonoBehaviour
     GameObject m_player;
     GameObject m_attack;
     GameObject m_gard;
+    //Transform m_attack;
+    //Transform m_gard;
 
     /*オブジェクトの座標変数*/
     private Vector3 m_playerPosition;
@@ -63,10 +64,11 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
+        //m_player.transform.Find("Attack");
+        //m_player.transform.Find("Gard");
         m_attack = GameObject.Find("Attack");
         m_gard = GameObject.Find("Gard");
-        m_hp = m_maxHp;
-        m_slider.value = m_maxHp;
+        m_slider.value = m_hp;
         //m_itemNum = 3;
 
         //m_speed = 5.0f;
@@ -92,13 +94,13 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 attackAdd = new Vector3(0, 0, 1);
-        Vector3 gardAdd = new Vector3(0, 0, 0);
+        //Vector3 attackAdd = new Vector3(0, 0, 1);
+        //Vector3 gardAdd = new Vector3(0, 0, 0);
 
         m_playerPosition = this.transform.position;
 
-        m_attackPosition = m_playerPosition + attackAdd;
-        m_gardPosition = m_playerPosition + gardAdd;
+        m_attackPosition = m_playerPosition;
+        m_gardPosition = m_playerPosition;
 
 
         /*移動処理*/
@@ -151,6 +153,22 @@ public class Player : MonoBehaviour
             }
         }
 
+        //HPが減っていた場合
+        if (m_isItem)
+        {
+            m_itemFrame++;
+            if (m_itemFrame >= kItemFrameCountNum)
+            {
+                m_isItem = false;
+                m_itemFrame = 0;
+                m_hp += 10;
+                m_slider.value = m_hp;//HPバーのUI変更
+
+                m_itemNum--;
+
+
+            }
+        }
 
         //Xボタン
         if (Input.GetButton("Xbutton"))
@@ -163,7 +181,7 @@ public class Player : MonoBehaviour
         if (m_isAttack)
         {
             m_attackFrame++;
-            m_attack.transform.position = m_attackPosition;
+            //m_attack.transform.position = m_attackPosition;
 
             m_attack.gameObject.SetActive(true);
 
@@ -193,29 +211,14 @@ public class Player : MonoBehaviour
             
         }
 
-        //HPが減っていた場合
-        if (m_isItem)
-        {
-            m_itemFrame++;
-            if(m_itemFrame >= kItemFrameCountNum)
-            {
-                m_isItem = false;
-                m_itemFrame = 0;
-                m_hp += 10;
-                m_slider.value = m_hp;//HPバーのUI変更
 
-                m_itemNum--;
-
-
-            }
-        }
 
 
 
 
 
         //Debug.Log(m_frame);
-        //Debug.Log(m_hp);
+        Debug.Log(m_hp);
         //Debug.Log(m_hpNum);
     }
 
