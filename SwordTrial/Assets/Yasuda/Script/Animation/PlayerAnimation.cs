@@ -87,7 +87,7 @@ public class PlayerAnimation : MonoBehaviour
         //‰ñ•œ
         if (m_recoveryBButton)
         {
-            NextAnim(m_recovery, 0, 40);
+            NextAnim(m_recovery, 0, 30);
             m_recoveryBButton = false;
         }
         //UŒ‚
