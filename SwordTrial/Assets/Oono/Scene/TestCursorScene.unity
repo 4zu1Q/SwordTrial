@@ -401,6 +401,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2724886152455379968, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c99e015f12d3f5c4ab57a97737cafd7a, type: 3}
     - target: {fileID: 2813542641550333704, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -768,6 +772,7 @@ MonoBehaviour:
   - {fileID: 1626811031}
   - {fileID: 1899196443}
   _isUIScaleChenge: 0
+  m_soundManager: {fileID: 0}
   m_selectItem: 
   m_soundImgObj: {fileID: 354412075}
   m_soundCursor: {fileID: 1098732777}
@@ -816,6 +821,7 @@ MonoBehaviour:
   - {fileID: 1142036872}
   - {fileID: 1463563031}
   _isUIScaleChenge: 1
+  m_soundManager: {fileID: 803300621}
   m_selectItem: 00000000
   m_isOptionCancellation: 0
   m_isOptionClose: 0
@@ -823,7 +829,6 @@ MonoBehaviour:
   - {fileID: 1612393712}
   - {fileID: 1299339774}
   - {fileID: 1142036874}
-  m_soundManager: {fileID: 803300621}
 --- !u!1 &1142036872 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5117922261006857878, guid: eab33f949f7f31f4db9f4b4faa604f28, type: 3}

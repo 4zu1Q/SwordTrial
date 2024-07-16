@@ -3,6 +3,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using static SoundManager;
 
 public class UIOperationBase : MonoBehaviour
 {
@@ -20,13 +21,14 @@ public class UIOperationBase : MonoBehaviour
     private float m_moveCursorSpeed;//カーソルの移動速度
     private bool m_isDecision;//決定を押したかどうか
     private Vector3[] m_itemDefaultRectTransform;//もともとの画像のサイズ取得
-    private float m_scaleChengeSize;//変更する大きさのサイズ
+    public float m_scaleChengeSize = 1.2f;//変更する大きさのサイズ
     private float m_scaleChengeSpeed;//スケールを変更する時間
     private float m_scaleChengeRestoreSpeed;
     private int m_pressTime;//押したままの時間の取得
     private int m_pressTimeMax;//押したままの時間の最大値
 
     public bool _isUIScaleChenge = false;
+    public SoundManager m_soundManager;
     protected virtual void Start()
     {
         //変数の初期化
@@ -44,12 +46,15 @@ public class UIOperationBase : MonoBehaviour
         m_selectUIImg = m_selectCursor.GetComponent<Image>();
         m_prevSelectNum = 0;
         m_moveCursorSpeed = 0.2f;
-        m_scaleChengeSize = 1.3f;
         m_scaleChengeSpeed = 1.0f;
         m_scaleChengeRestoreSpeed = 0.1f;
         m_pressTime = 0;
         m_pressTimeMax = 20;
 
+        if(GameObject.Find("SoundManager") != null)
+        {
+            m_soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        }
         UIScalseChengeLoop();
     }
 
@@ -85,6 +90,10 @@ public class UIOperationBase : MonoBehaviour
             {
                 m_selectNum = 0;
             }
+            if(m_soundManager != null)
+            {
+                m_soundManager.PlaySoundSE(SoundSEName.CursorMove);
+            }
         }
         //カーソルを上に動かす
         else if (LeftStick >= 0.5f)
@@ -95,6 +104,10 @@ public class UIOperationBase : MonoBehaviour
             if (m_selectNum < 0)
             {
                 m_selectNum = m_itemUI.Length - 1;
+            }
+            if (m_soundManager != null)
+            {
+                m_soundManager.PlaySoundSE(SoundSEName.CursorMove);
             }
         }
         else if (LeftStick >= -0.1f && LeftStick <= 0.1f)

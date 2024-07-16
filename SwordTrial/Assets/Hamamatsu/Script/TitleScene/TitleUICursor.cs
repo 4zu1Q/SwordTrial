@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using static SoundManager;
 
 public class TitleUICursor : UIOperationBase
 {
@@ -74,9 +75,11 @@ public class TitleUICursor : UIOperationBase
         if (Input.GetButtonDown("Bbutton"))
         {
             m_isPress = true;
+            m_soundManager.PlaySoundSE(SoundSEName.Decision);
         }
         if (Input.GetButtonDown("Abutton"))
         {
+            m_soundManager.PlaySoundSE(SoundSEName.Cancel);
             m_isPress = false;
         }
 
