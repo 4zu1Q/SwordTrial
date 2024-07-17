@@ -11,7 +11,7 @@ public class MainSceneTransition : SceneTransitionBase
     //Player情報
     [SerializeField] private Player m_player;
     //Enemy情報
-    [SerializeField] private EnemyState m_enemyState;
+    [SerializeField] private EnemyC m_enemyState;
 
     //LoseSceneに遷移するかどうか
     private bool m_isLoseScene = false;
@@ -39,10 +39,9 @@ public class MainSceneTransition : SceneTransitionBase
     private void SetBoolScene()
     {
         // 敗北シーンに遷移するかのフラグ
-        m_isLoseScene = (m_player.m_hp == 0) || m_timer.GetFinishCountDown();
+        m_isLoseScene = (m_player.m_hp <= 0) || m_timer.GetFinishCountDown();
         // 勝利シーンに遷移するかのフラグ
-        // TODO
-        //m_isWinScene = m_enemyState.
+        m_isWinScene = m_enemyState.m_currentHP <= 0;
     }
 
     /// <summary>
@@ -50,19 +49,6 @@ public class MainSceneTransition : SceneTransitionBase
     /// </summary>
     private void DebugSceneTransition()
     {
-        //Aボタンを押したら
-        //if (Input.GetButton("Abutton"))
-        //{
-        //    m_fade.m_isFading = false;
-        //    GetNextScene((int)SceneKinds.kWinScene);
-        //}
-        ////Bボタンを押したら、またはカウントダウンが終了したらシーン遷移
-        //else if (Input.GetButton("Bbutton") || m_timer.GetFinishCountDown())
-        //{
-        //    m_fade.m_isFading = false;
-        //    GetNextScene((int)SceneKinds.kLoseScene);
-        //}
-
         // プレイヤーの体力が0または時間切れになると敗北画面へ
         if(m_isLoseScene)
         {
@@ -70,12 +56,11 @@ public class MainSceneTransition : SceneTransitionBase
             GetNextScene((int)SceneKinds.kLoseScene);
         }
         // 敵の体力が0以下になれば勝利画面へ
-        // TODO：後にエネミーの体力を取得出来たら条件を追加する
-        //else
-        //{
-        //    m_fade.m_isFading = false;
-        //    GetNextScene((int)SceneKinds.kWinScene);
-        //}
+        else if(m_isWinScene)
+        {
+            m_fade.m_isFading = false;
+            GetNextScene((int)SceneKinds.kWinScene);
+        }
 
 
     }
