@@ -24,6 +24,7 @@ public class TimerResult : MonoBehaviour
     /// </summary>
     private void TimeResultView()
     {
+        Debug.Log(Timer.m_countIntSeconds);
         m_resultText.text = "Time:" + Timer.m_countDownMinutes + ":" + Timer.m_countIntSeconds;
     }
 }
