@@ -155,7 +155,6 @@ public class PlayerAnimation : MonoBehaviour
         }
         else if(m_leftStickHorizontal == 0 && m_leftStickVertical == 0)
         {
-            Debug.Log("ddd");
             m_walkStick = false;
         }
 
