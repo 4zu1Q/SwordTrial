@@ -5066,6 +5066,10 @@ PrefabInstance:
       propertyPath: m_hp
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_slider
+      value: 
+      objectReference: {fileID: 582645153}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
