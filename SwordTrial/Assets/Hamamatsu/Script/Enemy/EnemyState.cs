@@ -1,7 +1,6 @@
 //“G‚Ìˆ—
 
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using UnityEngine.UIElements;
 
 public class EnemyState : MonoBehaviour
