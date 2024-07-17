@@ -195,21 +195,21 @@ public class Player : MonoBehaviour
         }
 
         //Yボタン
-        if (Input.GetButtonDown("Ybutton"))
-        {
-            Debug.Log("ガード");
-            m_isGard = true;
-            SetTag(m_gardTag);
-            //Debug.Log(m_player.tag);
+        //if (Input.GetButtonDown("Ybutton"))
+        //{
+        //    Debug.Log("ガード");
+        //    m_isGard = true;
+        //    SetTag(m_gardTag);
+        //    //Debug.Log(m_player.tag);
 
-        }
-        else
-        {
-            m_isGard = false;
-            SetTag(m_attackTag);
-            //Debug.Log(m_player.tag);
+        //}
+        //else
+        //{
+        //    m_isGard = false;
+        //    SetTag(m_attackTag);
+        //    //Debug.Log(m_player.tag);
             
-        }
+        //}
 
 
 

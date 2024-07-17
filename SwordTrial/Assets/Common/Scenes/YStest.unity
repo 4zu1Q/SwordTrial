@@ -528,6 +528,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d792b12b30374d143bb0c7ca8ea286f3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 344745838}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: d792b12b30374d143bb0c7ca8ea286f3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 608896820}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d792b12b30374d143bb0c7ca8ea286f3, type: 3}
       insertIndex: -1
@@ -1461,11 +1464,11 @@ Transform:
   m_GameObject: {fileID: 608896819}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.3, y: 6.47, z: -13.48}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.027, y: 0.10099997, z: 0.059}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 107715452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &608896821
 SphereCollider:
@@ -2189,5 +2192,4 @@ SceneRoots:
   - {fileID: 7770494}
   - {fileID: 1471546537}
   - {fileID: 127440301}
-  - {fileID: 608896820}
   - {fileID: 476514655}
