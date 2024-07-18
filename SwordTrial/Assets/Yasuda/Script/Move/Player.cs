@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
         m_gard = GameObject.Find("Gard");
         m_slider.value = m_hp;
 
-        m_text = m_itemNumText.GetComponent<Text>();
+        //m_text = m_itemNumText.GetComponent<Text>();
 
         m_isDash = false;
         m_isItem = false;
@@ -207,19 +207,6 @@ public class Player : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        //Debug.Log(m_hp);
-        if (!m_isPause) return;
-
-        //HPÇ™É[ÉçÇ…Ç»Ç¡ÇΩÇÁ
-        if (m_hp <= 0)
-        {
-            Debug.Log("ïâÇØ");
-        }
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (!m_isPause) return;
@@ -231,10 +218,6 @@ public class Player : MonoBehaviour
         }
 
     }
-
-
-
-
 
 
 }

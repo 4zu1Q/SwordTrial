@@ -2064,6 +2064,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_slider
+      value: 
+      objectReference: {fileID: 1468804251}
+    - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_itemNum
       value: 10
       objectReference: {fileID: 0}
@@ -2071,6 +2075,10 @@ PrefabInstance:
       propertyPath: kAttackPower
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_itemNumText
+      value: 
+      objectReference: {fileID: 1195144789}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kItemFrameCountNum
       value: 180
