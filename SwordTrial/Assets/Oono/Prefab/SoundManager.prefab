@@ -174,11 +174,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93206b9f8ab019f45a0a50fe9c2c1e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_soundBGMData: []
+  m_soundBGMData:
+  - {fileID: 8300000, guid: a6658e4e542088b458614e5796a57fc0, type: 3}
+  - {fileID: 8300000, guid: 85a6cf412b955f84c91e30ae2a6a57e2, type: 3}
+  - {fileID: 8300000, guid: be5b1538f4b215b478f66e1c75c3dd33, type: 3}
+  - {fileID: 8300000, guid: 1f2be4f669d9ca54f9f5eb62180b6525, type: 3}
   m_soundSEData:
   - {fileID: 8300000, guid: 23e6b7e7edccf1644ae6d48025523579, type: 3}
   - {fileID: 8300000, guid: d22e84839d30d2c4b863631f55c7f8df, type: 3}
   - {fileID: 8300000, guid: 428983ce05cd6534288971189d8f392e, type: 3}
+  - {fileID: 8300000, guid: 60228f51590df534cbe5fe850b085839, type: 3}
   - {fileID: 8300000, guid: 7856f9ffee6c79348a5fb7980ccda6bd, type: 3}
   - {fileID: 8300000, guid: 4793420ea43d1814da68fcfc012bce46, type: 3}
   - {fileID: 8300000, guid: 0fb0cc83b416cbd40a3a9c4374472b49, type: 3}
