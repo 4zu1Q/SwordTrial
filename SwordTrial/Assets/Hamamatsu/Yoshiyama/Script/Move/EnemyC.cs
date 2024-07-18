@@ -96,6 +96,9 @@ public class EnemyC : MonoBehaviour
     //アニメーションを中断したかどうか
     private bool m_animInterrupt = false;
 
+    //ポーズ画面を開いているときに処理を止める
+    public bool m_isPause = true;
+
 
     void Start()
     {
@@ -106,12 +109,14 @@ public class EnemyC : MonoBehaviour
 
     void Update()
     {
+        if (!m_isPause) return;
+
         GetAttackKinds();
     }
 
     private void FixedUpdate()
     {
-        if (!m_isAlive) return;
+        if (!m_isAlive || !m_isPause) return;
 
         if (m_currentHP <= m_minHP)
         {
