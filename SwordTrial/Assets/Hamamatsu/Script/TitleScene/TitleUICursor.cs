@@ -57,13 +57,12 @@ public class TitleUICursor : UIOperationBase
             m_soundImgObj.SetActive(true);
             m_isOptionOpen = true;
             //説明や音声の調整とかできるようなウィンドウを展開
-            Debug.Log("説明書開く");
         }
         else if (m_isPress && m_selectNum == (int)SelectNum.kEnd)
         {
             //ゲーム終了させる
-            //End();
-            Debug.Log("ゲーム終了");
+            EndGame();
+            //Debug.Log("ゲーム終了");
         }
     }
     /// <summary>
@@ -107,5 +106,13 @@ public class TitleUICursor : UIOperationBase
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// ゲームを終了するときの処理
+    /// </summary>
+    private void EndGame()
+    {
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 }
