@@ -222,6 +222,7 @@ public class EnemyC : MonoBehaviour
             Debug.Log("’Ê‚é");
             m_anim.SetTrigger(m_walk);
             m_animInterrupt = true;
+            m_isActive = false;
         }
 
         
