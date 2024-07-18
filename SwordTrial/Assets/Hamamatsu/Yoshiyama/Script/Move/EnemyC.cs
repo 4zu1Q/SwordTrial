@@ -92,7 +92,8 @@ public class EnemyC : MonoBehaviour
 
     //-----------------------------------------------------------
 
-    public GameObject dfsf;
+
+
 
     void Start()
     {
@@ -157,7 +158,7 @@ public class EnemyC : MonoBehaviour
 
         //m_slider = GetComponentInChildren<Slider>();
 
-        //m_slider.value = m_currentHP;
+        m_slider.value = m_currentHP;
     }
 
     /// <summary>
@@ -255,7 +256,7 @@ public class EnemyC : MonoBehaviour
 
         m_currentHP -= 10;
 
-        //m_slider.value = m_currentHP;
+        m_slider.value = m_currentHP;
     }
 
     /// <summary>
@@ -312,28 +313,24 @@ public class EnemyC : MonoBehaviour
         // í èÌçUåÇ
         if (m_attackKinds == (int)AttackKinds.kNormalAttack)
         {
-            Debug.Log("í èÌçUåÇ");
             m_isAttackAnimation1 = true;
             m_currentAttackState[(int)AttackKinds.kNormalAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kChargeAttack)
         {
-            Debug.Log("ó≠ÇﬂçUåÇ");
             m_isAttackAnimation2 = true;
             m_currentAttackState[(int)AttackKinds.kChargeAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kComboAttack)
         {
-            Debug.Log("òAë±çUåÇ");
             m_isAttackAnimation3 = true;
             m_currentAttackState[(int)AttackKinds.kComboAttack] = true;
             m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kRotateAttack)
         {
-            Debug.Log("âÒì]çUåÇ");
             m_isAttackAnimation4 = true;
             m_currentAttackState[(int)AttackKinds.kRotateAttack] = true;
             m_attackInterval = 400;
@@ -345,7 +342,6 @@ public class EnemyC : MonoBehaviour
     /// </summary>
     private void AttackActive()
     {
-        //Debug.Log(m_isActive);  
         m_attackCol.SetActive(m_isActive);
     }
 
@@ -471,7 +467,6 @@ public class EnemyC : MonoBehaviour
         if (m_currentAttackInterval == noActiveTime)
         {
             m_isActive = false;
-            Debug.Log("í ÇÈ");
         }
     }
     internal void AttackNumber(int a, string m_attack1)
