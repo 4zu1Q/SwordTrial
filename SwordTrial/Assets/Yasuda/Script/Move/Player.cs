@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     /*ステータス変数*/
-    [SerializeField] private int m_itemNum;       //アイテムの個数
+    [SerializeField] public int m_itemNum;       //アイテムの個数
     [SerializeField] private float m_speed;
     [SerializeField] private float m_acel;
     [SerializeField] public int m_hp;
@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     GameObject m_player;
     GameObject m_attack;
     GameObject m_gard;
+    public GameObject m_itemNumText;
     //Transform m_attack;
     //Transform m_gard;
 
@@ -56,8 +57,10 @@ public class Player : MonoBehaviour
 
     /*UI*/
     public Slider m_slider;
-    
+    Text m_text;
 
+    /*ポーズ用変数*/
+    public bool m_isPause;
 
     void Start()
     {
@@ -69,12 +72,9 @@ public class Player : MonoBehaviour
         m_attack = GameObject.Find("Attack");
         m_gard = GameObject.Find("Gard");
         m_slider.value = m_hp;
-        //m_itemNum = 3;
 
-        //m_speed = 5.0f;
-        //m_acel = 2.0f;
+        m_text = m_itemNumText.GetComponent<Text>();
 
-        
         m_isDash = false;
         m_isItem = false;
         m_isGard = false;
@@ -89,16 +89,23 @@ public class Player : MonoBehaviour
         m_attackTag = "PlayerAttack";
         m_gardTag = "PlayerGard";
 
-
+        m_isPause = true;
     }
 
     void FixedUpdate()
     {
+        
+        if (!m_isPause) return;
+        
+        m_text = m_itemNumText.GetComponent<Text>();
+        
+        m_text.text = "x" + m_itemNum;
+        
         //Vector3 attackAdd = new Vector3(0, 0, 1);
         //Vector3 gardAdd = new Vector3(0, 0, 0);
-
+        
         m_playerPosition = this.transform.position;
-
+        
         m_attackPosition = m_playerPosition;
         m_gardPosition = m_playerPosition;
 
@@ -144,7 +151,7 @@ public class Player : MonoBehaviour
 
         /*ボタン操作*/
         //回復アイテムが残っていた場合
-        if(m_itemNum > 0)
+        if (m_itemNum > 0)
         {
             //Bボタン
             if (Input.GetButtonDown("Bbutton") && m_hp < 100)
@@ -194,46 +201,20 @@ public class Player : MonoBehaviour
             }
         }
 
-        //Yボタン
-        //if (Input.GetButtonDown("Ybutton"))
-        //{
-        //    Debug.Log("ガード");
-        //    m_isGard = true;
-        //    SetTag(m_gardTag);
-        //    //Debug.Log(m_player.tag);
-
-        //}
-        //else
-        //{
-        //    m_isGard = false;
-        //    SetTag(m_attackTag);
-        //    //Debug.Log(m_player.tag);
-            
-        //}
-
-
-
-
-
-
-
         //Debug.Log(m_frame);
         Debug.Log(m_hp);
         //Debug.Log(m_hpNum);
+        
     }
 
     void Update()
     {
         //Debug.Log(m_hp);
-
-
-
+        if (!m_isPause) return;
 
         //HPがゼロになったら
-        if(m_hp <= 0)
+        if (m_hp <= 0)
         {
-            ////LoseSceneに移行
-            //SceneManager.LoadScene("SceneLose");
             Debug.Log("負け");
         }
 
@@ -241,21 +222,19 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.tag == "EnemyAttack")
+        if (!m_isPause) return;
+
+        if (collision.transform.tag == "EnemyAttack")
         {
             m_hp -= 10;
             m_slider.value = m_hp;//HPバーのUI変更
         }
 
-
     }
 
 
 
-    private void SetTag(string newTag)
-    {
-        m_player.tag = newTag;
-    }
+
 
 
 }
