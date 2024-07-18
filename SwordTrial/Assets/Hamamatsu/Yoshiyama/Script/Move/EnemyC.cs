@@ -296,9 +296,10 @@ public class EnemyC : MonoBehaviour
     /// </summary>
     public void GetAttackKinds()
     {
-        //m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
+        m_attackKinds = Random.Range((int)AttackKinds.kNormalAttack, (int)AttackKinds.kAttackMaxKinds);
 
-        m_attackKinds = (int)AttackKinds.kComboAttack;
+        // デバッグ用の攻撃パターン
+        //m_attackKinds = (int)AttackKinds.kRotateAttack;
     }
 
     /// <summary>
@@ -332,25 +333,25 @@ public class EnemyC : MonoBehaviour
         {
             m_isAttackAnimation1 = true;
             m_currentAttackState[(int)AttackKinds.kNormalAttack] = true;
-            m_attackInterval = 100;
+            m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kChargeAttack)
         {
             m_isAttackAnimation2 = true;
             m_currentAttackState[(int)AttackKinds.kChargeAttack] = true;
-            m_attackInterval = 100;
+            m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kComboAttack)
         {
             m_isAttackAnimation3 = true;
             m_currentAttackState[(int)AttackKinds.kComboAttack] = true;
-            m_attackInterval = 100;
+            m_attackInterval = 400;
         }
         else if (m_attackKinds == (int)AttackKinds.kRotateAttack)
         {
             m_isAttackAnimation4 = true;
             m_currentAttackState[(int)AttackKinds.kRotateAttack] = true;
-            m_attackInterval = 100;
+            m_attackInterval = 400;
         }
     }
 
@@ -380,10 +381,12 @@ public class EnemyC : MonoBehaviour
             if (m_frame == 120)
             {
                 m_anim.SetTrigger(m_attack1);
+                m_animInterrupt = false;
             }
             else if (m_frame == 140)
             {
                 m_anim.SetTrigger(m_walk);
+                m_animInterrupt = true;
             }
             else if (m_frame == 400)
             {
@@ -403,9 +406,11 @@ public class EnemyC : MonoBehaviour
             if (m_frame == 250)
             {
                 m_anim.SetTrigger(m_attack2);
+                m_animInterrupt = false;
             }
             else if (m_frame == 370)
             {
+                m_animInterrupt = true;
                 m_anim.SetTrigger(m_walk);
             }
             else if (m_frame == 400)
@@ -416,12 +421,9 @@ public class EnemyC : MonoBehaviour
         //連続攻撃
         else if (m_currentAttackState[(int)AttackKinds.kComboAttack])
         {
-            DebugAttack(100, 130, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.7f, 0.7f, 0.7f));
-            //DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
-            //DebugAttack(250, 300, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
-
-            
-
+            DebugAttack(260, 270, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.7f, 0.7f, 0.7f));
+            DebugAttack(280, 290, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
+            DebugAttack(330, 340, new Vector3(0.0f, 0.1f, 0.06f), new Vector3(0.5f, 0.5f, 0.5f));
             m_frame++;
             if (m_frame == 250)
             {
@@ -430,7 +432,6 @@ public class EnemyC : MonoBehaviour
             }
             else if (m_frame == 370)
             {
-                Debug.Log("通る");
                 m_animInterrupt = true;
                 m_anim.SetTrigger(m_walk);
             }
@@ -453,14 +454,16 @@ public class EnemyC : MonoBehaviour
                 m_currentAttackState[(int)AttackKinds.kRotateAttack] = false;
                 m_isAttackAnimation4 = false;
             }
-            DebugAttack(200, 300, new Vector3(0.0f, 0.1f, 0.0f), new Vector3(2.0f, 2.0f, 2.0f));
+            DebugAttack(260, 330, new Vector3(0.0f, 0.1f, 0.0f), new Vector3(2.0f, 2.0f, 2.0f));
             m_frame++;
             if (m_frame == 230)
             {
                 m_anim.SetTrigger(m_attack4);
+                m_animInterrupt = false;
             }
             else if (m_frame == 350)
             {
+                m_animInterrupt = true;
                 m_anim.SetTrigger(m_walk);
             }
             else if (m_frame == 400)
@@ -486,7 +489,7 @@ public class EnemyC : MonoBehaviour
         if (m_currentAttackInterval == isActiveTime)
         {
             m_isActive = true;
-
+            Debug.Log("tooru ");
         }
 
         m_attackCol.transform.localPosition = position;
