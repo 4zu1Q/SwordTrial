@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 605884638006699842}
   - component: {fileID: 3429888227765033764}
   - component: {fileID: 8635892963699316779}
-  - component: {fileID: 2820151956716088632}
   m_Layer: 5
   m_Name: HPUI
   m_TagString: Untagged
@@ -116,21 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b1aa2977ae4b444b5ed17d98a8f245, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2820151956716088632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 512191863393068562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78709e35e842576469705eaa6e77de01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_maxHP: 100
-  HPUI: {fileID: 512191863393068562}
-  m_slider: {fileID: 8968123533475238947}
 --- !u!1 &1197284807731411108
 GameObject:
   m_ObjectHideFlags: 0
