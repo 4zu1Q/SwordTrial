@@ -1,11 +1,12 @@
 //“G‚Ìˆ—
 
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class EnemyC : MonoBehaviour
 {
-    
+    /*UI*/
+    public Slider m_slider;
 
     //UŒ‚‚Ìí—Ş
     public enum AttackKinds
@@ -91,8 +92,7 @@ public class EnemyC : MonoBehaviour
 
     //-----------------------------------------------------------
 
-    /*UI*/
-    private Slider m_slider;
+    public GameObject dfsf;
 
     void Start()
     {
@@ -155,9 +155,9 @@ public class EnemyC : MonoBehaviour
 
         m_isActive = false;
 
-        m_slider = GameObject.Find("HPBar").GetComponent<Slider>();
+        //m_slider = GetComponentInChildren<Slider>();
 
-        m_slider.value = m_currentHP;
+        //m_slider.value = m_currentHP;
     }
 
     /// <summary>
@@ -255,7 +255,7 @@ public class EnemyC : MonoBehaviour
 
         m_currentHP -= 10;
 
-        m_slider.value = m_currentHP;
+        //m_slider.value = m_currentHP;
     }
 
     /// <summary>
