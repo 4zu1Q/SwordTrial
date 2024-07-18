@@ -246,10 +246,17 @@ public class Player : MonoBehaviour
             m_hp -= 10;
             m_slider.value = m_hp;//HPバーのUI変更
         }
-
-
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.tag == "EnemyAttack")
+        {
+            Debug.Log("攻撃");
+            m_hp -= 10;
+            m_slider.value = m_hp;//HPバーのUI変更
+        }
+    }
 
 
     private void SetTag(string newTag)
