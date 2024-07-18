@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class EnemyC : MonoBehaviour
 {
+    
+
     //UŒ‚‚Ìí—Ş
     public enum AttackKinds
     {
@@ -89,6 +91,8 @@ public class EnemyC : MonoBehaviour
 
     //-----------------------------------------------------------
 
+    /*UI*/
+    private Slider m_slider;
 
     void Start()
     {
@@ -132,6 +136,7 @@ public class EnemyC : MonoBehaviour
         //TODO:ğŒ•ª‚ª‰¼‚È‚Ì‚ÅƒAƒ‹ƒtƒ@‚Å•ÏX‚·‚é
         if (other.tag == "PlayerAttack")
         {
+            Debug.Log("’Ê‚é");
             ReceiveDamage();
         }
     }
@@ -149,6 +154,10 @@ public class EnemyC : MonoBehaviour
         m_normalAttack = new EnemyNormalAttack();
 
         m_isActive = false;
+
+        m_slider = GameObject.Find("HPBar").GetComponent<Slider>();
+
+        m_slider.value = m_currentHP;
     }
 
     /// <summary>
@@ -245,6 +254,8 @@ public class EnemyC : MonoBehaviour
         if (!m_isAlive) return;
 
         m_currentHP -= 10;
+
+        m_slider.value = m_currentHP;
     }
 
     /// <summary>
@@ -334,7 +345,7 @@ public class EnemyC : MonoBehaviour
     /// </summary>
     private void AttackActive()
     {
-        Debug.Log(m_isActive);  
+        //Debug.Log(m_isActive);  
         m_attackCol.SetActive(m_isActive);
     }
 
@@ -364,7 +375,7 @@ public class EnemyC : MonoBehaviour
             {
                 m_frame = 0;
             }
-            Debug.Log("’ÊíUŒ‚");
+            //Debug.Log("’ÊíUŒ‚");
         }
         else if (m_currentAttackState[(int)AttackKinds.kChargeAttack])
         {
@@ -387,7 +398,7 @@ public class EnemyC : MonoBehaviour
             {
                 m_frame = 0;
             }
-            Debug.Log("—­‚ßUŒ‚");
+            //Debug.Log("—­‚ßUŒ‚");
         }
         else if (m_currentAttackState[(int)AttackKinds.kComboAttack])
         {
@@ -410,7 +421,7 @@ public class EnemyC : MonoBehaviour
             {
                 m_frame = 0;
             }
-            Debug.Log("˜A‘±UŒ‚");
+            //Debug.Log("˜A‘±UŒ‚");
         }
         else if (m_currentAttackState[(int)AttackKinds.kRotateAttack])
         {
@@ -434,7 +445,7 @@ public class EnemyC : MonoBehaviour
                 m_frame = 0;
             }
 
-            Debug.Log("‰ñ“]UŒ‚");
+            //Debug.Log("‰ñ“]UŒ‚");
         }
 
     }
@@ -442,9 +453,10 @@ public class EnemyC : MonoBehaviour
     /// <summary>
     /// ƒfƒoƒbƒO—p“–‚½‚è”»’è
     /// </summary>
-    /// <param name="isActiveTime"></param>
-    /// <param name="noActiveTime"></param>
-    /// <param name="scale"></param>
+    /// <param name="isActiveTime">“–‚½‚è”»’è¶¬</param>
+    /// <param name="noActiveTime">“–‚½‚è”»’èÁ‹</param>
+    /// <param name="position">”­¶ˆÊ’u</param>
+    /// <param name="scale">‘å‚«‚³</param>
     private void DebugAttack(int isActiveTime, int noActiveTime, Vector3 position, Vector3 scale)
     {
         if (m_currentAttackInterval == isActiveTime)
