@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; //ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì‚½‚ß
+using UnityEngine.SceneManagement; //ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®ãŸã‚
 using UnityEngine.UI;
 
 
 
 public class Player : MonoBehaviour
 {
-    /*ƒXƒe[ƒ^ƒX•Ï”*/
-    [SerializeField] public int m_itemNum;       //ƒAƒCƒeƒ€‚ÌŒÂ”
+    /*ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹å¤‰æ•°*/
+    [SerializeField] public int m_itemNum;       //ã‚¢ã‚¤ãƒ†ãƒ ã®å€‹æ•°
     [SerializeField] private float m_speed;
     [SerializeField] private float m_acel;
     [SerializeField] public int m_hp;
 
-    /*ƒIƒuƒWƒFƒNƒg•Ï”*/
+    /*ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå¤‰æ•°*/
     GameObject m_boss;
     GameObject m_player;
     GameObject m_attack;
@@ -23,25 +23,25 @@ public class Player : MonoBehaviour
     //Transform m_attack;
     //Transform m_gard;
 
-    /*ƒIƒuƒWƒFƒNƒg‚ÌÀ•W•Ï”*/
+    /*ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åº§æ¨™å¤‰æ•°*/
     private Vector3 m_playerPosition;
     private Vector3 m_attackPosition;
     private Vector3 m_gardPosition;
 
-    /*ƒ^ƒO•Ï”*/
+    /*ã‚¿ã‚°å¤‰æ•°*/
     private string m_attackTag;
     private string m_gardTag;
 
-    /*ƒtƒŒ[ƒ€•Ï”*/
+    /*ãƒ•ãƒ¬ãƒ¼ãƒ å¤‰æ•°*/
     [SerializeField] private int m_itemFrame;
     [SerializeField] private int m_attackFrame;
 
-    /*’è”*/
+    /*å®šæ•°*/
     [SerializeField] private int kItemFrameCountNum;
     [SerializeField] private int kAttackFrameCountNum;
     [SerializeField] private int kAttackPower;
 
-    /*ˆÚ“®•Ï”*/
+    /*ç§»å‹•å¤‰æ•°*/
     private float m_inputHorizontal;
     private float m_inputVertical;
     private Rigidbody m_rb;
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     private bool m_isAttack;
     private bool m_isGard;
 
-    /*ƒJƒƒ‰‚Ì•Ï”*/
+    /*ã‚«ãƒ¡ãƒ©ã®å¤‰æ•°*/
     private Vector3 m_cameraForward;
     private Vector3 m_moveForward;
 
@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     public Slider m_slider;
     Text m_text;
 
-    /*ƒ|[ƒY—p•Ï”*/
+    /*ãƒãƒ¼ã‚ºç”¨å¤‰æ•°*/
     public bool m_isPause;
 
     void Start()
@@ -110,23 +110,23 @@ public class Player : MonoBehaviour
         m_gardPosition = m_playerPosition;
 
 
-        /*ˆÚ“®ˆ—*/
+        /*ç§»å‹•å‡¦ç†*/
         m_inputHorizontal = Input.GetAxis("Horizontal");
         m_inputVertical = Input.GetAxis("Vertical");
 
-        // ƒJƒƒ‰‚Ì•ûŒü‚©‚çAX-Z•½–Ê‚Ì’PˆÊƒxƒNƒgƒ‹‚ðŽæ“¾
+        // ã‚«ãƒ¡ãƒ©ã®æ–¹å‘ã‹ã‚‰ã€X-Zå¹³é¢ã®å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
         Vector3 m_cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
 
-        // •ûŒüƒL[‚Ì“ü—Í’l‚ÆƒJƒƒ‰‚ÌŒü‚«‚©‚çAˆÚ“®•ûŒü‚ðŒˆ’è
+        // æ–¹å‘ã‚­ãƒ¼ã®å…¥åŠ›å€¤ã¨ã‚«ãƒ¡ãƒ©ã®å‘ãã‹ã‚‰ã€ç§»å‹•æ–¹å‘ã‚’æ±ºå®š
         Vector3 m_moveForward = m_cameraForward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
 
         if (!m_isGard && !m_isAttack)
         {
-            // ˆÚ“®•ûŒü‚ÉƒXƒs[ƒh‚ðŠ|‚¯‚éB
+            // ç§»å‹•æ–¹å‘ã«ã‚¹ãƒ”ãƒ¼ãƒ‰ã‚’æŽ›ã‘ã‚‹ã€‚
             m_rb.velocity = m_moveForward * m_speed;
 
-            //Aƒ{ƒ^ƒ“
-            //‰Ÿ‚µ‚Ä‚¢‚éŠÔ‚Íƒ_ƒbƒVƒ…‚·‚é
+            //Aãƒœã‚¿ãƒ³
+            //æŠ¼ã—ã¦ã„ã‚‹é–“ã¯ãƒ€ãƒƒã‚·ãƒ¥ã™ã‚‹
             if (Input.GetButton("Abutton") && !m_isDash)
             {
 
@@ -134,11 +134,11 @@ public class Player : MonoBehaviour
             }
         }
 
-        //Debug.Log("‘¬“xƒxƒNƒgƒ‹: " + m_rb.velocity);
+        //Debug.Log("é€Ÿåº¦ãƒ™ã‚¯ãƒˆãƒ«: " + m_rb.velocity);
 
         if (!m_isGard && !m_isAttack)
         {
-            // ƒLƒƒƒ‰ƒNƒ^[‚ÌŒü‚«‚ðis•ûŒü‚É
+            // ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®å‘ãã‚’é€²è¡Œæ–¹å‘ã«
             if (m_moveForward != Vector3.zero)
             {
                 transform.rotation = Quaternion.LookRotation(m_moveForward);
@@ -149,18 +149,18 @@ public class Player : MonoBehaviour
 
 
 
-        /*ƒ{ƒ^ƒ“‘€ì*/
-        //‰ñ•œƒAƒCƒeƒ€‚ªŽc‚Á‚Ä‚¢‚½ê‡
+        /*ãƒœã‚¿ãƒ³æ“ä½œ*/
+        //å›žå¾©ã‚¢ã‚¤ãƒ†ãƒ ãŒæ®‹ã£ã¦ã„ãŸå ´åˆ
         if (m_itemNum > 0)
         {
-            //Bƒ{ƒ^ƒ“
+            //Bãƒœã‚¿ãƒ³
             if (Input.GetButtonDown("Bbutton") && m_hp < 100)
             {
                 m_isItem = true;
             }
         }
 
-        //HP‚ªŒ¸‚Á‚Ä‚¢‚½ê‡
+        //HPãŒæ¸›ã£ã¦ã„ãŸå ´åˆ
         if (m_isItem)
         {
             m_itemFrame++;
@@ -169,7 +169,7 @@ public class Player : MonoBehaviour
                 m_isItem = false;
                 m_itemFrame = 0;
                 m_hp += 10;
-                m_slider.value = m_hp;//HPƒo[‚ÌUI•ÏX
+                m_slider.value = m_hp;//HPãƒãƒ¼ã®UIå¤‰æ›´
 
                 m_itemNum--;
 
@@ -177,14 +177,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        //Xƒ{ƒ^ƒ“
+        //Xãƒœã‚¿ãƒ³
         if (Input.GetButton("Xbutton"))
         {
             m_isAttack = true;
         }
 
 
-        //“–‚½‚è”»’è‚ð•\Ž¦
+        //å½“ãŸã‚Šåˆ¤å®šã‚’è¡¨ç¤º
         if (m_isAttack)
         {
             m_attackFrame++;
@@ -214,9 +214,24 @@ public class Player : MonoBehaviour
         if (collision.transform.tag == "EnemyAttack")
         {
             m_hp -= 10;
-            m_slider.value = m_hp;//HPƒo[‚ÌUI•ÏX
+            m_slider.value = m_hp;//HPãƒãƒ¼ã®UIå¤‰æ›´
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.transform.tag == "EnemyAttack")
+        {
+            Debug.Log("æ”»æ’ƒ");
+            m_hp -= 10;
+            m_slider.value = m_hp;//HPãƒãƒ¼ã®UIå¤‰æ›´
+        }
+    }
+
+
+    private void SetTag(string newTag)
+    {
+        m_player.tag = newTag;
     }
 
 
