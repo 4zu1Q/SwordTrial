@@ -71,6 +71,7 @@ public class MainSceneTransition : SceneTransitionBase
     {
         if (m_Ui.m_pauseNum[(int)PauseUI.SelectNum.kTitleBack])
         {
+            Debug.Log("‚ ");
             m_fade.m_isFading = false;
             GetNextScene((int)SceneKinds.kTitleScene);
         }

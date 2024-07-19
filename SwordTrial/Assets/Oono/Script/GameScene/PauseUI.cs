@@ -35,6 +35,11 @@ public class PauseUI : UIOperationBase
     // Update is called once per frame
     void Update()
     {
+        if (!m_pauseMenu.GetMenu())
+        {
+            PauseImgInit();
+            return;
+        }
         UpdateFunction();
         PauseUpdate();
         //SlectUIColorChenge(m_isPress);
@@ -63,10 +68,7 @@ public class PauseUI : UIOperationBase
             m_pauseNum[(int)SelectNum.kTitleBack] = true;
             //Debug.Log("説明書開く");
         }
-        if(!m_pauseMenu.GetMenu())
-        {
-            PauseImgInit();
-        }
+
     }
 
     /// <summary>
@@ -102,6 +104,8 @@ public class PauseUI : UIOperationBase
         {
             m_pauseImage = m_defaultPauseImage;
             m_isPauseOpen = false;
+            m_selectNum = 0;
+            ResetCursor();
         }
     }
 }

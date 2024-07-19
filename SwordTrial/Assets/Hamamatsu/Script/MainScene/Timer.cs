@@ -3,19 +3,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class Timer : TimeBase
 {
     // 1分の長さ
     private const float m_oneMinute = 60;
 
-    //カウントダウン分
-    [SerializeField] public static int m_countDownMinutes = 3;
-    //カウントダウン秒(float)
-    [SerializeField] public float m_countDownSeconds = 0;
-    //カウントダウン秒(int)
-    public static int m_countIntSeconds = 0;
-    //現在の時間を表示するテキスト
-    private Text m_timerText;
     //メニューの処理
     private PauseMenu m_menu;
 
@@ -25,7 +17,6 @@ public class Timer : MonoBehaviour
     void Start()
     {
         m_countDownMinutes = 3;
-        m_timerText = GameObject.Find("TimerText").GetComponent<Text>();
         m_menu = GetComponent<PauseMenu>();
     }
 
@@ -38,16 +29,10 @@ public class Timer : MonoBehaviour
 
         if (m_countDownMinutes <= 0 && m_countDownSeconds <= 0)
         {
-            m_timerText.text = string.Format("Time 00：00");
-
             //カウントダウン終了
             m_finishCountDown = true;
         }
-        else 
-        {
-            m_timerText.text = string.Format("Time " + m_countDownMinutes + ":" + m_countIntSeconds);
-        }
-        
+        TimeImgView();
     }
 
     /// <summary>

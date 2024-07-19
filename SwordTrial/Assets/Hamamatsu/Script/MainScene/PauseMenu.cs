@@ -8,6 +8,10 @@ public class PauseMenu : MonoBehaviour
     private bool m_openMenu = false;
     //メニューオブジェクト
     [SerializeField] private GameObject m_menuObject;
+    //プレイヤーの取得
+    [SerializeField] private Player m_player;
+    //エネミーの取得
+    [SerializeField] private EnemyC m_enemy;
 
     void Start()
     {
@@ -49,6 +53,16 @@ public class PauseMenu : MonoBehaviour
                 m_openMenu = true;
             }
         }
+        PauseFlag();
+    }
+    /// <summary>
+    /// プレイヤーとエネミーの動きの停止
+    /// </summary>
+    private void PauseFlag()
+    {
+        var pause = !m_openMenu;
+        m_player.m_isPause = pause;
+        m_enemy.m_isPause = pause;
     }
 
     private void DrawMenu()
