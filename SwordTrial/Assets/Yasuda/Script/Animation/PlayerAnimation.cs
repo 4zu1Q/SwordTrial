@@ -15,6 +15,8 @@ public class PlayerAnimation : MonoBehaviour
     //private string m_win = "isWin";
     //private string m_lose = "isLose";
 
+    public bool m_isPause;
+
     //アニメーションのトリガー
     private string m_idle = "Idle";         //待機
     private string m_run = "Run";           //走る
@@ -52,17 +54,22 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         m_anim = GetComponent<Animator>();
+        m_isPause = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!m_isPause) return;
+
         GamePadInputUpdate();
         AnimTransitionUpdate();
     }
 
     private void FixedUpdate()
     {
+        if (!m_isPause) return;
+
         m_currentFlameNum++;
 
         AnimEnd(m_currentAnim);
@@ -73,6 +80,8 @@ public class PlayerAnimation : MonoBehaviour
     /// </summary>
     private void AnimEnd(string anim)
     {
+        if (!m_isPause) return;
+
         if (m_currentFlameNum == m_changeFlameNum)
         {
             m_anim.SetBool(anim, false);
