@@ -2135,7 +2135,7 @@ PrefabInstance:
     - target: {fileID: 2724886152455379968, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: a6658e4e542088b458614e5796a57fc0, type: 3}
     - target: {fileID: 2813542641550333704, guid: d0887a54f3fe54a4a823d91c389dbdab, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -2849,7 +2849,7 @@ SceneRoots:
   - {fileID: 708495181}
   - {fileID: 1878301352}
   - {fileID: 1098732773}
-  - {fileID: 1829696757}
   - {fileID: 459155558}
   - {fileID: 661651976}
   - {fileID: 1216407074}
+  - {fileID: 1829696757}
