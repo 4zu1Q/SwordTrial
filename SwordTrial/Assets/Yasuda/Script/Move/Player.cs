@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement; //シーン切り替えのため
 using UnityEngine.UI;
@@ -61,6 +62,13 @@ public class Player : MonoBehaviour
 
     /*ポーズ用変数*/
     public bool m_isPause;
+
+    /*SE用変数*/
+    public AudioClip m_attackSe;
+    public AudioClip m_healSe;
+
+    AudioSource m_audioSource;
+
 
     void Start()
     {
@@ -170,7 +178,7 @@ public class Player : MonoBehaviour
                 m_itemFrame = 0;
                 m_hp += 10;
                 m_slider.value = m_hp;//HPバーのUI変更
-
+                m_audioSource.PlayOneShot(m_healSe);
                 m_itemNum--;
 
 
@@ -181,6 +189,8 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Xbutton"))
         {
             m_isAttack = true;
+            m_audioSource.PlayOneShot(m_attackSe);
+
         }
 
 

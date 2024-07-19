@@ -345,6 +345,8 @@ MonoBehaviour:
   kAttackPower: 0
   m_slider: {fileID: 1468804251}
   m_isPause: 0
+  m_attackSe: {fileID: 0}
+  m_healSe: {fileID: 0}
 --- !u!4 &107715452 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d792b12b30374d143bb0c7ca8ea286f3, type: 3}
@@ -684,6 +686,8 @@ MonoBehaviour:
   kAttackPower: 0
   m_slider: {fileID: 1468804251}
   m_isPause: 0
+  m_attackSe: {fileID: 0}
+  m_healSe: {fileID: 0}
 --- !u!54 &154152295
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2116,6 +2120,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_healSe
+      value: 
+      objectReference: {fileID: 8300000, guid: 2fc3383655a7d8a47add5e47a625c59e, type: 3}
+    - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_slider
       value: 
       objectReference: {fileID: 1468804251}
@@ -2123,6 +2131,10 @@ PrefabInstance:
       propertyPath: m_itemNum
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_attackSe
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ed4423c2be38214ea2faed622c2f568, type: 3}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kAttackPower
       value: 10
@@ -2306,6 +2318,8 @@ MonoBehaviour:
   kAttackPower: 0
   m_slider: {fileID: 0}
   m_isPause: 0
+  m_attackSe: {fileID: 0}
+  m_healSe: {fileID: 0}
 --- !u!54 &2122581317
 Rigidbody:
   m_ObjectHideFlags: 0
