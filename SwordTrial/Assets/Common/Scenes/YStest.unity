@@ -2176,6 +2176,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 799605284921249749, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1317279671536957721, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20.12
@@ -2227,7 +2231,7 @@ PrefabInstance:
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_healSe
       value: 
-      objectReference: {fileID: 8300000, guid: 2fc3383655a7d8a47add5e47a625c59e, type: 3}
+      objectReference: {fileID: 8300000, guid: 894fc22c68b2a1542958e9c22fca2642, type: 3}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_slider
       value: 
@@ -2243,7 +2247,7 @@ PrefabInstance:
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_damageSe
       value: 
-      objectReference: {fileID: 8300000, guid: 86aaede2a8fd02d4598cb7d258937755, type: 3}
+      objectReference: {fileID: 8300000, guid: 81b4b0c1cf8ce014b905156eabba4a95, type: 3}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kAttackPower
       value: 10
