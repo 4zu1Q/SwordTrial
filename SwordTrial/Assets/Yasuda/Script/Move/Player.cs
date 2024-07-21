@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement; //シーン切り替えのため
 using UnityEngine.UI;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     /*定数*/
     [SerializeField] private int kItemFrameCountNum;
     [SerializeField] private int kAttackFrameCountNum;
+    [SerializeField] private int kAttackSeNum;
     [SerializeField] private int kAttackPower;
 
     /*移動変数*/
@@ -61,6 +63,14 @@ public class Player : MonoBehaviour
 
     /*ポーズ用変数*/
     public bool m_isPause;
+
+    /*SE用変数*/
+    public AudioClip m_attackSe;
+    public AudioClip m_healSe;
+    public AudioClip m_damageSe;
+
+    AudioSource m_audioSource;
+
 
     void Start()
     {
@@ -90,6 +100,9 @@ public class Player : MonoBehaviour
         m_gardTag = "PlayerGard";
 
         m_isPause = true;
+
+        m_audioSource = GetComponent<AudioSource>();
+
     }
 
     void FixedUpdate()
@@ -154,7 +167,7 @@ public class Player : MonoBehaviour
         if (m_itemNum > 0)
         {
             //Bボタン
-            if (Input.GetButtonDown("Bbutton") && m_hp < 100)
+            if (Input.GetButton("Bbutton") && m_hp < 100)
             {
                 m_isItem = true;
             }
@@ -170,7 +183,7 @@ public class Player : MonoBehaviour
                 m_itemFrame = 0;
                 m_hp += 10;
                 m_slider.value = m_hp;//HPバーのUI変更
-
+                m_audioSource.PlayOneShot(m_healSe);
                 m_itemNum--;
 
 
@@ -181,16 +194,23 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Xbutton"))
         {
             m_isAttack = true;
+
         }
 
 
         //当たり判定を表示
         if (m_isAttack)
         {
+
             m_attackFrame++;
             //m_attack.transform.position = m_attackPosition;
 
             m_attack.gameObject.SetActive(true);
+
+            if(m_attackFrame == kAttackSeNum)
+            {
+                m_audioSource.PlayOneShot(m_attackSe);
+            }
 
             if (m_attackFrame >= kAttackFrameCountNum)
             {
@@ -215,6 +235,7 @@ public class Player : MonoBehaviour
         {
             m_hp -= 10;
             m_slider.value = m_hp;//HPバーのUI変更
+            m_audioSource.PlayOneShot(m_damageSe);
         }
     }
 
