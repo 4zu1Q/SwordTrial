@@ -5638,6 +5638,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 954195d2dac6f85469d2d331c233fb4e, type: 2}
+    - target: {fileID: 799605284921249749, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1216339302118472718, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -5760,7 +5764,7 @@ PrefabInstance:
       objectReference: {fileID: 259258462}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kItemFrameCountNum
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kAttackFrameCountNum
