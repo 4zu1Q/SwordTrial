@@ -1397,6 +1397,7 @@ GameObject:
   - component: {fileID: 1098732774}
   - component: {fileID: 1098732775}
   - component: {fileID: 1098732776}
+  - component: {fileID: 1098732777}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1483,6 +1484,18 @@ MonoBehaviour:
   - {fileID: 545021174}
   - {fileID: 545021173}
   - {fileID: 545021171}
+--- !u!114 &1098732777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1098732770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22e9989659a9a644a5cdd72a31eec10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1176890619
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2312,7 +2325,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96

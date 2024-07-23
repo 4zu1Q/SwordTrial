@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 2
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -2323,6 +2323,7 @@ GameObject:
   - component: {fileID: 263368888}
   - component: {fileID: 263368890}
   - component: {fileID: 263368889}
+  - component: {fileID: 263368891}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2425,6 +2426,18 @@ MonoBehaviour:
   m_pauseImage: {fileID: 0}
   m_defaultPauseImage: {fileID: 0}
   m_pauseNum: 000000
+--- !u!114 &263368891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263368885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22e9989659a9a644a5cdd72a31eec10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &263900386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3899520030807063256, guid: e7031235c6596384ab7253cc7b268266, type: 3}
@@ -3947,7 +3960,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 453, y: 434}
+  m_AnchoredPosition: {x: 397, y: 434}
   m_SizeDelta: {x: 231, y: 79}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432267605
