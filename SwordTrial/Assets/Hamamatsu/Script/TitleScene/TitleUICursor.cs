@@ -113,6 +113,10 @@ public class TitleUICursor : UIOperationBase
     /// </summary>
     private void EndGame()
     {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
