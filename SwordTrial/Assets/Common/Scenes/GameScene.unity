@@ -5803,7 +5803,7 @@ PrefabInstance:
       objectReference: {fileID: 607207717}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_itemNum
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_attackSe
@@ -5823,7 +5823,7 @@ PrefabInstance:
       objectReference: {fileID: 259258462}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kItemFrameCountNum
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kAttackFrameCountNum
