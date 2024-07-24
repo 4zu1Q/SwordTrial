@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     /*オブジェクト変数*/
     GameObject m_boss;
     GameObject m_player;
-    GameObject m_attack;
+    [SerializeField] private GameObject m_attack;
     public GameObject m_itemNumText;
     //Transform m_attack;
 
@@ -75,7 +75,6 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
-        m_attack = GameObject.Find("Attack");
         //m_player.transform.Find("Attack");
 
         m_slider.value = m_hp;
