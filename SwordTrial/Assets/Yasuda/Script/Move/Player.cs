@@ -19,10 +19,8 @@ public class Player : MonoBehaviour
     GameObject m_boss;
     GameObject m_player;
     GameObject m_attack;
-    GameObject m_gard;
     public GameObject m_itemNumText;
     //Transform m_attack;
-    //Transform m_gard;
 
     /*オブジェクトの座標変数*/
     private Vector3 m_playerPosition;
@@ -77,10 +75,9 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
-        //m_player.transform.Find("Attack");
-        //m_player.transform.Find("Gard");
         m_attack = GameObject.Find("Attack");
-        m_gard = GameObject.Find("Gard");
+        //m_player.transform.Find("Attack");
+
         m_slider.value = m_hp;
 
         //m_text = m_itemNumText.GetComponent<Text>();
@@ -103,6 +100,8 @@ public class Player : MonoBehaviour
 
         m_audioSource = GetComponent<AudioSource>();
 
+        m_attack.SetActive(false);
+
     }
 
     void FixedUpdate()
@@ -113,9 +112,6 @@ public class Player : MonoBehaviour
         m_text = m_itemNumText.GetComponent<Text>();
         
         m_text.text = "x" + m_itemNum;
-        
-        //Vector3 attackAdd = new Vector3(0, 0, 1);
-        //Vector3 gardAdd = new Vector3(0, 0, 0);
         
         m_playerPosition = this.transform.position;
         
@@ -167,7 +163,7 @@ public class Player : MonoBehaviour
         if (m_itemNum > 0)
         {
             //Bボタン
-            if (Input.GetButton("Bbutton") && m_hp < 100)
+            if (Input.GetButtonDown("Bbutton") && m_hp < 100)
             {
                 m_isItem = true;
             }
@@ -191,7 +187,7 @@ public class Player : MonoBehaviour
         }
 
         //Xボタン
-        if (Input.GetButton("Xbutton"))
+        if (Input.GetButtonDown("Xbutton"))
         {
             m_isAttack = true;
 
@@ -203,9 +199,8 @@ public class Player : MonoBehaviour
         {
 
             m_attackFrame++;
-            //m_attack.transform.position = m_attackPosition;
 
-            m_attack.gameObject.SetActive(true);
+            m_attack.SetActive(true);
 
             if(m_attackFrame == kAttackSeNum)
             {
@@ -214,17 +209,16 @@ public class Player : MonoBehaviour
 
             if (m_attackFrame >= kAttackFrameCountNum)
             {
+
+                //Debug.Assert(m_attack == null);
+
                 m_attackFrame = 0;
                 m_isAttack = false;
-                m_attack.gameObject.SetActive(false);
-
+                m_attack.SetActive(false);
             }
         }
 
-        //Debug.Log(m_frame);
         Debug.Log(m_hp);
-        //Debug.Log(m_hpNum);
-        
     }
 
     private void OnCollisionEnter(Collision collision)

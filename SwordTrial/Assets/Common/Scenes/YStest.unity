@@ -2262,7 +2262,7 @@ PrefabInstance:
       objectReference: {fileID: 1195144789}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kItemFrameCountNum
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: kAttackFrameCountNum
