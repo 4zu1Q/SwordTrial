@@ -113,6 +113,17 @@ public class Player : MonoBehaviour
             m_isAttack = true;
 
         }
+
+        /*ボタン操作*/
+        //回復アイテムが残っていた場合
+        if (m_itemNum > 0)
+        {
+            //Bボタン
+            if (Input.GetButtonDown("Bbutton") && m_hp < 100)
+            {
+                m_isItem = true;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -169,16 +180,7 @@ public class Player : MonoBehaviour
 
 
 
-        /*ボタン操作*/
-        //回復アイテムが残っていた場合
-        if (m_itemNum > 0)
-        {
-            //Bボタン
-            if (Input.GetButtonDown("Bbutton") && m_hp < 100)
-            {
-                m_isItem = true;
-            }
-        }
+        
 
         //HPが減っていた場合
         if (m_isItem)
@@ -254,9 +256,9 @@ public class Player : MonoBehaviour
     {
         if(other.transform.tag == "EnemyAttack")
         {
-            Debug.Log("攻撃");
             m_hp -= 10;
             m_slider.value = m_hp;//HPバーのUI変更
+            m_audioSource.PlayOneShot(m_damageSe);
         }
     }
 
