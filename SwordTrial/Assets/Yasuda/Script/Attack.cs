@@ -7,7 +7,7 @@ public class Attack : MonoBehaviour
     private GameObject m_attack;
 
     private int m_currentFlame = 0;
-    private readonly int m_destroyFlame = 30;
+    private readonly int m_destroyFlame = 20;
 
     // Start is called before the first frame update
     void Start()

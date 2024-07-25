@@ -105,6 +105,16 @@ public class Player : MonoBehaviour
         m_attackObject = (GameObject)Resources.Load("PlayerAttack");
     }
 
+    private void Update()
+    {
+        //Xボタン
+        if (Input.GetButtonDown("Xbutton") && !m_isAttack)
+        {
+            m_isAttack = true;
+
+        }
+    }
+
     void FixedUpdate()
     {
         
@@ -187,19 +197,14 @@ public class Player : MonoBehaviour
             }
         }
 
-        //Xボタン
-        if (Input.GetButtonDown("Xbutton"))
-        {
-            m_isAttack = true;
-
-        }
+        
 
 
         //当たり判定を表示
         if (m_isAttack)
         {
 
-
+            
             //m_attack.SetActive(true);
 
             
@@ -226,9 +231,11 @@ public class Player : MonoBehaviour
                 //Debug.Log("通る");
                 //Destroy(m_attackObject);
             }
+
+            //Debug.Log(m_attackFrame);
         }
 
-        //Debug.Log(m_hp);
+        Debug.Log(m_isAttack);
     }
 
     private void OnCollisionEnter(Collision collision)

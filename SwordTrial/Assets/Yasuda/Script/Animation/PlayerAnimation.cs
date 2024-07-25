@@ -102,7 +102,7 @@ public class PlayerAnimation : MonoBehaviour
         //çUåÇ
         else if(m_attackXButton)
         {
-            NextAnim(m_attack, 0, 19);
+            NextAnim(m_attack, 0, 20);
             m_attackXButton = false;
         }
 
