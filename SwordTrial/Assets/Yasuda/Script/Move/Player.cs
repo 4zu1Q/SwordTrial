@@ -32,8 +32,8 @@ public class Player : MonoBehaviour
     private string m_gardTag;
 
     /*フレーム変数*/
-    [SerializeField] private int m_itemFrame;
-    [SerializeField] private int m_attackFrame;
+    private int m_itemFrame;
+    private int m_attackFrame;
 
     /*定数*/
     [SerializeField] private int kItemFrameCountNum;
