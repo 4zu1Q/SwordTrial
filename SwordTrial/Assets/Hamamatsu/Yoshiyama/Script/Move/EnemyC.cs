@@ -54,8 +54,8 @@ public class EnemyC : MonoBehaviour
     [SerializeField] private float m_rotateSpeed = 0;
 
     //‘Ì—Í-------------------------------------------------------
-    public int m_currentHP = 100;//Œ»İ
-    public readonly int m_maxHP = 100;//Å‘å’l
+    public int m_currentHP = 1000;//Œ»İ
+    public readonly int m_maxHP = 1000;//Å‘å’l
     public readonly int m_minHP = 0;//Å¬’l
     //-----------------------------------------------------------
 
@@ -155,7 +155,7 @@ public class EnemyC : MonoBehaviour
     /// </summary>
     private void Initialization()
     {
-        m_currentHP = 100;
+        //m_currentHP = 100;
         m_attackKinds = 3;
         m_currentAttackState = new bool[(int)AttackKinds.kAttackMaxKinds];
 

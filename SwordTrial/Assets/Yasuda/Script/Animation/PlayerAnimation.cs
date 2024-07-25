@@ -49,12 +49,16 @@ public class PlayerAnimation : MonoBehaviour
 
     //-----------------------------------------------------
 
+    Player m_pPlayer;
+
 
     // Start is called before the first frame update
     void Start()
     {
         m_anim = GetComponent<Animator>();
         m_isPause = true;
+        
+        
     }
 
     // Update is called once per frame
@@ -94,13 +98,28 @@ public class PlayerAnimation : MonoBehaviour
     private void AnimTransitionUpdate()
     {
         //âÒïú
+        //if(m_pPlayer.m_itemNum > 0)
+        //{
+        //    if (m_recoveryBButton)
+        //    {
+        //        NextAnim(m_recovery, 0, 30);
+        //        m_recoveryBButton = false;
+        //    }
+        //}
+
+        //if (m_attackXButton)
+        //{
+        //    NextAnim(m_attack, 0, 20);
+        //    m_attackXButton = false;
+        //}
+
         if (m_recoveryBButton)
         {
             NextAnim(m_recovery, 0, 30);
             m_recoveryBButton = false;
         }
         //çUåÇ
-        else if(m_attackXButton)
+        else if (m_attackXButton)
         {
             NextAnim(m_attack, 0, 20);
             m_attackXButton = false;
