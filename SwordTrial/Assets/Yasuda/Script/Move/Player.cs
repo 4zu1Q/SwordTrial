@@ -69,6 +69,7 @@ public class Player : MonoBehaviour
 
     AudioSource m_audioSource;
 
+    private GameObject m_attackObject;
 
     void Start()
     {
@@ -99,8 +100,9 @@ public class Player : MonoBehaviour
 
         m_audioSource = GetComponent<AudioSource>();
 
-        m_attack.SetActive(false);
+        //m_attack.SetActive(false);
 
+        m_attackObject = (GameObject)Resources.Load("PlayerAttack");
     }
 
     void FixedUpdate()
@@ -197,14 +199,20 @@ public class Player : MonoBehaviour
         if (m_isAttack)
         {
 
-            m_attackFrame++;
 
-            m_attack.SetActive(true);
+            //m_attack.SetActive(true);
 
-            if(m_attackFrame == kAttackSeNum)
+            
+
+            if (m_attackFrame == kAttackSeNum)
             {
                 m_audioSource.PlayOneShot(m_attackSe);
+
+
+                Debug.Log("通る");
+                Instantiate(m_attackObject, m_attack.transform.position, Quaternion.identity);
             }
+            m_attackFrame++;
 
             if (m_attackFrame >= kAttackFrameCountNum)
             {
@@ -213,11 +221,14 @@ public class Player : MonoBehaviour
 
                 m_attackFrame = 0;
                 m_isAttack = false;
-                m_attack.SetActive(false);
+                //m_attack.SetActive(false);
+
+                //Debug.Log("通る");
+                //Destroy(m_attackObject);
             }
         }
 
-        Debug.Log(m_hp);
+        //Debug.Log(m_hp);
     }
 
     private void OnCollisionEnter(Collision collision)

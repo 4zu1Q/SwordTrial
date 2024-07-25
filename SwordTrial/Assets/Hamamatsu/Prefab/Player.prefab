@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8686024223514394123}
   - component: {fileID: 896414249355296126}
   - component: {fileID: 569265088076167749}
-  - component: {fileID: 6059264931757490923}
   m_Layer: 0
   m_Name: Attack
   m_TagString: PlayerAttack
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6059264931757490923
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 799605284921249749}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1571003777546247922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -229,14 +207,20 @@ MonoBehaviour:
   m_itemNum: 0
   m_speed: 5
   m_acel: 2
-  m_maxHp: 0
   m_hp: 0
+  m_attack: {fileID: 0}
+  m_itemNumText: {fileID: 0}
   m_itemFrame: 0
   m_attackFrame: 0
   kItemFrameCountNum: 0
   kAttackFrameCountNum: 0
+  kAttackSeNum: 0
   kAttackPower: 0
   m_slider: {fileID: 0}
+  m_isPause: 0
+  m_attackSe: {fileID: 0}
+  m_healSe: {fileID: 0}
+  m_damageSe: {fileID: 0}
 --- !u!54 &5023935386598591006
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -299,6 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404ec3c98336c8a45b5473476f48a304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_isPause: 0
 --- !u!95 &4740786920349903439
 Animator:
   serializedVersion: 5
