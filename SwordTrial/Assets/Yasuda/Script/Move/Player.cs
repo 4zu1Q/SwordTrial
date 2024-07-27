@@ -22,10 +22,10 @@ public class Player : MonoBehaviour
     public GameObject m_itemNumText;
     //Transform m_attack;
 
-    /*オブジェクトの座標変数*/
-    private Vector3 m_playerPosition;
-    private Vector3 m_attackPosition;
-    private Vector3 m_gardPosition;
+    ///*オブジェクトの座標変数*/
+    //private Vector3 m_playerPosition;
+    //private Vector3 m_attackPosition;
+    //private Vector3 m_gardPosition;
 
     /*タグ変数*/
     private string m_attackTag;
@@ -118,10 +118,12 @@ public class Player : MonoBehaviour
         //回復アイテムが残っていた場合
         if (m_itemNum > 0)
         {
+
             //Bボタン
             if (Input.GetButtonDown("Bbutton") && m_hp < 100)
             {
                 m_isItem = true;
+
             }
         }
     }
@@ -135,11 +137,6 @@ public class Player : MonoBehaviour
         
         m_text.text = "x" + m_itemNum;
         
-        m_playerPosition = this.transform.position;
-        
-        m_attackPosition = m_playerPosition;
-        m_gardPosition = m_playerPosition;
-
 
         /*移動処理*/
         m_inputHorizontal = Input.GetAxis("Horizontal");
