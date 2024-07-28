@@ -115,12 +115,16 @@ public class PlayerAnimation : MonoBehaviour
 
         if (m_recoveryBButton)
         {
+            m_anim.SetBool(m_attack, false);
+
             NextAnim(m_recovery, 0, 30);
             m_recoveryBButton = false;
         }
         //çUåÇ
         else if (m_attackXButton)
         {
+            m_anim.SetBool(m_recovery, false);
+
             NextAnim(m_attack, 0, 20);
             m_attackXButton = false;
         }
@@ -144,14 +148,14 @@ public class PlayerAnimation : MonoBehaviour
             m_anim.SetBool(m_dash, false);
         }
         //ñhå‰
-        if (m_guardYButton)
-        {
-            m_anim.SetBool(m_guard, true);
-        }
-        else if (!m_guardYButton)
-        {
-            m_anim.SetBool(m_guard, false);
-        }
+        //if (m_guardYButton)
+        //{
+        //    m_anim.SetBool(m_guard, true);
+        //}
+        //else if (!m_guardYButton)
+        //{
+        //    m_anim.SetBool(m_guard, false);
+        //}
     }
 
     /// <summary>
