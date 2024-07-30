@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         m_player = GameObject.Find("Player");
         //m_player.transform.Find("Attack");
 
-        m_slider.value = m_hp;
+        //m_slider.value = m_hp;
 
         //m_text = m_itemNumText.GetComponent<Text>();
 
@@ -188,7 +188,7 @@ public class Player : MonoBehaviour
                 m_isItem = false;
                 m_itemFrame = 0;
                 m_hp += 10;
-                m_slider.value = m_hp;//HPバーのUI変更
+                //m_slider.value = m_hp;//HPバーのUI変更
                 m_audioSource.PlayOneShot(m_healSe);
                 m_itemNum--;
 
