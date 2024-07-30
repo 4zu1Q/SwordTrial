@@ -337,9 +337,8 @@ MonoBehaviour:
   m_speed: 5
   m_acel: 2
   m_hp: 100
+  m_attack: {fileID: 0}
   m_itemNumText: {fileID: 1195144789}
-  m_itemFrame: 0
-  m_attackFrame: 0
   kItemFrameCountNum: 180
   kAttackFrameCountNum: 50
   kAttackSeNum: 0
@@ -680,9 +679,8 @@ MonoBehaviour:
   m_speed: 5
   m_acel: 2
   m_hp: 0
+  m_attack: {fileID: 0}
   m_itemNumText: {fileID: 0}
-  m_itemFrame: 0
-  m_attackFrame: 0
   kItemFrameCountNum: 180
   kAttackFrameCountNum: 50
   kAttackSeNum: 0
@@ -2224,6 +2222,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3741221038726039568, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 71593ebff7409274b8330de4b69595c3, type: 2}
+    - target: {fileID: 4263458804565570027, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 954195d2dac6f85469d2d331c233fb4e, type: 2}
     - target: {fileID: 5335192306446427880, guid: d09ec7d7873a8f84ba4ad64962fc9d44, type: 3}
       propertyPath: m_hp
       value: 100
@@ -2430,9 +2436,8 @@ MonoBehaviour:
   m_speed: 0
   m_acel: 0
   m_hp: 0
+  m_attack: {fileID: 0}
   m_itemNumText: {fileID: 0}
-  m_itemFrame: 0
-  m_attackFrame: 0
   kItemFrameCountNum: 0
   kAttackFrameCountNum: 0
   kAttackSeNum: 0
