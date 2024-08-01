@@ -1,20 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
-
-public class HPUI : MonoBehaviour
+public class EnemyHPUI : MonoBehaviour
 {
-    [SerializeField]private Player _palyer;
+    [SerializeField] private EnemyC _enemy;
     // 現在のHP
     [SerializeField] private Slider _nowHP;
     // 減少するHP
     [SerializeField] private Slider _decreaseHP;
-    // HPのグループ取得
-    [SerializeField] private GameObject _objHP;
-    [SerializeField] private Vector3 _objMovePos;
-    [SerializeField] private Vector3 _objDefaultHPPos;
     // 今のHPのデータ
     private float _nowHpData = 0;
     // 1フレーム前のHPのデータ
@@ -23,15 +15,11 @@ public class HPUI : MonoBehaviour
     private float _decreaseHpData = 0;
     // アニメーション(HPをゆっくり減らす)フラグ
     private bool _isDecreaseAnim = false;
-    private bool _isRecoveryAnim = false;
     // 減少を開始する前に止める時間
     private int _stopTime = 0;
     // 減少を開始する前に止める時間の最大値
     private int _startTimeMax = 60;
-    // 揺らす時間
-    private int _swayTimer = 0;
-    private int _swayTimerMax = 25;
-    private bool _isSway = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,12 +38,9 @@ public class HPUI : MonoBehaviour
     /// </summary>
     private void UIInit()
     {
-        _nowHpData = _palyer.m_hp;
+        _nowHpData = _enemy.m_currentHP;
         _nowHpData = _nowHP.value;
         _decreaseHpData = _decreaseHP.value;
-        _objMovePos = _objHP.transform.position;
-        _objDefaultHPPos = _objMovePos;
-        _swayTimer = _swayTimerMax;
     }
     /// <summary>
     /// 更新処理
@@ -64,15 +49,12 @@ public class HPUI : MonoBehaviour
     private void UIUpdate()
     {
         // 現在のHPの取得
-        _nowHpData = _palyer.m_hp;
+        _nowHpData = _enemy.m_currentHP;
         if (_nowHpData != _decreaseHpData)
         {
             // 減少処理
             HPDecrease();
-            // 回復処理
-            HPRecovery();
         }
-        SwayHP();
         _prevHpData = _nowHpData;
 
     }
@@ -82,10 +64,8 @@ public class HPUI : MonoBehaviour
     private void HPDecrease()
     {
         // 現在のHPとHPが違ったらゆっくりHPを減少させる
-        if(_nowHpData < _prevHpData)
+        if (_nowHpData < _prevHpData)
         {
-            _nowHpData = _nowHP.value;
-            _isSway = true;
             _isDecreaseAnim = true;
         }
         // フラグがたっていなかったら処理をしない
@@ -102,25 +82,7 @@ public class HPUI : MonoBehaviour
             _isDecreaseAnim = false;
         }
     }
-    private void HPRecovery()
-    {
-        // 現在のHPとHPが違ったら回復させる
-        if (_nowHpData > _nowHP.value)
-        {
-            _isRecoveryAnim = true;
-        }
-        // フラグがたっていなかったら処理をしない
-        if (!_isRecoveryAnim) { return; }
-        _nowHP.value++;
-        if (_nowHP.value == _nowHpData)
-        {
-            _nowHP.value = _nowHpData;
-            _decreaseHP.value = _nowHpData;
-            _decreaseHpData = _nowHpData;
-            _isRecoveryAnim = false;
-        }
 
-    }
     /// <summary>
     /// HP減少させる前に止まる
     /// </summary>
@@ -128,31 +90,11 @@ public class HPUI : MonoBehaviour
     private bool IsAnimStopTime()
     {
         _stopTime++;
-        if(_stopTime >= _startTimeMax)
+        if (_stopTime >= _startTimeMax)
         {
             return true;
         }
         return false;
     }
-    /// <summary>
-    /// HPバーを揺らす処理
-    /// </summary>
-    private void SwayHP()
-    {
-        if (!_isSway) { return; }
-        _swayTimer--;
-        if (0 < _swayTimer)
-        {
-            var posX = _objDefaultHPPos.x + Random.Range(-_swayTimer, _swayTimer);
-            var posY = _objDefaultHPPos.y + Random.Range(-_swayTimer, _swayTimer);
-            _objMovePos = new Vector3(posX, posY, _objDefaultHPPos.y);
-            _objHP.transform.position = _objMovePos;
-        }
-        else
-        {
-            _swayTimer = _swayTimerMax;
-            _isSway = false;
-            _objHP.transform.position = _objDefaultHPPos;
-        }
-    }
+
 }
