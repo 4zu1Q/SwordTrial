@@ -6,18 +6,19 @@ public partial class PlayerState : MonoBehaviour
 {
     private void Start()
     {
-        
+        Init();
     }
 
     private void Update()
     {
-        
+        UpdateFunc();
     }
 
     private void FixedUpdate()
     {
-        
+        FixedUpdateFunc();
     }
+
 
 
 }
