@@ -20,12 +20,6 @@ public class Player : MonoBehaviour
     GameObject m_player;
     [SerializeField] private GameObject m_attack;
     public GameObject m_itemNumText;
-    //Transform m_attack;
-
-    ///*オブジェクトの座標変数*/
-    //private Vector3 m_playerPosition;
-    //private Vector3 m_attackPosition;
-    //private Vector3 m_gardPosition;
 
     /*タグ変数*/
     private string m_attackTag;
@@ -76,11 +70,8 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
-        //m_player.transform.Find("Attack");
 
         m_slider.value = m_hp;
-
-        //m_text = m_itemNumText.GetComponent<Text>();
 
         m_isDash = false;
         m_isItem = false;
