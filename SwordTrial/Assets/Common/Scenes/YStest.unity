@@ -1737,6 +1737,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerVer2
       objectReference: {fileID: 0}
+    - target: {fileID: 3286204980316786009, guid: 41a4620e0836b6848ae62cb1740d10c1, type: 3}
+      propertyPath: m_hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286204980316786009, guid: 41a4620e0836b6848ae62cb1740d10c1, type: 3}
+      propertyPath: m_acel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286204980316786009, guid: 41a4620e0836b6848ae62cb1740d10c1, type: 3}
+      propertyPath: m_speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286204980316786009, guid: 41a4620e0836b6848ae62cb1740d10c1, type: 3}
+      propertyPath: m_itemNum
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3286204980316786009, guid: 41a4620e0836b6848ae62cb1740d10c1, type: 3}
+      propertyPath: m_itemNumText
+      value: 
+      objectReference: {fileID: 1195144789}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
