@@ -10,6 +10,7 @@ public partial class PlayerState
     private void Init()
     {
         VariableInitialization();
+        m_currentState.OnEnter(this, null);
     }
 
     /// <summary>
@@ -17,7 +18,8 @@ public partial class PlayerState
     /// </summary>
     private void UpdateFunc()
     {
-
+        GetGamePadInformation();
+        m_currentState.OnUpdate(this);
     }
 
     /// <summary>
@@ -26,6 +28,9 @@ public partial class PlayerState
     private void FixedUpdateFunc()
     {
         StateFrameManager();
+        AnimTransition();
+        m_currentState.OnFixedUpdate(this);
+        m_currentState.OnChangeState(this);
     }
 
     /// <summary>
@@ -50,7 +55,10 @@ public partial class PlayerState
         FrameReset();
         // 次の状態の呼び出し
         nextState.OnEnter(this, m_currentState);
-        // 次にs根にする状態の
+        // 次に遷移する状態の代入
+        m_currentState = nextState;
+
+        StateTransitionInitialization();
     }
 
     /// <summary>
@@ -86,5 +94,40 @@ public partial class PlayerState
 
     }
 
+    /// <summary>
+    /// ゲームパッドのの入力情報取得
+    /// </summary>
+    private void GetGamePadInformation()
+    {
+        // スティックの情報を取得
+        m_inputHorizontal = Input.GetAxis("Horizontal");
+        m_inputVertical = Input.GetAxis("Vertical");
+    }
 
+
+    private void Move()
+    {
+        // カメラの方向から、X-Z平面の単位ベクトルを取得
+        Vector3 m_cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
+
+        // 方向キーの入力値とカメラの向きから、移動方向を決定
+        Vector3 m_moveForward = m_cameraForward * m_inputVertical + Camera.main.transform.right * m_inputHorizontal;
+
+        // 移動方向にスピードを掛ける。
+        m_rigidbody.velocity = m_moveForward * m_speed;
+
+        // キャラクターの向きを進行方向に
+        if (m_moveForward != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(m_moveForward);
+        }
+
+        //Aボタン
+        //押している間はダッシュする
+        if (Input.GetButton("Abutton"))
+        {
+
+            m_rigidbody.velocity = m_moveForward * m_speed * m_acel;
+        }
+    }
 }

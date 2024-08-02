@@ -14,14 +14,14 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_targetObjectName = "Player";
+        m_targetObjectName = "PlayerVer2";
         m_targetObject = GameObject.Find(m_targetObjectName);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(m_hp);
+        //Debug.Log(m_hp);
 
 
         //ê≥ãKâª

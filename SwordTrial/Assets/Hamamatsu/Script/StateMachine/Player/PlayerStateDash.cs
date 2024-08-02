@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class PlayerStateDash : MonoBehaviour
+public partial class PlayerState
 {
-    // Start is called before the first frame update
-    void Start()
+    public class PlayerStateDash : StateBase
     {
-        
-    }
+        public override void OnEnter(PlayerState owner, StateBase prevState)
+        {
+            owner.m_dashMotion = true;
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override void OnFixedUpdate(PlayerState owner)
+        {
+            owner.Move();
+        }
+
+        public override void OnExit(PlayerState owner, StateBase nextState)
+        {
+            owner.m_dashMotion = false;
+        }
+
+        public override void OnChangeState(PlayerState owner)
+        {
+            if (owner.m_inputHorizontal == 0 && owner.m_inputVertical == 0)
+            {
+                owner.StateTransition(m_idle);
+            }
+        }
     }
 }

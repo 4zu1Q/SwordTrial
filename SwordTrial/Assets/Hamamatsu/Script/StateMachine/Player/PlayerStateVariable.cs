@@ -7,10 +7,12 @@ using UnityEngine.UI;
 public partial class PlayerState
 {
     /*各状態*/
-
+    private static readonly PlayerStateIdle m_idle = new ();    // 待機
+    private static readonly PlayerStateRun m_run = new ();      // 走る
+    private static readonly PlayerStateDash m_dash = new ();    // ダッシュ
 
     // 現在のState
-    private StateBase m_currentState;
+    private StateBase m_currentState = m_idle;
 
     /*ステータ変数*/
     [Header("アイテムの個数")]
@@ -26,7 +28,7 @@ public partial class PlayerState
     /*オブジェクト変数*/
     [Header("プレイヤーの攻撃判定")]
     [SerializeField] private GameObject m_attack;
-    [Header("プレイヤーの攻撃判定")]
+    [Header("アイテムの個数を表すテキスト")]
     [SerializeField] public GameObject m_itemNumText;
 
     /*フレーム変数*/
@@ -39,7 +41,7 @@ public partial class PlayerState
 
     /*UI*/
     [Header("HPスライダー")]
-    public SliderJoint2D m_slider;
+    //public SliderJoint2D m_slider;
     Text m_text;// アイテムの個数
 
     /*ポーズ用変数*/

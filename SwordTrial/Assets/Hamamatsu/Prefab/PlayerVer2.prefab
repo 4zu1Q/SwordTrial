@@ -324,11 +324,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 291228257dc64494c90fbd8ebb5e199a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itemNum: 0
-  m_speed: 0
-  m_acel: 0
-  m_hp: 0
-  m_attack: {fileID: 0}
+  m_itemNum: 5
+  m_speed: 5
+  m_acel: 2
+  m_hp: 100
+  m_attack: {fileID: 1058219890487983348, guid: f3fcb5164cc053e45a19ecf65500891a, type: 3}
   m_itemNumText: {fileID: 0}
   m_slider: {fileID: 0}
   m_isPause: 0
