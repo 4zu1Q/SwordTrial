@@ -64,6 +64,7 @@ public class PlayerHPUI : MonoBehaviour
         if (_nowHpData < _palyer.m_hp)
         {
             _isRecoveryAnim = true;
+            _decreaseHpData = _nowHP.value;
         }
         _nowHpData = _palyer.m_hp;
         if (_nowHpData != _decreaseHpData)
@@ -82,8 +83,9 @@ public class PlayerHPUI : MonoBehaviour
     /// </summary>
     private void HPDecrease()
     {
+        if (_isRecoveryAnim) { return; }
         // åªç›ÇÃHPÇ∆HPÇ™à·Ç¡ÇΩÇÁÇ‰Ç¡Ç≠ÇËHPÇå∏è≠Ç≥ÇπÇÈ
-        if(_nowHpData < _prevHpData)
+        if (_nowHpData < _prevHpData)
         {
             _nowHpData = _nowHP.value;
             _isSway = true;
@@ -108,8 +110,9 @@ public class PlayerHPUI : MonoBehaviour
     {
         // ÉtÉâÉOÇ™ÇΩÇ¡ÇƒÇ¢Ç»Ç©Ç¡ÇΩÇÁèàóùÇÇµÇ»Ç¢
         if (!_isRecoveryAnim) { return; }
-        _nowHP.value++;
-        if (_nowHP.value == _nowHpData)
+        _decreaseHpData++;
+        _nowHP.value = _decreaseHpData;
+        if (_nowHP.value >= _nowHpData)
         {
             _nowHP.value = _nowHpData;
             _decreaseHP.value = _nowHpData;

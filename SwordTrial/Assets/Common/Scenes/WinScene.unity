@@ -7698,7 +7698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countDownSeconds: 0
-  m_timeNum:
+  m_numbers:
   - {fileID: 21300000, guid: 415c1fab56fff5e4980906f01e044aa4, type: 3}
   - {fileID: 21300000, guid: ef4335267e53f8c42b9b06f2b3f95e4c, type: 3}
   - {fileID: 21300000, guid: 515e7d07cc5853142a10bf90a0939237, type: 3}
