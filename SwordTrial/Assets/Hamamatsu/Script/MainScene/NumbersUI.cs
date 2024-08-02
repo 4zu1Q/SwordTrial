@@ -3,7 +3,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer : TimeBase
+public class NumbersUI : NumbersUIBase
 {
     // 1分の長さ
     private const float m_oneMinute = 60;
@@ -14,6 +14,7 @@ public class Timer : TimeBase
     //カウントダウン終了フラグ
     private bool m_finishCountDown = false;
 
+    [SerializeField] private Player m_player;
     void Start()
     {
         m_countDownMinutes = 3;
@@ -33,6 +34,12 @@ public class Timer : TimeBase
             m_finishCountDown = true;
         }
         TimeImgView();
+
+        if(m_isItem) 
+        {
+            m_ItemNum = m_player.m_itemNum;
+            ItemImgView();
+        }
     }
 
     /// <summary>

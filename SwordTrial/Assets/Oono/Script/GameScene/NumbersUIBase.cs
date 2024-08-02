@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeBase : MonoBehaviour
+public class NumbersUIBase : MonoBehaviour
 {
     //カウントダウン分
     [SerializeField] public static int m_countDownMinutes = 3;
@@ -10,8 +10,11 @@ public class TimeBase : MonoBehaviour
     //カウントダウン秒(int)
     public static int m_countIntSeconds = 0;
     //時間の計測結果を表示するテキスト
-    [SerializeField] private Sprite[] m_timeNum;//数字の画像取得
+    [SerializeField] private Sprite[] m_numbers;//数字の画像取得
     [SerializeField] private Image[] m_timeImage;//表示する時間の画像取得
+    [SerializeField] private Image[] m_ItemImage;//表示する時間の画像取得
+     public  bool m_isItem;//表示する時間の画像取得
+    [SerializeField] public static int m_ItemNum = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,8 +53,41 @@ public class TimeBase : MonoBehaviour
     /// <param name="num2">秒数の1の位の数値</param>
     private void TimeImageChenge(int num1, int num2)
     {
-        m_timeImage[0].sprite = m_timeNum[m_countDownMinutes];
-        m_timeImage[1].sprite = m_timeNum[num1];
-        m_timeImage[2].sprite = m_timeNum[num2];
+        m_timeImage[0].sprite = m_numbers[m_countDownMinutes];
+        m_timeImage[1].sprite = m_numbers[num1];
+        m_timeImage[2].sprite = m_numbers[num2];
     }
+    /// <summary>
+    /// 勝利した時の時間を表示
+    /// </summary>
+    public void ItemImgView()
+    {
+        if (!m_isItem) { return;}
+        // 残り時間が10秒より多ければ
+        if (m_ItemNum >= 10)
+        {
+            var num1 = m_ItemNum / 10;
+            var num2 = m_ItemNum - num1 * 10;
+            // 時間の画像変更
+            ItemImageChenge(num1, num2);
+        }
+        //それ以外だったら
+        else
+        {
+            // 時間の画像変更
+            ItemImageChenge(0, m_ItemNum);
+        }
+    }
+    /// <summary>
+    ///  時間の画像の変更処理
+    /// </summary>
+    /// <param name="num1">あいてむ10の位の数値</param>
+    /// <param name="num2">あいてむ1の位の数値</param>
+    private void ItemImageChenge(int num1, int num2)
+    {
+
+        m_ItemImage[0].sprite = m_numbers[num1];
+        m_ItemImage[1].sprite = m_numbers[num2];
+    }
+
 }

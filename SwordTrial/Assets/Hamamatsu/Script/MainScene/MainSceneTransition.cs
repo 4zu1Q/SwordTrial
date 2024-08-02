@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainSceneTransition : SceneTransitionBase
 {
     //タイマー情報
-    private Timer m_timer;
+    private NumbersUI m_timer;
     private PauseUI m_Ui;
 
     //Player情報
@@ -21,7 +21,7 @@ public class MainSceneTransition : SceneTransitionBase
     protected override void Start()
     {
         base.Start();
-        m_timer = GetComponent<Timer>();
+        m_timer = GetComponent<NumbersUI>();
         m_Ui = GetComponent<PauseUI>();
     }
 
