@@ -20,6 +20,7 @@ public partial class PlayerState
     {
         GetGamePadInformation();
         m_currentState.OnUpdate(this);
+        m_currentState.OnChangeState(this);
     }
 
     /// <summary>
@@ -30,7 +31,7 @@ public partial class PlayerState
         StateFrameManager();
         AnimTransition();
         m_currentState.OnFixedUpdate(this);
-        m_currentState.OnChangeState(this);
+        
     }
 
     /// <summary>
@@ -124,10 +125,10 @@ public partial class PlayerState
 
         //Aボタン
         //押している間はダッシュする
-        if (Input.GetButton("Abutton"))
-        {
+        //if (Input.GetButton("Abutton"))
+        //{
 
-            m_rigidbody.velocity = m_moveForward * m_speed * m_acel;
-        }
+        //    m_rigidbody.velocity = m_moveForward * m_speed * m_acel;
+        //}
     }
 }

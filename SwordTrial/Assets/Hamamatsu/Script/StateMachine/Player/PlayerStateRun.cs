@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public partial class PlayerState
 {
     public class PlayerStateRun : StateBase
@@ -5,6 +7,7 @@ public partial class PlayerState
         public override void OnEnter(PlayerState owner, StateBase prevState)
         {
             owner.m_runMotion = true;
+            owner.m_speed = 5;
         }
 
         public override void OnFixedUpdate(PlayerState owner)
@@ -22,6 +25,11 @@ public partial class PlayerState
             if (owner.m_inputHorizontal == 0 && owner.m_inputVertical == 0)
             {
                 owner.StateTransition(m_idle);
+            }
+
+            if((owner.m_inputHorizontal != 0 && owner.m_inputVertical != 0) && Input.GetButton("Abutton"))
+            {
+                owner.StateTransition(m_dash);
             }
         }
     }

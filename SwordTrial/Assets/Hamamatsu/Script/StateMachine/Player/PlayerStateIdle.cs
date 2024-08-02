@@ -20,10 +20,13 @@ public partial class PlayerState
 
         public override void OnChangeState(PlayerState owner)
         {
-            if(owner.m_inputHorizontal != 0 || owner.m_inputVertical != 0) 
+            if(owner.m_inputHorizontal != 0 || owner.m_inputVertical != 0 && !Input.GetButtonDown("Abutton")) 
             {
                 owner.StateTransition(m_run);
-                Debug.Log("‚ ‚ ‚ ");
+            }
+            else if ((owner.m_inputHorizontal != 0 || owner.m_inputVertical != 0) && Input.GetButton("Abutton"))
+            {
+                owner.StateTransition(m_dash);
             }
         }
     }
