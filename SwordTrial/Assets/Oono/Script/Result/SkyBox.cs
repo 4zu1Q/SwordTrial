@@ -6,7 +6,7 @@ public class SkyBox : MonoBehaviour
 {
     public Material _skybox;
     private float _rotationRepeatValue = 0.0f ;
-    private float _addRotation = 0.3f ;
+    public float _addRotation = 0.2f ;
     // Start is called before the first frame update
     void Start()
     {
