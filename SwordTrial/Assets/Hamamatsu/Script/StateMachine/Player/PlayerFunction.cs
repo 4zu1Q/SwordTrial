@@ -92,7 +92,7 @@ public partial class PlayerState
         m_animator.SetBool("Idle", m_idleMotion);
         m_animator.SetBool("Run", m_runMotion);
         m_animator.SetBool("Dash", m_dashMotion);
-
+        m_animator.SetBool("Attack", m_attackMotion);
     }
 
     /// <summary>

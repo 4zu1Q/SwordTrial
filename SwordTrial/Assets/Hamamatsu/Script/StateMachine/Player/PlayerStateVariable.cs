@@ -1,6 +1,5 @@
 /*プレイヤーステートの変数*/
 
-using DG.Tweening.Core.Easing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +9,7 @@ public partial class PlayerState
     private static readonly PlayerStateIdle m_idle = new ();    // 待機
     private static readonly PlayerStateRun m_run = new ();      // 走る
     private static readonly PlayerStateDash m_dash = new ();    // ダッシュ
+    private static readonly PlayerStateAttack m_attack = new(); // 攻撃
 
     // 現在のState
     private StateBase m_currentState = m_idle;
@@ -26,8 +26,10 @@ public partial class PlayerState
 
 
     /*オブジェクト変数*/
-    [Header("プレイヤーの攻撃判定")]
-    [SerializeField] private GameObject m_attack;
+    [Header("攻撃判定")]
+    [SerializeField] private GameObject m_attackCol;
+    [Header("攻撃判定の座標を表すオブジェクト")]
+    [SerializeField] private GameObject m_attackPos;
     [Header("アイテムの個数を表すテキスト")]
     [SerializeField] public GameObject m_itemNumText;
 
