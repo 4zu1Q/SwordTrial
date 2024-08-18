@@ -20,12 +20,6 @@ public class Player : MonoBehaviour
     GameObject m_player;
     [SerializeField] private GameObject m_attack;
     public GameObject m_itemNumText;
-    //Transform m_attack;
-
-    ///*オブジェクトの座標変数*/
-    //private Vector3 m_playerPosition;
-    //private Vector3 m_attackPosition;
-    //private Vector3 m_gardPosition;
 
     /*タグ変数*/
     private string m_attackTag;
@@ -76,11 +70,8 @@ public class Player : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_boss = GameObject.Find("Boss");
         m_player = GameObject.Find("Player");
-        //m_player.transform.Find("Attack");
 
         //m_slider.value = m_hp;
-
-        //m_text = m_itemNumText.GetComponent<Text>();
 
         m_isDash = false;
         m_isItem = false;
@@ -100,7 +91,7 @@ public class Player : MonoBehaviour
 
         m_audioSource = GetComponent<AudioSource>();
 
-        //m_attack.SetActive(false);
+        //m_attackCol.SetActive(false);
 
         m_attackObject = (GameObject)Resources.Load("PlayerAttack");
     }
@@ -173,12 +164,6 @@ public class Player : MonoBehaviour
             }
         }
 
-
-
-
-
-        
-
         //HPが減っていた場合
         if (m_isItem)
         {
@@ -204,7 +189,7 @@ public class Player : MonoBehaviour
         {
 
             
-            //m_attack.SetActive(true);
+            //m_attackCol.SetActive(true);
 
             
 
@@ -220,18 +205,10 @@ public class Player : MonoBehaviour
 
             if (m_attackFrame >= kAttackFrameCountNum)
             {
-
-                //Debug.Assert(m_attack == null);
-
                 m_attackFrame = 0;
                 m_isAttack = false;
-                //m_attack.SetActive(false);
-
-                //Debug.Log("通る");
-                //Destroy(m_attackObject);
             }
 
-            //Debug.Log(m_attackFrame);
         }
 
         Debug.Log(m_isAttack);

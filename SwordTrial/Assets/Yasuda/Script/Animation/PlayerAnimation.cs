@@ -7,7 +7,7 @@ public class PlayerAnimation : MonoBehaviour
 {
     /*ïœêî*/
     //private string m_walk = "isWalk";
-    //private string m_attack = "isAttack";
+    //private string m_attackCol = "isAttack";
     //private string m_dash = "isDash";
     //private string m_gard = "isGard";
     //private string m_item = "isItem";
@@ -109,7 +109,7 @@ public class PlayerAnimation : MonoBehaviour
 
         //if (m_attackXButton)
         //{
-        //    NextAnim(m_attack, 0, 20);
+        //    NextAnim(m_attackCol, 0, 20);
         //    m_attackXButton = false;
         //}
 
