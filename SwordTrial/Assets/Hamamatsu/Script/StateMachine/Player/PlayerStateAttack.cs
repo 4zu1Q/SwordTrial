@@ -1,5 +1,6 @@
 /*攻撃状態*/
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public partial class PlayerState
@@ -9,12 +10,15 @@ public partial class PlayerState
         public override void OnEnter(PlayerState owner, StateBase prevState)
         {
             owner.m_attackMotion = true;
-            Instantiate(owner.m_attackCol, owner.m_attackPos.transform.position, Quaternion.identity);
+            
         }
 
         public override void OnFixedUpdate(PlayerState owner)
         {
-            
+            if(owner.m_currentFrame == 1)
+            {
+                Instantiate(owner.m_attackCol, owner.m_attackPos.transform.position, Quaternion.identity);
+            }
         }
 
         public override void OnExit(PlayerState owner, StateBase nextState)
@@ -25,7 +29,7 @@ public partial class PlayerState
         public override void OnChangeState(PlayerState owner)
         {
             // 100フレームたたないと状態遷移の条件をスキップする
-            if (owner.m_currentFrame <= 100) return;
+            if (owner.m_currentFrame <= 20) return;
 
             if (owner.m_inputHorizontal == 0 && owner.m_inputVertical == 0)
             {

@@ -22,6 +22,11 @@ public partial class PlayerState
 
         public override void OnChangeState(PlayerState owner)
         {
+            if (Input.GetButtonDown("Xbutton"))
+            {
+                owner.StateTransition(m_attack);
+            }
+
             if (owner.m_inputHorizontal == 0 && owner.m_inputVertical == 0)
             {
                 owner.StateTransition(m_idle);
