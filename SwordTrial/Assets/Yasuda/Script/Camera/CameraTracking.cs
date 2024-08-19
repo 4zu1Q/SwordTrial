@@ -14,8 +14,8 @@ public class CameraTracking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //m_target = GameObject.Find("Player");
-        m_target = GameObject.Find("PlayerVer2");
+        m_target = GameObject.Find("Player");
+        //m_target = GameObject.Find("PlayerVer2");
 
         m_targetPos = m_target.transform.position;
     }

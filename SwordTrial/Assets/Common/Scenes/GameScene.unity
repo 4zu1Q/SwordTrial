@@ -4350,6 +4350,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: d72b3267571b637469e97b62ddf6816e, type: 2}
     - target: {fileID: 3015940847576437137, guid: 242da2928ac71af4dae228f52bc89184, type: 3}
+      propertyPath: m_maxHP
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3015940847576437137, guid: 242da2928ac71af4dae228f52bc89184, type: 3}
       propertyPath: m_slider
       value: 
       objectReference: {fileID: 1903146437}
@@ -4359,7 +4363,7 @@ PrefabInstance:
       objectReference: {fileID: 566115722}
     - target: {fileID: 3015940847576437137, guid: 242da2928ac71af4dae228f52bc89184, type: 3}
       propertyPath: m_currentHP
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 3015940847576437137, guid: 242da2928ac71af4dae228f52bc89184, type: 3}
       propertyPath: m_shortDistance
@@ -4491,11 +4495,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8968123533475238947, guid: 242da2928ac71af4dae228f52bc89184, type: 3}
       propertyPath: m_Value
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 8968123533475238947, guid: 242da2928ac71af4dae228f52bc89184, type: 3}
       propertyPath: m_MaxValue
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9132187496172529807, guid: 242da2928ac71af4dae228f52bc89184, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17528,9 +17532,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1000
+  m_MaxValue: 500
   m_WholeNumbers: 0
-  m_Value: 1000
+  m_Value: 500
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
